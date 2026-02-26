@@ -4212,8 +4212,12 @@ function parseReceiptText(text) {
   }
   if (!beschrijving && combined) beschrijving = combined;
   if (!beschrijving) beschrijving = combined || lines[0] || '';
+  // Herstel eerste letter als die ontbreekt (Tesseract mist soms de eerste letter)
+  if (beschrijving && /^[a-z]/.test(beschrijving)) {
+    beschrijving = beschrijving.charAt(0).toUpperCase() + beschrijving.slice(1);
+  }
 
-  // ── Totaalbedrag
+  // ── Totaalbedrag — zoek eerst op sleutelwoorden
   let bedrag = null;
   const totalKeywords = /totaal|total|te betalen|gesamtbetrag|summe|gesamt|grand.?total|sum:|bedrag|amount/i;
   for (const line of lines) {
@@ -4227,6 +4231,18 @@ function parseReceiptText(text) {
       }
     }
   }
+  // Zoek ook op naburige regels: sleutelwoord op regel N, bedrag op regel N+1
+  if (bedrag === null) {
+    for (let i = 0; i < lines.length - 1; i++) {
+      if (totalKeywords.test(lines[i])) {
+        const nums = [...lines[i+1].matchAll(/(\d{1,6}[.,]\d{2})/g)]
+          .map(m => parseFloat(m[1].replace(',','.')))
+          .filter(n => n > 0);
+        if (nums.length) { bedrag = Math.max(...nums); break; }
+      }
+    }
+  }
+  // Fallback: grootste bedrag > €5
   if (bedrag === null || bedrag < 5) {
     const allAmounts = [...text.matchAll(/(\d{1,5}[.,]\d{2})/g)]
       .map(m => parseFloat(m[1].replace(',','.')))
