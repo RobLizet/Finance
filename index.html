@@ -1897,7 +1897,7 @@ border: 1px solid var(–border); margin-top: 0.8rem; display: none;
 <!-- ── DASHBOARD ── -->
 <section class="page-section active" id="page-dashboard">
   <div class="page-header">
-    <h2>Goedemorgen, <em id="greeting-name">Rob</em> 👋</h2>
+    <h2><span id="greeting-text">Goedemorgen</span>, <em id="greeting-name">Rob</em> <span id="greeting-emoji">👋</span></h2>
     <div class="page-date" id="header-date"></div>
   </div>
 
@@ -2791,6 +2791,15 @@ onAuthStateChanged(auth, async (user) => {
   if (user) {
     currentUser = user;    const name = user.displayName?.split(' ')[0] || 'Rob';
     document.getElementById('greeting-name').textContent = name;
+    // Dynamische begroeting op basis van tijdstip
+    const hour = new Date().getHours();
+    let greet, emoji;
+    if (hour >= 5  && hour < 12) { greet = 'Goedemorgen';  emoji = '☀️'; }
+    else if (hour >= 12 && hour < 18) { greet = 'Goedemiddag';  emoji = '👋'; }
+    else if (hour >= 18 && hour < 23) { greet = 'Goedenavond';  emoji = '🌙'; }
+    else                               { greet = 'Goedenacht';   emoji = '😴'; }
+    document.getElementById('greeting-text').textContent = greet;
+    document.getElementById('greeting-emoji').textContent = emoji;
     document.getElementById('sb-user-name').textContent  = name;
     document.getElementById('sb-user-email').textContent = user.email;
     document.getElementById('sb-user-avatar').src        = user.photoURL || '';
