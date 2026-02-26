@@ -199,6 +199,39 @@ text-align: center;
 
 .made-by-sidebar strong { color: #7a6e62; font-style: normal; }
 
+/* Sidebar user */
+.sidebar-user {
+display: flex;
+align-items: center;
+gap: 0.6rem;
+margin-top: 1rem;
+padding: 0.7rem 0.8rem;
+background: rgba(255,255,255,0.05);
+border-radius: 10px;
+border: 1px solid rgba(255,255,255,0.06);
+}
+
+.sb-user-avatar {
+width: 32px; height: 32px;
+border-radius: 50%;
+object-fit: cover;
+flex-shrink: 0;
+background: #3a2a1a;
+}
+
+.sb-user-info { flex: 1; min-width: 0; }
+.sb-user-name  { font-size: 0.78rem; font-weight: 700; color: #d0c8be; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sb-user-email { font-size: 0.6rem; color: #6b5f52; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.sb-logout-btn {
+background: none; border: none;
+color: #6b5f52; font-size: 1rem;
+cursor: pointer; padding: 0.2rem;
+border-radius: 5px; transition: color 0.15s;
+flex-shrink: 0;
+}
+.sb-logout-btn:hover { color: #e87a60; }
+
 .install-btn {
 width: 100%;
 background: var(–accent);
@@ -1096,7 +1129,159 @@ animation: riseUp 0.6s ease both;
 .owner-cards-row { grid-template-columns: 1fr 1fr; }
 }
 
-.account-card {
+/* ── CRYPTO ── */
+.crypto-total-card {
+background: linear-gradient(135deg, #261e16 0%, #3a2a1a 100%);
+border-radius: 20px;
+padding: 2rem 2rem 1.5rem;
+margin-bottom: 1.5rem;
+color: #f0ebe3;
+position: relative;
+overflow: hidden;
+animation: riseUp 0.5s ease both;
+}
+
+.crypto-total-card::before {
+content: ‘₿’;
+position: absolute;
+right: 1.5rem;
+top: 50%;
+transform: translateY(-50%);
+font-size: 6rem;
+opacity: 0.06;
+line-height: 1;
+}
+
+.crypto-total-label {
+font-size: 0.65rem;
+text-transform: uppercase;
+letter-spacing: 0.14em;
+color: #7a6e62;
+font-weight: 600;
+margin-bottom: 0.5rem;
+}
+
+.crypto-total-amount {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 3rem;
+font-weight: 600;
+line-height: 1;
+color: #f0ebe3;
+margin-bottom: 0.4rem;
+}
+
+.crypto-total-sub {
+font-size: 0.72rem;
+color: #7a6e62;
+font-weight: 500;
+}
+
+.crypto-refresh-btn {
+position: absolute;
+top: 1.2rem;
+right: 1.2rem;
+background: rgba(255,255,255,0.08);
+border: 1px solid rgba(255,255,255,0.12);
+color: #9a8e82;
+border-radius: 8px;
+padding: 0.4rem 0.75rem;
+font-size: 0.72rem;
+font-weight: 600;
+cursor: pointer;
+font-family: ‘Space Grotesk’, sans-serif;
+transition: all 0.18s;
+}
+
+.crypto-refresh-btn:hover { background: rgba(255,255,255,0.14); color: #f0ebe3; }
+.crypto-refresh-btn.spinning { animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.crypto-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+gap: 1rem;
+animation: riseUp 0.5s 0.1s ease both;
+}
+
+.crypto-card {
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: 16px;
+padding: 1.3rem;
+box-shadow: var(–shadow);
+position: relative;
+overflow: hidden;
+transition: transform 0.18s, box-shadow 0.18s;
+}
+
+.crypto-card:hover { transform: translateY(-2px); box-shadow: var(–shadow-lg); }
+
+.crypto-card-top {
+display: flex;
+justify-content: space-between;
+align-items: flex-start;
+margin-bottom: 0.9rem;
+}
+
+.crypto-coin-info { display: flex; align-items: center; gap: 0.7rem; }
+
+.crypto-coin-icon {
+width: 42px; height: 42px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 1rem;
+font-weight: 700;
+color: #fff;
+flex-shrink: 0;
+font-family: ‘Space Grotesk’, sans-serif;
+}
+
+.crypto-coin-name  { font-size: 0.95rem; font-weight: 700; color: var(–ink); line-height: 1.2; }
+.crypto-coin-symbol { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(–muted); font-weight: 600; }
+
+.crypto-card-del {
+background: none; border: none; color: var(–border); cursor: pointer;
+font-size: 0.78rem; padding: 0.25rem; border-radius: 5px; transition: color 0.15s, background 0.15s;
+}
+.crypto-card-del:hover { color: var(–red); background: var(–red-light); }
+
+.crypto-price-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.3rem; }
+
+.crypto-price { font-family: ‘Cormorant Garamond’, serif; font-size: 1.5rem; font-weight: 600; color: var(–ink); }
+
+.crypto-change { font-size: 0.72rem; font-weight: 700; padding: 0.2rem 0.5rem; border-radius: 6px; }
+.crypto-change.up   { background: var(–green-light); color: var(–green); }
+.crypto-change.down { background: var(–red-light);   color: var(–red); }
+.crypto-change.flat { background: var(–card);         color: var(–muted); }
+
+.crypto-holdings {
+border-top: 1px solid var(–border);
+margin-top: 0.9rem; padding-top: 0.9rem;
+display: flex; justify-content: space-between; align-items: center; gap: 0.5rem;
+}
+
+.crypto-amount-input {
+background: var(–card); border: 1px solid var(–border); border-radius: 8px;
+padding: 0.35rem 0.6rem; font-family: ‘Space Grotesk’, sans-serif;
+font-size: 0.82rem; font-weight: 600; color: var(–ink);
+width: 110px; outline: none; transition: border-color 0.15s;
+}
+.crypto-amount-input:focus { border-color: var(–accent); }
+
+.crypto-eur-value { font-family: ‘Cormorant Garamond’, serif; font-size: 1.3rem; font-weight: 700; color: var(–green); text-align: right; }
+.crypto-eur-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(–muted); font-weight: 600; text-align: right; }
+
+.crypto-error {
+background: var(–red-light); color: var(–red); border-radius: 10px;
+padding: 0.8rem 1rem; font-size: 0.78rem; font-weight: 600; margin-bottom: 1rem;
+}
+
+@media (max-width: 700px) {
+.crypto-grid { grid-template-columns: 1fr; }
+.crypto-total-amount { font-size: 2.2rem; }
+}
 background: var(–surface);
 border: 1px solid var(–border);
 border-radius: 16px;
@@ -1310,6 +1495,44 @@ min-height: 100vh;
 
 </head>
 <body>
+<!-- ── LOGIN SCREEN ── -->
+<div id="login-screen" style="display:flex; position:fixed; inset:0; z-index:9999; background:#f7f3ee; flex-direction:column; align-items:center; justify-content:center; padding:2rem;">
+  <div style="text-align:center; max-width:340px; width:100%;">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80" style="display:block;margin:0 auto 1.5rem">
+      <rect width="80" height="80" rx="18" fill="#261e16"/>
+      <rect x="0" y="0" width="80" height="5" rx="3" fill="url(#lsg)"/>
+      <defs><linearGradient id="lsg" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#c9602a"/>
+        <stop offset="0.5" stop-color="#e8a060"/>
+        <stop offset="1" stop-color="#2a5b8a"/>
+      </linearGradient></defs>
+      <circle cx="40" cy="46" r="22" fill="none" stroke="#c9602a" stroke-width="2" opacity="0.6"/>
+      <text x="40" y="53" font-family="Georgia,serif" font-size="16" font-weight="bold" fill="#c9602a" text-anchor="middle">RB</text>
+    </svg>
+    <div style="font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:600; color:#14100a; margin-bottom:0.3rem;">Financiën</div>
+    <div style="font-size:0.78rem; color:#6b5f52; font-weight:500; margin-bottom:2.5rem;">Rob &amp; Lizet · Gedeeld huishoudboekje</div>
+
+```
+<button onclick="loginWithGoogle()" style="
+  display:flex; align-items:center; gap:0.8rem; justify-content:center;
+  width:100%; padding:0.9rem 1.5rem;
+  background:#fff; border:2px solid #e2d9cc; border-radius:14px;
+  font-family:'Space Grotesk',sans-serif; font-size:0.95rem; font-weight:600; color:#14100a;
+  cursor:pointer; box-shadow:0 2px 12px rgba(0,0,0,0.08); transition:all 0.18s;
+" onmouseover="this.style.borderColor='#b85c28'" onmouseout="this.style.borderColor='#e2d9cc'">
+  <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+  Inloggen met Google
+</button>
+
+<div style="margin-top:1.5rem; font-size:0.68rem; color:#9a8e82; font-weight:500; line-height:1.6;">
+  Alleen Rob en Lizet kunnen inloggen.<br>Data is gedeeld en beveiligd via Google.
+</div>
+```
+
+  </div>
+</div>
+
+<div id="app-wrapper" style="display:none; grid-template-rows:auto 1fr; min-height:100vh;">
 <div class="top-stripe"></div>
 <div class="layout">
 
@@ -1362,6 +1585,9 @@ min-height: 100vh;
   <button class="nav-item" onclick="showPage('accounts')">
     <span class="nav-icon">🏦</span> Rekeningen
   </button>
+  <button class="nav-item" onclick="showPage('crypto')">
+    <span class="nav-icon">₿</span> Crypto
+  </button>
 </div>
 
 <div class="sidebar-balance">
@@ -1374,6 +1600,16 @@ min-height: 100vh;
 <button class="install-btn" id="install-btn" onclick="installApp()" style="display:none">
   📲 Installeer app
 </button>
+
+<!-- User info + logout -->
+<div class="sidebar-user" id="sidebar-user">
+  <img class="sb-user-avatar" id="sb-user-avatar" src="" alt="" />
+  <div class="sb-user-info">
+    <div class="sb-user-name" id="sb-user-name">—</div>
+    <div class="sb-user-email" id="sb-user-email"></div>
+  </div>
+  <button class="sb-logout-btn" onclick="logoutUser()" title="Uitloggen">⏻</button>
+</div>
 ```
 
   </nav>
@@ -1386,7 +1622,7 @@ min-height: 100vh;
 <!-- ── DASHBOARD ── -->
 <section class="page-section active" id="page-dashboard">
   <div class="page-header">
-    <h2>Goedemorgen, <em>Rob</em> 👋</h2>
+    <h2>Goedemorgen, <em id="greeting-name">Rob</em> 👋</h2>
     <div class="page-date" id="header-date"></div>
   </div>
 
@@ -1678,6 +1914,7 @@ min-height: 100vh;
           <option value="savings">💎 Spaarrekening</option>
           <option value="cash">💵 Kas / Contant</option>
           <option value="credit">💳 Creditcard</option>
+          <option value="car">🚗 Auto</option>
           <option value="invest">📈 Beleggingen</option>
         </select>
       </div>
@@ -1706,10 +1943,57 @@ min-height: 100vh;
     <div class="transaction-list" id="account-tx-list"></div>
   </div>
 </section>
+
+<!-- ── CRYPTO ── -->
+<section class="page-section" id="page-crypto">
+  <div class="page-header">
+    <h2>Mijn <em>Crypto</em></h2>
+    <div class="page-date">Live koersen via CoinGecko · <span id="crypto-updated">—</span></div>
+  </div>
+
+  <!-- Portfolio totaal -->
+  <div class="crypto-total-card" id="crypto-total-card">
+    <div class="crypto-total-label">Totale Portfolio Waarde</div>
+    <div class="crypto-total-amount" id="crypto-total-eur">€ —</div>
+    <div class="crypto-total-sub" id="crypto-total-sub">Laden...</div>
+    <button class="crypto-refresh-btn" onclick="loadCryptoPrices()" id="crypto-refresh-btn">↻ Ververs</button>
+  </div>
+
+  <!-- Coin cards -->
+  <div class="crypto-grid" id="crypto-grid"></div>
+
+  <!-- Coin toevoegen -->
+  <div class="form-card" style="margin-top:1.5rem">
+    <div class="form-title">Coin <em>toevoegen</em></div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Coin naam</label>
+        <input type="text" id="crypto-name" placeholder="Bijv. Bitcoin" maxlength="30" />
+      </div>
+      <div class="form-group">
+        <label>CoinGecko ID</label>
+        <input type="text" id="crypto-id" placeholder="Bijv. bitcoin" maxlength="50" />
+      </div>
+      <div class="form-group">
+        <label>Symbool</label>
+        <input type="text" id="crypto-symbol" placeholder="Bijv. BTC" maxlength="10" />
+      </div>
+      <div class="form-group">
+        <label>Aantal coins</label>
+        <input type="number" id="crypto-amount" placeholder="0" step="any" min="0" />
+      </div>
+    </div>
+    <div style="font-size:0.7rem;color:var(--muted);margin-bottom:0.8rem;font-weight:500">
+      💡 Zoek de juiste ID op <a href="https://coingecko.com" target="_blank" style="color:var(--accent)">coingecko.com</a> — zoek je coin, de ID staat in de URL (bijv. /en/coins/<strong>bitcoin</strong>)
+    </div>
+    <button class="add-btn btn-income" onclick="addCryptoCoin()">₿ &nbsp;Coin toevoegen</button>
+  </div>
+</section>
 ```
 
   </main>
-</div>
+</div><!-- end .layout -->
+</div><!-- end #app-wrapper -->
 
 <div class="toast" id="toast"></div>
 
@@ -1763,18 +2047,20 @@ if ('serviceWorker' in navigator) {
 }
 </script>
 
-<script>
+<script type="module">
 // ─── DATA ───────────────────────────────────────────────────
 const DEFAULT_EXPENSE_CATS = {
-  eten:          { label:'Eten & drinken',  icon:'🍔', default:true },
-  transport:     { label:'Transport',        icon:'🚗', default:true },
-  wonen:         { label:'Wonen',            icon:'🏠', default:true },
-  gezondheid:    { label:'Gezondheid',       icon:'💊', default:true },
-  entertainment: { label:'Entertainment',    icon:'🎬', default:true },
-  kleding:       { label:'Kleding',          icon:'👗', default:true },
-  abonnement:    { label:'Abonnementen',     icon:'📱', default:true },
-  sporten:       { label:'Sporten',          icon:'🏃', default:true },
-  overig:        { label:'Overig',           icon:'📦', default:true },
+  eten:          { label:'Eten & drinken',    icon:'🍔', default:true },
+  transport:     { label:'Transport',          icon:'🚗', default:true },
+  wonen:         { label:'Wonen',              icon:'🏠', default:true },
+  gezondheid:    { label:'Gezondheid',         icon:'💊', default:true },
+  entertainment: { label:'Entertainment',      icon:'🎬', default:true },
+  kleding:       { label:'Kleding',            icon:'👗', default:true },
+  abonnement:    { label:'Abonnementen',       icon:'📱', default:true },
+  sporten:       { label:'Sporten',            icon:'🏃', default:true },
+  peugeot_rob:   { label:'🚙 Peugeot (Rob)',  icon:'🚙', default:true },
+  ford_lizet:    { label:'🚘 Ford (Lizet)',    icon:'🚘', default:true },
+  overig:        { label:'Overig',             icon:'📦', default:true },
 };
 
 const DEFAULT_INCOME_CATS = {
@@ -1787,9 +2073,9 @@ const DEFAULT_INCOME_CATS = {
   'overig-ink':  { label:'Overig',           icon:'💰', default:true },
 };
 
-// Load custom categories from localStorage, merge with defaults
-let customExpenseCats = JSON.parse(localStorage.getItem('rb_custom_expense_cats') || '{}');
-let customIncomeCats  = JSON.parse(localStorage.getItem('rb_custom_income_cats')  || '{}');
+// Custom categories — loaded from Firestore via subscribeToFirestore
+let customExpenseCats = {};
+let customIncomeCats  = {};
 
 let EXPENSE_CATS = { ...DEFAULT_EXPENSE_CATS, ...customExpenseCats };
 let INCOME_CATS  = { ...DEFAULT_INCOME_CATS,  ...customIncomeCats  };
@@ -1865,13 +2151,12 @@ function addCustomCategory() {
 
   if (catType === 'expense') {
     customExpenseCats[key] = { label: name, icon: emoji, default: false };
-    localStorage.setItem('rb_custom_expense_cats', JSON.stringify(customExpenseCats));
   } else {
     customIncomeCats[key] = { label: name, icon: emoji, default: false };
-    localStorage.setItem('rb_custom_income_cats', JSON.stringify(customIncomeCats));
   }
 
   rebuildAllCats();
+  save();
   buildCategorySelect();
   buildFilters();
   renderCategoryManager();
@@ -1890,11 +2175,10 @@ function deleteCustomCategory(key, type) {
   }
   if (type === 'expense') {
     delete customExpenseCats[key];
-    localStorage.setItem('rb_custom_expense_cats', JSON.stringify(customExpenseCats));
   } else {
     delete customIncomeCats[key];
-    localStorage.setItem('rb_custom_income_cats', JSON.stringify(customIncomeCats));
   }
+  save();
   rebuildAllCats();
   buildCategorySelect();
   buildFilters();
@@ -1945,21 +2229,149 @@ const TIPS = [
   "Een <em>spaardoel</em> instellen verhoogt de kans op sparen met 42%.",
 ];
 
-let transactions = JSON.parse(localStorage.getItem('rb_tx_v3') || '[]');
-let goals        = JSON.parse(localStorage.getItem('rb_goals_v3') || '[]');
-let budget       = parseFloat(localStorage.getItem('rb_budget_v3') || '0');
+let transactions = [];
+let goals        = [];
+let budget       = 0;
 let currentType  = 'expense';
 let activeFilter = 'alles';
-let activeFilterType = 'alles'; // alles / income / expense
+let activeFilterType = 'alles';
+
+// ─── FIREBASE ────────────────────────────────────────────────
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged }
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { getFirestore, doc, collection, setDoc, deleteDoc, onSnapshot, getDoc }
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC68DxSZll4i4oGvkDqa-JE6FmpuJCWIsg",
+  authDomain: "financien-rob-lizet.firebaseapp.com",
+  projectId: "financien-rob-lizet",
+  storageBucket: "financien-rob-lizet.firebasestorage.app",
+  messagingSenderId: "146252754953",
+  appId: "1:146252754953:web:31e488d81fc92f77bb88d8"
+};
+
+const fbApp  = initializeApp(firebaseConfig);
+const auth   = getAuth(fbApp);
+const db     = getFirestore(fbApp);
+
+let currentUser = null;
+let unsubscribers = [];
+
+// ─── AUTH ────────────────────────────────────────────────────
+function showLoginScreen() {
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('app-wrapper').style.display  = 'none';
+}
+
+function showAppScreen() {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('app-wrapper').style.display  = 'grid';
+}
+
+async function loginWithGoogle() {
+  try {
+    const provider = new GoogleAuthProvider();
+    await signInWithPopup(auth, provider);
+  } catch(e) {
+    alert('Inloggen mislukt: ' + e.message);
+  }
+}
+
+async function logoutUser() {
+  unsubscribers.forEach(u => u());
+  unsubscribers = [];
+  await signOut(auth);
+  transactions = []; goals = []; budget = 0;
+  accounts = []; transfers = [];
+  customExpenseCats = {}; customIncomeCats = {};
+}
+
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    currentUser = user;
+    const name = user.displayName?.split(' ')[0] || 'Rob';
+    document.getElementById('greeting-name').textContent = name;
+    document.getElementById('sb-user-name').textContent  = name;
+    document.getElementById('sb-user-email').textContent = user.email;
+    document.getElementById('sb-user-avatar').src        = user.photoURL || '';
+    showAppScreen();
+    subscribeToFirestore();
+  } else {
+    currentUser = null;
+    showLoginScreen();
+  }
+});
+
+// ─── FIRESTORE HELPERS ───────────────────────────────────────
+function sharedRef(path) {
+  // All data is shared in one "household" — projectId is the household
+  return doc(db, 'households', 'financien-rob-lizet', path);
+}
+
+function sharedCol(path) {
+  return collection(db, 'households', 'financien-rob-lizet', path);
+}
+
+// ─── REALTIME SUBSCRIPTIONS ─────────────────────────────────
+function subscribeToFirestore() {
+  unsubscribers.forEach(u => u());
+  unsubscribers = [];
+
+  // Transactions
+  unsubscribers.push(onSnapshot(sharedCol('transactions'), snap => {
+    transactions = snap.docs.map(d => d.data());
+    transactions.sort((a,b) => b.date.localeCompare(a.date) || b.id - a.id);
+    render();
+  }));
+
+  // Goals
+  unsubscribers.push(onSnapshot(sharedCol('goals'), snap => {
+    goals = snap.docs.map(d => d.data());
+    renderGoals();
+  }));
+
+  // Accounts
+  unsubscribers.push(onSnapshot(sharedCol('accounts'), snap => {
+    accounts = snap.docs.map(d => d.data());
+    migrateAccountsIfNeeded();
+    buildAccountSelects();
+    if (document.getElementById('page-accounts').classList.contains('active')) renderAccountsPage();
+  }));
+
+  // Transfers
+  unsubscribers.push(onSnapshot(sharedCol('transfers'), snap => {
+    transfers = snap.docs.map(d => d.data());
+    if (document.getElementById('page-accounts').classList.contains('active')) renderAccountsPage();
+  }));
+
+  // Settings (budget, custom cats)
+  unsubscribers.push(onSnapshot(sharedRef('settings/main'), snap => {
+    const data = snap.data() || {};
+    budget = data.budget || 0;
+    customExpenseCats = data.customExpenseCats || {};
+    customIncomeCats  = data.customIncomeCats  || {};
+    rebuildAllCats();
+    buildCategorySelect();
+    document.getElementById('budget-input').value = budget || '';
+    renderBudget();
+  }));
+
+  // Crypto coins
+  unsubscribers.push(onSnapshot(sharedRef('settings/crypto'), snap => {
+    const data = snap.data() || {};
+    cryptoCoins = data.coins || defaultCryptoCoins();
+    if (document.getElementById('page-crypto').classList.contains('active')) renderCryptoPage();
+  }));
+}
 
 // ─── INIT ────────────────────────────────────────────────────
 document.getElementById('date').value = new Date().toISOString().split('T')[0];
-document.getElementById('budget-input').value = budget || '';
 document.getElementById('header-date').textContent = new Date().toLocaleDateString('nl-NL',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
 document.getElementById('tip-text').innerHTML = TIPS[Math.floor(Math.random() * TIPS.length)];
 buildCategorySelect();
 buildFilters();
-render();
 
 // ─── HELPERS ────────────────────────────────────────────────
 function fmt(n) {
@@ -2009,7 +2421,8 @@ function buildCategorySelect() {
 // ─── BUDGET ─────────────────────────────────────────────────
 function updateBudget() {
   budget = parseFloat(document.getElementById('budget-input').value) || 0;
-  save(); renderBudget();
+  save();
+  renderBudget();
 }
 
 function renderBudget() {
@@ -2097,8 +2510,8 @@ function renderList(id, list, paginated=false) {
 }
 
 function deleteTransaction(id) {
-  transactions = transactions.filter(t=>t.id!==id);
-  save(); render(); toast('🗑 Verwijderd.');
+  deleteTxFromDB(id);
+  toast('🗑 Verwijderd.');
 }
 
 // ─── INSIGHTS ────────────────────────────────────────────────
@@ -2151,8 +2564,8 @@ function addGoal() {
     return;
   }
 
-  goals.push({ id: Date.now(), name, target, saved });
-  save(); renderGoals();
+  const goal = { id: Date.now(), name, target, saved };
+  saveGoalToDB(goal);
   toast('🎯 Doel toegevoegd!');
   document.getElementById('goal-name').value = '';
   document.getElementById('goal-target').value = '';
@@ -2160,13 +2573,13 @@ function addGoal() {
 }
 
 function deleteGoal(id) {
-  goals = goals.filter(g=>g.id!==id);
-  save(); renderGoals(); toast('🗑 Doel verwijderd.');
+  deleteGoalFromDB(id);
+  toast('🗑 Doel verwijderd.');
 }
 
 function updateGoalSaved(id, val) {
   const g = goals.find(g=>g.id===id);
-  if (g) { g.saved = Math.max(0, parseFloat(val)||0); save(); renderGoals(); }
+  if (g) { g.saved = Math.max(0, parseFloat(val)||0); saveGoalToDB(g); }
 }
 
 function renderGoals() {
@@ -2208,47 +2621,36 @@ const ACC_TYPES = {
   cash:    { label: 'Kas / Contant',   icon: '💵' },
   credit:  { label: 'Creditcard',      icon: '💳' },
   invest:  { label: 'Beleggingen',     icon: '📈' },
+  car:     { label: 'Auto',            icon: '🚗' },
 };
 
 const ACC_COLORS = ['#b85c28','#2d7a50','#2e5f8a','#8a5faf','#b08a3a','#2a8a8a','#b83028','#607a2a','#003d82','#c8002a','#e87722','#ffb3c7'];
 
-let accounts   = JSON.parse(localStorage.getItem('rb_accounts_v1') || '[]');
-let transfers  = JSON.parse(localStorage.getItem('rb_transfers_v1') || '[]');
+let accounts   = [];
+let transfers  = [];
 let selectedAccColor = ACC_COLORS[0];
 let activeAccountId  = null;
-let activeOwnerFilter = 'alles'; // 'alles' | 'rob' | 'vriendin'
+let activeOwnerFilter = 'alles';
 
-// Seed default accounts if empty — Rob (ING) + Vriendin (RABO) setup
-if (!accounts.length) {
-  accounts = [
-    { id: 'acc_rob_ing',    name: 'ING Betaalrekening', type: 'bank',    color: '#e87722', startBalance: 0, owner: 'rob' },
-    { id: 'acc_rob_anwb',   name: 'ANWB Creditcard',    type: 'credit',  color: '#003d82', startBalance: 0, owner: 'rob' },
-    { id: 'acc_rob_ingcc',  name: 'ING Creditcard',     type: 'credit',  color: '#e87722', startBalance: 0, owner: 'rob' },
-    { id: 'acc_rob_klarna', name: 'Klarna',              type: 'credit',  color: '#ffb3c7', startBalance: 0, owner: 'rob' },
-    { id: 'acc_vr_rabo',    name: 'RABO Betaalrekening', type: 'bank',   color: '#c8002a', startBalance: 0, owner: 'vriendin' },
-    { id: 'acc_vr_cc',      name: 'Creditcard Vriendin', type: 'credit', color: '#2d7a50', startBalance: 0, owner: 'vriendin' },
-  ];
-  localStorage.setItem('rb_accounts_v1', JSON.stringify(accounts));
+// Seed default accounts into Firestore if the collection is empty (called from subscription)
+function migrateAccountsIfNeeded() {
+  if (accounts.length === 0) {
+    const defaults = [
+      { id: 'acc_rob_ing',      name: 'ING Betaalrekening',  type: 'bank',   color: '#e87722', startBalance: 0, owner: 'rob' },
+      { id: 'acc_rob_anwb',     name: 'ANWB Creditcard',     type: 'credit', color: '#003d82', startBalance: 0, owner: 'rob' },
+      { id: 'acc_rob_ingcc',    name: 'ING Creditcard',      type: 'credit', color: '#e87722', startBalance: 0, owner: 'rob' },
+      { id: 'acc_rob_klarna',   name: 'Klarna',               type: 'credit', color: '#ffb3c7', startBalance: 0, owner: 'rob' },
+      { id: 'acc_rob_peugeot',  name: 'Peugeot Rob',          type: 'car',    color: '#2e5f8a', startBalance: 0, owner: 'rob' },
+      { id: 'acc_vr_rabo',      name: 'RABO Betaalrekening',  type: 'bank',   color: '#c8002a', startBalance: 0, owner: 'vriendin' },
+      { id: 'acc_vr_cc',        name: 'Creditcard Vriendin',  type: 'credit', color: '#2d7a50', startBalance: 0, owner: 'vriendin' },
+      { id: 'acc_vr_ford',      name: 'Ford Lizet',           type: 'car',    color: '#8a5faf', startBalance: 0, owner: 'vriendin' },
+    ];
+    defaults.forEach(acc => saveAccountToDB(acc));
+  }
 }
 
-// Migrate old CC1/CC2 accounts → ANWB + ING creditcard + Klarna
-(function migrateAccounts() {
-  let changed = false;
-  const cc1 = accounts.find(a => a.id === 'acc_rob_cc1');
-  const cc2 = accounts.find(a => a.id === 'acc_rob_cc2');
-  if (cc1) { cc1.id = 'acc_rob_anwb';  cc1.name = 'ANWB Creditcard'; cc1.color = '#003d82'; changed = true; }
-  if (cc2) { cc2.id = 'acc_rob_ingcc'; cc2.name = 'ING Creditcard';  cc2.color = '#e87722'; changed = true; }
-  if (!accounts.find(a => a.id === 'acc_rob_klarna')) {
-    const robIdx = accounts.reduce((best, a, i) => (a.owner === 'rob' ? i : best), -1);
-    accounts.splice(robIdx + 1, 0, { id: 'acc_rob_klarna', name: 'Klarna', type: 'credit', color: '#ffb3c7', startBalance: 0, owner: 'rob' });
-    changed = true;
-  }
-  if (changed) localStorage.setItem('rb_accounts_v1', JSON.stringify(accounts));
-})();
-
 function saveAccounts() {
-  localStorage.setItem('rb_accounts_v1',  JSON.stringify(accounts));
-  localStorage.setItem('rb_transfers_v1', JSON.stringify(transfers));
+  // no-op: accounts are saved individually to Firestore via saveAccountToDB
 }
 
 // ─── ACCOUNT BALANCE CALCULATION ─────────────────────────────
@@ -2277,10 +2679,8 @@ function addAccount() {
   if (!name) { toast('⚠️ Vul een naam in voor de rekening.'); return; }
 
   const id = 'acc_' + Date.now();
-  accounts.push({ id, name, type, color: selectedAccColor, startBalance: balance, owner });
-  saveAccounts();
-  buildAccountSelects();
-  renderAccountsPage();
+  const acc = { id, name, type, color: selectedAccColor, startBalance: balance, owner };
+  saveAccountToDB(acc);
   toast(`✓ Rekening "${name}" toegevoegd!`);
   document.getElementById('acc-name').value    = '';
   document.getElementById('acc-balance').value = '';
@@ -2289,10 +2689,7 @@ function addAccount() {
 function deleteAccount(id) {
   const inUse = transactions.some(t => t.account === id);
   if (inUse) { toast('⚠️ Rekening is in gebruik bij transacties — kan niet verwijderen.'); return; }
-  accounts = accounts.filter(a => a.id !== id);
-  saveAccounts();
-  buildAccountSelects();
-  renderAccountsPage();
+  deleteAccountFromDB(id);
   toast('🗑 Rekening verwijderd.');
 }
 
@@ -2308,9 +2705,8 @@ function doTransfer() {
   if (!amount || amount <= 0) { toast('⚠️ Vul een geldig bedrag in.'); return; }
   if (!date)             { toast('⚠️ Vul een datum in.'); return; }
 
-  transfers.push({ id: Date.now(), from, to, amount, date, desc });
-  saveAccounts();
-  renderAccountsPage();
+  const tr = { id: Date.now(), from, to, amount, date, desc };
+  saveTransferToDB(tr);
   toast('⇄ Overboeking uitgevoerd!');
   document.getElementById('transfer-amount').value = '';
   document.getElementById('transfer-desc').value   = '';
@@ -2502,14 +2898,15 @@ function addTransaction() {
   const date   = document.getElementById('date').value;
   const note   = document.getElementById('note').value.trim();
   const account = document.getElementById('account-select')?.value || (accounts[0]?.id || '');
+  const addedBy = currentUser?.displayName?.split(' ')[0] || 'onbekend';
 
   if (!desc || isNaN(amount) || amount <= 0 || !date) {
     toast('⚠️ Vul omschrijving, bedrag en datum in.');
     return;
   }
 
-  transactions.unshift({ id: Date.now(), type: currentType, desc, amount, category: cat, date, note, account });
-  save(); render();
+  const tx = { id: Date.now(), type: currentType, desc, amount, category: cat, date, note, account, addedBy };
+  saveTx(tx);
   toast(currentType === 'expense' ? '✓ Uitgave toegevoegd!' : '✓ Inkomst toegevoegd!');
 
   document.getElementById('desc').value    = '';
@@ -2526,15 +2923,50 @@ function showPage(page) {
   document.querySelector(`.nav-item[onclick="showPage('${page}')"]`).classList.add('active');
   if (page === 'categories') renderCategoryManager();
   else if (page === 'accounts') renderAccountsPage();
+  else if (page === 'crypto') { renderCryptoPage(); loadCryptoPrices(); }
   else render();
 }
 
-// ─── UPDATED save ─────────────────────────────────────────────
-function save() {
-  localStorage.setItem('rb_tx_v3',      JSON.stringify(transactions));
-  localStorage.setItem('rb_goals_v3',   JSON.stringify(goals));
-  localStorage.setItem('rb_budget_v3',  budget.toString());
-  saveAccounts();
+// ─── FIRESTORE SAVE FUNCTIONS ────────────────────────────────
+async function save() {
+  // budget + custom cats in settings
+  await setDoc(sharedRef('settings/main'), {
+    budget,
+    customExpenseCats,
+    customIncomeCats,
+  });
+}
+
+async function saveTx(tx) {
+  await setDoc(doc(sharedCol('transactions'), String(tx.id)), tx);
+}
+
+async function deleteTxFromDB(id) {
+  await deleteDoc(doc(sharedCol('transactions'), String(id)));
+}
+
+async function saveGoalToDB(goal) {
+  await setDoc(doc(sharedCol('goals'), String(goal.id)), goal);
+}
+
+async function deleteGoalFromDB(id) {
+  await deleteDoc(doc(sharedCol('goals'), String(id)));
+}
+
+async function saveAccountToDB(acc) {
+  await setDoc(doc(sharedCol('accounts'), acc.id), acc);
+}
+
+async function deleteAccountFromDB(id) {
+  await deleteDoc(doc(sharedCol('accounts'), id));
+}
+
+async function saveTransferToDB(tr) {
+  await setDoc(doc(sharedCol('transfers'), String(tr.id)), tr);
+}
+
+async function saveCryptoDB() {
+  await setDoc(sharedRef('settings/crypto'), { coins: cryptoCoins });
 }
 
 // ─── INIT ACCOUNTS ────────────────────────────────────────────
@@ -2582,6 +3014,237 @@ function render() {
   renderGoals();
   renderSidebarBalance();
 }
+
+// ═══════════════════════════════════════════════════════════════
+// ─── CRYPTO MODULE ────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════
+
+const CRYPTO_STORAGE_KEY = 'rb_crypto_v1';
+const CRYPTO_COLORS = {
+  devve:        '#4a90e2',
+  fias:         '#f5a623',
+  bitcoin:      '#f7931a',
+  ethereum:     '#627eea',
+  default:      '#8a5faf',
+};
+
+// Default coins: DevvE + FIAS pre-loaded
+function defaultCryptoCoins() {
+  return [
+    { id: 'devve',        name: 'DevvE',      symbol: 'DEVVE', amount: 0, color: '#4a90e2' },
+    { id: 'fias',         name: 'FIAS',       symbol: 'FIAS',  amount: 0, color: '#f5a623' },
+  ];
+}
+
+let cryptoCoins = defaultCryptoCoins();
+let cryptoPriceCache = {};
+
+function saveCryptoDB_stub() {} // replaced by real saveCryptoDB above
+
+// ─── FETCH LIVE PRICES ────────────────────────────────────────
+async function loadCryptoPrices() {
+  if (!cryptoCoins.length) return;
+
+  const btn = document.getElementById('crypto-refresh-btn');
+  if (btn) { btn.textContent = '↻'; btn.classList.add('spinning'); }
+
+  const ids = [...new Set(cryptoCoins.map(c => c.id))].join(',');
+
+  try {
+    // Fetch coin prices in EUR + USD, with 24h change
+    const url = `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=eur,usd&include_24hr_change=true`;
+    const res  = await fetch(url);
+
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+
+    const now = Date.now();
+    for (const id of ids.split(',')) {
+      if (data[id]) {
+        cryptoPriceCache[id] = {
+          eur:       data[id].eur       || 0,
+          usd:       data[id].usd       || 0,
+          change24h: data[id].eur_24h_change || 0,
+          fetchedAt: now,
+        };
+      }
+    }
+
+    // Update timestamp
+    const updEl = document.getElementById('crypto-updated');
+    if (updEl) updEl.textContent = 'bijgewerkt ' + new Date().toLocaleTimeString('nl-NL', { hour:'2-digit', minute:'2-digit' });
+
+    renderCryptoPage();
+
+  } catch (err) {
+    const grid = document.getElementById('crypto-grid');
+    if (grid) {
+      const errDiv = document.createElement('div');
+      errDiv.className = 'crypto-error';
+      errDiv.textContent = `⚠️ Kon koersen niet ophalen: ${err.message}. Controleer je internetverbinding.`;
+      grid.prepend(errDiv);
+    }
+    // Still render with cached/zero prices
+    renderCryptoPage();
+  } finally {
+    if (btn) btn.classList.remove('spinning');
+    if (btn) btn.textContent = '↻ Ververs';
+  }
+}
+
+// ─── RENDER CRYPTO PAGE ───────────────────────────────────────
+function renderCryptoPage() {
+  const grid = document.getElementById('crypto-grid');
+  if (!grid) return;
+
+  // Clear old error messages
+  grid.querySelectorAll('.crypto-error').forEach(e => e.remove());
+
+  if (!cryptoCoins.length) {
+    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><span class="icon">₿</span>Nog geen coins toegevoegd</div>`;
+    updateCryptoTotal();
+    return;
+  }
+
+  grid.innerHTML = cryptoCoins.map((coin, idx) => {
+    const price  = cryptoPriceCache[coin.id];
+    const eurPrice  = price?.eur   ?? null;
+    const change    = price?.change24h ?? null;
+    const eurValue  = (eurPrice !== null && coin.amount) ? eurPrice * coin.amount : null;
+    const color     = coin.color || CRYPTO_COLORS[coin.id] || CRYPTO_COLORS.default;
+    const initials  = coin.symbol.slice(0,3).toUpperCase();
+
+    // Change badge
+    let changeBadge = '';
+    if (change !== null) {
+      const cls  = change > 0.05 ? 'up' : change < -0.05 ? 'down' : 'flat';
+      const sign = change > 0 ? '+' : '';
+      changeBadge = `<span class="crypto-change ${cls}">${sign}${change.toFixed(2)}%</span>`;
+    }
+
+    // Price display
+    const priceDisplay = eurPrice !== null
+      ? `€ ${eurPrice < 0.01 ? eurPrice.toFixed(6) : eurPrice < 1 ? eurPrice.toFixed(4) : eurPrice.toLocaleString('nl-NL', {minimumFractionDigits:2, maximumFractionDigits:2})}`
+      : `<span style="color:var(--muted);font-size:0.9rem">Laden…</span>`;
+
+    // EUR value
+    const valueDisplay = eurValue !== null
+      ? `<div class="crypto-eur-value">${fmt(eurValue)}</div><div class="crypto-eur-label">jouw waarde</div>`
+      : `<div class="crypto-eur-value" style="color:var(--muted)">—</div><div class="crypto-eur-label">voer aantal in</div>`;
+
+    return `
+      <div class="crypto-card" style="border-top: 3px solid ${color}">
+        <div class="crypto-card-top">
+          <div class="crypto-coin-info">
+            <div class="crypto-coin-icon" style="background:${color}">${initials}</div>
+            <div>
+              <div class="crypto-coin-name">${coin.name}</div>
+              <div class="crypto-coin-symbol">${coin.symbol}</div>
+            </div>
+          </div>
+          <button class="crypto-card-del" onclick="deleteCryptoCoin(${idx})">✕</button>
+        </div>
+        <div class="crypto-price-row">
+          <div class="crypto-price">${priceDisplay}</div>
+          ${changeBadge}
+        </div>
+        <div style="font-size:0.62rem;color:var(--muted);font-weight:500;margin-bottom:0.2rem">prijs per coin (EUR)</div>
+        <div class="crypto-holdings">
+          <div>
+            <div style="font-size:0.62rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);font-weight:600;margin-bottom:0.3rem">Jouw coins</div>
+            <input class="crypto-amount-input"
+              type="number" min="0" step="any"
+              value="${coin.amount || ''}"
+              placeholder="0"
+              oninput="updateCryptoAmount(${idx}, this.value)"
+            />
+          </div>
+          <div style="text-align:right">${valueDisplay}</div>
+        </div>
+      </div>`;
+  }).join('');
+
+  updateCryptoTotal();
+}
+
+function updateCryptoAmount(idx, val) {
+  cryptoCoins[idx].amount = parseFloat(val) || 0;
+  saveCryptoDB();
+  renderCryptoPage();
+}
+
+function updateCryptoTotal() {
+  let total = 0;
+  let hasAny = false;
+  cryptoCoins.forEach(coin => {
+    const price = cryptoPriceCache[coin.id];
+    if (price?.eur && coin.amount) {
+      total += price.eur * coin.amount;
+      hasAny = true;
+    }
+  });
+
+  const totalEl = document.getElementById('crypto-total-eur');
+  const subEl   = document.getElementById('crypto-total-sub');
+
+  if (totalEl) totalEl.textContent = hasAny ? fmt(total) : '€ —';
+  if (subEl) {
+    const n = cryptoCoins.filter(c => c.amount > 0).length;
+    subEl.textContent = hasAny
+      ? `${n} coin${n !== 1 ? 's' : ''} in portefeuille`
+      : cryptoCoins.length ? 'Vul je aantal coins in om je waarde te zien' : 'Voeg coins toe om te beginnen';
+  }
+}
+
+// ─── ADD / DELETE COIN ────────────────────────────────────────
+function addCryptoCoin() {
+  const name   = document.getElementById('crypto-name').value.trim();
+  const coinId = document.getElementById('crypto-id').value.trim().toLowerCase().replace(/\s+/g, '-');
+  const symbol = document.getElementById('crypto-symbol').value.trim().toUpperCase();
+  const amount = parseFloat(document.getElementById('crypto-amount').value) || 0;
+
+  if (!name)   { toast('⚠️ Vul een naam in.'); return; }
+  if (!coinId) { toast('⚠️ Vul een CoinGecko ID in.'); return; }
+  if (!symbol) { toast('⚠️ Vul een symbool in (bijv. BTC).'); return; }
+  if (cryptoCoins.find(c => c.id === coinId)) { toast('⚠️ Deze coin staat er al in.'); return; }
+
+  const colors = ['#4a90e2','#f5a623','#2d7a50','#8a5faf','#e24a4a','#4ae2b0','#e2a84a'];
+  const color  = CRYPTO_COLORS[coinId] || colors[cryptoCoins.length % colors.length];
+
+  cryptoCoins.push({ id: coinId, name, symbol, amount, color });
+  saveCryptoDB();
+
+  // Clear form
+  ['crypto-name','crypto-id','crypto-symbol','crypto-amount'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+
+  toast(`₿ ${name} toegevoegd!`);
+  loadCryptoPrices();
+}
+
+function deleteCryptoCoin(idx) {
+  const name = cryptoCoins[idx]?.name || 'Coin';
+  cryptoCoins.splice(idx, 1);
+  saveCryptoDB();
+  renderCryptoPage();
+  toast(`🗑 ${name} verwijderd.`);
+}
+
+// ── EXPOSE TO GLOBAL SCOPE (needed for inline onclick handlers with type="module") ──
+Object.assign(window, {
+  loginWithGoogle, logoutUser,
+  showPage, setType, addTransaction, deleteTransaction,
+  addGoal, deleteGoal, updateGoalSaved,
+  addAccount, deleteAccount, doTransfer, setOwnerFilter,
+  pickAccColor, buildColorPicker,
+  addCustomCategory, deleteCustomCategory,
+  renderCategoryManager, setCatType,
+  updateBudget,
+  addCryptoCoin, deleteCryptoCoin, updateCryptoAmount, loadCryptoPrices,
+  installApp,
+});
+
 </script>
 
 </body>
