@@ -10,8 +10,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Financiën RB">
 <meta name="application-name" content="Financiën RB">
-<meta name="theme-color" content="#1a1714">
-<meta name="msapplication-TileColor" content="#1a1714">
+<meta name="theme-color" content="#261e16">
+<meta name="msapplication-TileColor" content="#261e16">
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='bg2' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%231a1714'/%3E%3Cstop offset='1' stop-color='%232e2825'/%3E%3C/linearGradient%3E%3ClinearGradient id='stripe2' x1='0' y1='0' x2='1' y2='0'%3E%3Cstop offset='0' stop-color='%23c9602a'/%3E%3Cstop offset='0.4' stop-color='%23e8a060'/%3E%3Cstop offset='0.65' stop-color='%232a7a4f'/%3E%3Cstop offset='1' stop-color='%232a5b8a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='512' height='512' rx='112' fill='url(%23bg2)'/%3E%3Crect x='0' y='0' width='512' height='28' rx='14' fill='url(%23stripe2)'/%3E%3Ccircle cx='256' cy='290' r='140' fill='none' stroke='%23c9602a' stroke-width='12' opacity='0.5'/%3E%3Ccircle cx='256' cy='290' r='100' fill='none' stroke='%23c9602a' stroke-width='5' opacity='0.2'/%3E%3Ccircle cx='256' cy='290' r='60' fill='%23c9602a' opacity='0.08'/%3E%3Ctext x='256' y='335' font-family='Georgia,serif' font-size='120' font-weight='bold' fill='%23c9602a' text-anchor='middle' letter-spacing='-4'%3ERB%3C/text%3E%3Ctext x='256' y='110' font-family='Georgia,serif' font-size='42' fill='%236b6560' text-anchor='middle' letter-spacing='16'%3EFINANCI%C3%8BN%3C/text%3E%3C/svg%3E">
 <link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22Financi%C3%ABn%20Rob%20Borghouts%22%2C%22short_name%22%3A%22Financi%C3%ABn%20RB%22%2C%22description%22%3A%22Persoonlijk%20financi%C3%ABl%20overzicht%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%231a1714%22%2C%22theme_color%22%3A%22%231a1714%22%2C%22orientation%22%3A%22portrait%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%2520viewBox%3D'0%25200%2520512%2520512'%253E%253Crect%2520width%3D'512'%2520height%3D'512'%2520rx%3D'112'%2520fill%3D'%25231a1714'%2F%253E%253Ctext%2520x%3D'256'%2520y%3D'340'%2520font-family%3D'Georgia'%2520font-size%3D'120'%2520fill%3D'%2523c9602a'%2520text-anchor%3D'middle'%253ERB%253C%2Ftext%253E%253C%2Fsvg%253E%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%2C%22purpose%22%3A%22any%20maskable%22%7D%5D%7D">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%231a1714'/%3E%3Cstop offset='1' stop-color='%232e2825'/%3E%3C/linearGradient%3E%3ClinearGradient id='stripe' x1='0' y1='0' x2='1' y2='0'%3E%3Cstop offset='0' stop-color='%23c9602a'/%3E%3Cstop offset='0.4' stop-color='%23e8a060'/%3E%3Cstop offset='0.65' stop-color='%232a7a4f'/%3E%3Cstop offset='1' stop-color='%232a5b8a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23bg)'/%3E%3Crect x='0' y='0' width='100' height='5' rx='3' fill='url(%23stripe)'/%3E%3Ccircle cx='50' cy='54' r='28' fill='none' stroke='%23c9602a' stroke-width='2.5' opacity='0.5'/%3E%3Ccircle cx='50' cy='54' r='21' fill='none' stroke='%23c9602a' stroke-width='1' opacity='0.25'/%3E%3Ctext x='50' y='62' font-family='Georgia,serif' font-size='22' font-weight='bold' fill='%23c9602a' text-anchor='middle' letter-spacing='-1'%3ERB%3C/text%3E%3Ctext x='50' y='22' font-family='Georgia,serif' font-size='9' fill='%236b6560' text-anchor='middle' letter-spacing='3'%3EFINANCI%C3%8BN%3C/text%3E%3C/svg%3E">
@@ -20,23 +20,25 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-–bg: #faf8f4;
-–surface: #ffffff;
-–card: #f5f2ed;
-–border: #e8e2d9;
-–ink: #1a1714;
-–ink2: #4a4540;
-–muted: #9a9088;
-–accent: #c9602a;
-–accent-light: #f5ebe3;
-–green: #2a7a4f;
-–green-light: #e3f4ec;
-–blue: #2a5b8a;
-–blue-light: #e3ecf5;
-–red: #c9302a;
-–red-light: #fdecea;
-–shadow: 0 2px 20px rgba(26,23,20,0.07);
-–shadow-lg: 0 8px 40px rgba(26,23,20,0.12);
+–bg: #f7f3ee;
+–surface: #fdfaf6;
+–card: #f0ebe3;
+–border: #e2d9cc;
+–ink: #2a2118;
+–ink2: #4a3f33;
+–muted: #9e9184;
+–accent: #b85c28;
+–accent-light: #f5e8de;
+–green: #2d7a50;
+–green-light: #dff0e8;
+–blue: #2e5f8a;
+–blue-light: #deeaf5;
+–red: #b83028;
+–red-light: #fce8e7;
+–gold: #b08a3a;
+–gold-light: #f5edda;
+–shadow: 0 2px 20px rgba(42,33,24,0.08);
+–shadow-lg: 0 8px 40px rgba(42,33,24,0.14);
 }
 
 body {
@@ -49,20 +51,20 @@ overflow-x: hidden;
 
 .top-stripe {
 height: 5px;
-background: linear-gradient(90deg, #c9602a 0%, #e8a060 30%, #2a7a4f 60%, #2a5b8a 100%);
+background: linear-gradient(90deg, #b85c28 0%, #d4924a 30%, #b08a3a 55%, #2d7a50 75%, #2e5f8a 100%);
 }
 
 /* ── SIDEBAR LAYOUT ── */
 .layout {
 display: grid;
-grid-template-columns: 260px 1fr;
+grid-template-columns: 260px minmax(0, 1fr);
 min-height: calc(100vh - 5px);
 }
 
 /* Sidebar */
 .sidebar {
-background: var(–ink);
-color: #faf8f4;
+background: #261e16;
+color: #f0ebe3;
 padding: 2.5rem 1.8rem;
 display: flex;
 flex-direction: column;
@@ -105,7 +107,7 @@ font-family: ‘Space Grotesk’, sans-serif;
 font-size: 0.58rem;
 text-transform: uppercase;
 letter-spacing: 0.14em;
-color: #6b6560;
+color: #7a6e62;
 font-weight: 500;
 margin-top: 1px;
 }
@@ -121,7 +123,7 @@ margin-bottom: 2rem;
 font-size: 0.58rem;
 text-transform: uppercase;
 letter-spacing: 0.14em;
-color: #4a4540;
+color: #4e453c;
 font-weight: 600;
 padding: 0.3rem 0.5rem;
 margin-bottom: 0.2rem;
@@ -145,7 +147,7 @@ text-align: left;
 width: 100%;
 }
 
-.nav-item:hover { background: rgba(255,255,255,0.07); color: #faf8f4; }
+.nav-item:hover { background: rgba(255,255,255,0.07); color: #f7f3ee; }
 .nav-item.active { background: rgba(201,96,42,0.18); color: var(–accent); }
 .nav-item .nav-icon { font-size: 1rem; flex-shrink: 0; }
 
@@ -162,7 +164,7 @@ border: 1px solid rgba(255,255,255,0.07);
 font-size: 0.6rem;
 text-transform: uppercase;
 letter-spacing: 0.12em;
-color: #6b6560;
+color: #7a6e62;
 font-weight: 500;
 margin-bottom: 0.4rem;
 }
@@ -172,7 +174,7 @@ font-family: ‘Cormorant Garamond’, serif;
 font-size: 1.8rem;
 font-weight: 300;
 line-height: 1;
-color: #faf8f4;
+color: #f7f3ee;
 }
 
 .sidebar-balance .bal-amount.positive { color: #5dba88; }
@@ -180,7 +182,7 @@ color: #faf8f4;
 
 .sidebar-balance .bal-sub {
 font-size: 0.62rem;
-color: #4a4540;
+color: #4e453c;
 margin-top: 0.35rem;
 }
 
@@ -188,17 +190,17 @@ margin-top: 0.35rem;
 font-family: ‘Cormorant Garamond’, serif;
 font-size: 0.8rem;
 font-style: italic;
-color: #3a3530;
+color: #45392e;
 margin-top: 1.2rem;
 text-align: center;
 }
 
-.made-by-sidebar strong { color: #6b6560; font-style: normal; }
+.made-by-sidebar strong { color: #7a6e62; font-style: normal; }
 
 .install-btn {
 width: 100%;
 background: var(–accent);
-color: #faf8f4;
+color: #f7f3ee;
 border: none;
 border-radius: 10px;
 font-family: ‘Space Grotesk’, sans-serif;
@@ -218,6 +220,8 @@ text-align: center;
 .main {
 padding: 2.5rem 2.5rem 5rem;
 overflow-y: auto;
+overflow-x: hidden;
+min-width: 0;
 }
 
 /* Page sections */
@@ -257,7 +261,6 @@ gap: 1rem;
 margin-bottom: 2rem;
 animation: riseUp 0.6s ease both;
 }
-
 .summary-card {
 background: var(–surface);
 border: 1px solid var(–border);
@@ -470,8 +473,8 @@ vertical-align: middle;
 
 /* Tip */
 .tip-box {
-background: linear-gradient(135deg, #f5ebe3 0%, #faf3ee 100%);
-border: 1px solid #e8d0c4;
+background: linear-gradient(135deg, var(–accent-light) 0%, var(–bg) 100%);
+border: 1px solid var(–border);
 border-left: 3px solid var(–accent);
 border-radius: 12px;
 padding: 0.9rem 1.2rem;
@@ -590,7 +593,7 @@ margin-top: 1rem;
 transition: opacity 0.2s, transform 0.1s;
 }
 
-.add-btn.btn-expense { background: var(–ink); color: #faf8f4; }
+.add-btn.btn-expense { background: var(–ink); color: #f7f3ee; }
 .add-btn.btn-expense:hover { background: var(–accent); }
 .add-btn.btn-income  { background: var(–green); color: #fff; }
 .add-btn.btn-income:hover  { opacity: 0.85; }
@@ -625,7 +628,7 @@ letter-spacing: 0.05em;
 }
 
 .filter-btn:hover { border-color: var(–accent); color: var(–accent); }
-.filter-btn.active { background: var(–ink); border-color: var(–ink); color: #faf8f4; }
+.filter-btn.active { background: var(–ink); border-color: var(–ink); color: #f7f3ee; }
 
 .sort-select {
 background: var(–surface);
@@ -909,7 +912,7 @@ position: fixed;
 bottom: 2rem;
 right: 2rem;
 background: var(–ink);
-color: #faf8f4;
+color: #f7f3ee;
 font-size: 0.78rem;
 font-weight: 500;
 padding: 0.65rem 1.2rem;
@@ -924,36 +927,378 @@ z-index: 999;
 
 .toast.show { opacity: 1; transform: translateY(0); }
 
+/* App footer */
+.app-footer {
+text-align: center;
+padding: 2.5rem 1rem 1rem;
+margin-top: 2rem;
+border-top: 1px solid var(–border);
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 1rem;
+font-style: italic;
+color: var(–muted);
+letter-spacing: 0.02em;
+}
+
+.app-footer strong {
+font-weight: 600;
+font-style: normal;
+color: var(–ink);
+}
+
 /* Mobile menu toggle */
 .mobile-header { display: none; }
+
+/* ── CATEGORIES MANAGEMENT ── */
+.cat-manage-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 1.2rem;
+margin-top: 0.5rem;
+}
+
+.cat-manage-col h3 {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 1.2rem;
+font-weight: 400;
+margin-bottom: 0.9rem;
+padding-bottom: 0.6rem;
+border-bottom: 1px solid var(–border);
+}
+
+.cat-manage-col h3 em { font-style: italic; color: var(–accent); }
+.cat-manage-col h3 em.green { color: var(–green); }
+
+.cat-manage-list {
+display: flex;
+flex-direction: column;
+gap: 0.5rem;
+}
+
+.cat-manage-item {
+display: flex;
+align-items: center;
+gap: 0.7rem;
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: 11px;
+padding: 0.7rem 1rem;
+transition: box-shadow 0.18s;
+}
+
+.cat-manage-item:hover { box-shadow: var(–shadow); }
+
+.cat-manage-item.is-default {
+opacity: 0.65;
+}
+
+.cat-manage-emoji {
+font-size: 1.3rem;
+width: 36px;
+height: 36px;
+display: flex;
+align-items: center;
+justify-content: center;
+border-radius: 9px;
+flex-shrink: 0;
+}
+
+.cat-manage-name {
+font-size: 0.85rem;
+font-weight: 500;
+flex: 1;
+color: var(–ink);
+}
+
+.cat-manage-badge {
+font-size: 0.58rem;
+text-transform: uppercase;
+letter-spacing: 0.08em;
+color: var(–muted);
+font-weight: 500;
+background: var(–card);
+padding: 0.18rem 0.45rem;
+border-radius: 99px;
+border: 1px solid var(–border);
+}
+
+.cat-manage-del {
+background: none;
+border: none;
+color: var(–border);
+cursor: pointer;
+font-size: 0.82rem;
+padding: 0.28rem;
+border-radius: 6px;
+transition: color 0.18s, background 0.18s;
+line-height: 1;
+flex-shrink: 0;
+}
+
+.cat-manage-del:hover { color: var(–red); background: var(–red-light); }
+.cat-manage-del:disabled { opacity: 0.25; cursor: not-allowed; }
+
+.cat-manage-del:disabled:hover { color: var(–border); background: none; }
 
 @keyframes riseUp {
 from { opacity: 0; transform: translateY(16px); }
 to   { opacity: 1; transform: translateY(0); }
 }
 
+/* Owner groups */
+.owner-group {
+margin-bottom: 1.8rem;
+}
+
+.owner-group-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 0.8rem;
+padding-bottom: 0.6rem;
+border-bottom: 1px solid var(–border);
+}
+
+.owner-group-name {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 1.3rem;
+font-weight: 400;
+color: var(–ink);
+}
+
+.owner-group-total {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 1.4rem;
+font-weight: 300;
+color: var(–green);
+}
+
+.owner-group-total.negative { color: var(–red); }
+
+.owner-cards-row {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+gap: 1rem;
+}
+
+/* Account cards container — no longer a direct grid, groups handle that */
+.account-cards {
+margin-bottom: 1.5rem;
+animation: riseUp 0.6s ease both;
+}
+
 @media (max-width: 700px) {
-.layout { grid-template-columns: 1fr; }
+.owner-cards-row { grid-template-columns: 1fr 1fr; }
+}
+
+.account-card {
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: 16px;
+padding: 1.3rem;
+box-shadow: var(–shadow);
+position: relative;
+overflow: hidden;
+cursor: pointer;
+transition: transform 0.18s, box-shadow 0.18s;
+}
+
+.account-card:hover { transform: translateY(-2px); box-shadow: var(–shadow-lg); }
+.account-card.selected { border-width: 2px; }
+
+.account-card::before {
+content: ‘’;
+position: absolute;
+top: 0; left: 0; right: 0;
+height: 3px;
+}
+
+.account-card-top {
+display: flex;
+justify-content: space-between;
+align-items: flex-start;
+margin-bottom: 0.8rem;
+}
+
+.account-card-icon {
+font-size: 1.4rem;
+width: 40px; height: 40px;
+border-radius: 10px;
+display: flex;
+align-items: center;
+justify-content: center;
+background: var(–card);
+}
+
+.account-card-del {
+background: none;
+border: none;
+color: var(–border);
+cursor: pointer;
+font-size: 0.78rem;
+padding: 0.25rem;
+border-radius: 5px;
+transition: color 0.18s, background 0.18s;
+line-height: 1;
+}
+
+.account-card-del:hover { color: var(–red); background: var(–red-light); }
+
+.account-card-name {
+font-size: 0.88rem;
+font-weight: 600;
+color: var(–ink);
+margin-bottom: 0.2rem;
+}
+
+.account-card-type {
+font-size: 0.63rem;
+text-transform: uppercase;
+letter-spacing: 0.1em;
+color: var(–muted);
+font-weight: 500;
+}
+
+.account-card-balance {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 1.8rem;
+font-weight: 300;
+line-height: 1;
+margin-top: 0.7rem;
+}
+
+.account-card-balance.negative { color: var(–red); }
+
+.account-card-sub {
+font-size: 0.63rem;
+color: var(–muted);
+margin-top: 0.3rem;
+}
+
+/* Color picker dots */
+.color-picker {
+display: flex;
+gap: 0.45rem;
+align-items: center;
+padding: 0.72rem 0.5rem;
+flex-wrap: wrap;
+}
+
+.color-dot {
+width: 22px; height: 22px;
+border-radius: 50%;
+cursor: pointer;
+border: 2px solid transparent;
+transition: transform 0.15s, border-color 0.15s;
+flex-shrink: 0;
+}
+
+.color-dot:hover { transform: scale(1.2); }
+.color-dot.selected { border-color: var(–ink); transform: scale(1.15); }
+
+/* Account badge on tx items */
+.tx-account-badge {
+display: inline-flex;
+align-items: center;
+gap: 0.25rem;
+font-size: 0.6rem;
+font-weight: 600;
+text-transform: uppercase;
+letter-spacing: 0.06em;
+padding: 0.15rem 0.45rem;
+border-radius: 99px;
+color: #fff;
+margin-left: 0.35rem;
+vertical-align: middle;
+}
+
+@media (max-width: 700px) {
+.account-cards { grid-template-columns: 1fr 1fr; }
+.cat-manage-grid { grid-template-columns: 1fr; }
+
+/* Hide full sidebar on mobile */
+.layout { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
 .sidebar {
-position: static;
+position: fixed;
+bottom: 0; left: 0; right: 0;
+top: auto;
 height: auto;
 flex-direction: row;
-flex-wrap: wrap;
-padding: 1rem 1.2rem;
-gap: 0.5rem;
-align-items: center;
-justify-content: space-between;
+flex-wrap: nowrap;
+padding: 0;
+gap: 0;
+z-index: 100;
+border-top: 1px solid rgba(255,255,255,0.08);
+box-shadow: 0 -4px 20px rgba(0,0,0,0.25);
+overflow: visible;
 }
-.sidebar-logo { margin-bottom: 0; }
-.sidebar-nav { flex-direction: row; gap: 0.3rem; margin-bottom: 0; }
-.nav-label { display: none; }
+
+/* Hide decorative sidebar elements on mobile */
+.sidebar-logo    { display: none; }
 .sidebar-balance { display: none; }
 .made-by-sidebar { display: none; }
-.main { padding: 1.5rem 1rem 4rem; }
-.summary { grid-template-columns: 1fr 1fr; }
+.install-btn     { display: none !important; }
+.nav-label       { display: none; }
+
+/* Nav items become bottom tab bar */
+.sidebar-nav {
+display: flex;
+flex-direction: row;
+width: 100%;
+margin-bottom: 0;
+gap: 0;
+}
+
+.nav-item {
+flex: 1;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+gap: 0.2rem;
+padding: 0.6rem 0.3rem 0.75rem;
+border-radius: 0;
+font-size: 0.52rem;
+letter-spacing: 0.04em;
+text-transform: uppercase;
+color: #60554c;
+min-width: 0;
+}
+
+.nav-item .nav-icon { font-size: 1.3rem; }
+.nav-item:hover { background: rgba(255,255,255,0.05); color: #f7f3ee; }
+.nav-item.active { background: transparent; color: var(–accent); }
+.nav-item.active .nav-icon { filter: drop-shadow(0 0 4px rgba(201,96,42,0.5)); }
+
+/* Main content sits above bottom nav */
+.main {
+padding: 1.2rem 1rem 5.5rem;
+min-height: 100vh;
+}
+
+/* Page header smaller on mobile */
+.page-header { margin-bottom: 1.5rem; padding-bottom: 1rem; }
+.page-header h2 { font-size: 2rem; }
+
+/* Summary 2-col grid */
+.summary { grid-template-columns: 1fr 1fr; gap: 0.7rem; margin-bottom: 1.2rem; }
+.summary-card { padding: 1rem; }
+.sc-num { font-size: 1.4rem; }
+
+/* Forms */
 .form-grid { grid-template-columns: 1fr; }
+.form-card { padding: 1.3rem; }
+
+/* Insights */
 .insights-grid { grid-template-columns: 1fr; }
-.tx-item { grid-template-columns: 38px 1fr auto auto; gap: 0.6rem; }
+
+/* Transaction items */
+.tx-item { grid-template-columns: 38px 1fr auto auto; gap: 0.6rem; padding: 0.8rem 0.9rem; }
+
+/* Controls */
+.controls { flex-direction: column; align-items: flex-start; }
+
+/* Footer */
+.app-footer { padding-bottom: 2rem; font-size: 0.88rem; }
 }
 </style>
 
@@ -976,12 +1321,12 @@ justify-content: space-between;
         <stop offset="1" stop-color="#2a5b8a"/>
       </linearGradient>
     </defs>
-    <rect width="44" height="44" rx="10" fill="#2e2825"/>
+    <rect width="44" height="44" rx="10" fill="#2a1e14"/>
     <rect x="0" y="0" width="44" height="3" rx="2" fill="url(#ls)"/>
     <circle cx="22" cy="26" r="13" fill="none" stroke="#c9602a" stroke-width="1.5" opacity="0.6"/>
     <circle cx="22" cy="26" r="9.5" fill="none" stroke="#c9602a" stroke-width="0.8" opacity="0.25"/>
     <text x="22" y="31" font-family="Georgia,serif" font-size="10" font-weight="bold" fill="#c9602a" text-anchor="middle" letter-spacing="-0.5">RB</text>
-    <text x="22" y="11" font-family="Georgia,serif" font-size="3.8" fill="#6b6560" text-anchor="middle" letter-spacing="1.8">FIN</text>
+    <text x="22" y="11" font-family="Georgia,serif" font-size="3.8" fill="#7a6e62" text-anchor="middle" letter-spacing="1.8">FIN</text>
   </svg>
 </div>
       <div class="logo-text">
@@ -1005,6 +1350,12 @@ justify-content: space-between;
   <button class="nav-item" onclick="showPage('goals')">
     <span class="nav-icon">🎯</span> Doelen
   </button>
+  <button class="nav-item" onclick="showPage('categories')">
+    <span class="nav-icon">🏷️</span> Categorieën
+  </button>
+  <button class="nav-item" onclick="showPage('accounts')">
+    <span class="nav-icon">🏦</span> Rekeningen
+  </button>
 </div>
 
 <div class="sidebar-balance">
@@ -1013,7 +1364,7 @@ justify-content: space-between;
   <div class="bal-sub" id="sb-balance-sub">Inkomsten - Uitgaven</div>
 </div>
 
-<div class="made-by-sidebar">Made by <strong>Rob Borghouts</strong></div>
+<div class="made-by-sidebar">Made by <strong>Rob Borghouts</strong> 2026</div>
 <button class="install-btn" id="install-btn" onclick="installApp()" style="display:none">
   📲 Installeer app
 </button>
@@ -1111,6 +1462,10 @@ justify-content: space-between;
         <input type="date" id="date" />
       </div>
       <div class="form-group full">
+        <label>Rekening / Kas</label>
+        <select id="account-select"></select>
+      </div>
+      <div class="form-group full">
         <label>Notitie (optioneel)</label>
         <input type="text" id="note" placeholder="Extra toelichting…" />
       </div>
@@ -1122,6 +1477,11 @@ justify-content: space-between;
   <div class="list-title">Recente <em>transacties</em></div>
   <div class="transaction-list" id="recent-list"></div>
 </section>
+
+<!-- ── GLOBAL FOOTER ── -->
+<footer class="app-footer">
+  Made by <strong>Rob Borghouts</strong> · 2026
+</footer>
 
 <!-- ── TRANSACTIES ── -->
 <section class="page-section" id="page-transactions">
@@ -1209,6 +1569,137 @@ justify-content: space-between;
   <div class="list-title">Mijn <em>doelen</em></div>
   <div class="goals-list" id="goals-list"></div>
 </section>
+
+<!-- ── CATEGORIEËN ── -->
+<section class="page-section" id="page-categories">
+  <div class="page-header">
+    <h2>Mijn <em>Categorieën</em></h2>
+    <div class="page-date">Voeg eigen categorieën toe of verwijder ze</div>
+  </div>
+
+  <!-- Add category form -->
+  <div class="form-card" style="animation: riseUp 0.6s ease both">
+    <div class="form-title">Nieuwe <em>categorie</em></div>
+
+    <!-- Type toggle -->
+    <div class="type-toggle" style="margin-bottom:1.2rem">
+      <button class="type-btn active-expense" id="cat-btn-expense" onclick="setCatType('expense')">− Uitgave</button>
+      <button class="type-btn" id="cat-btn-income" onclick="setCatType('income')">+ Inkomst</button>
+    </div>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Naam categorie</label>
+        <input type="text" id="cat-name" placeholder="Bijv. Huisdier" maxlength="30" />
+      </div>
+      <div class="form-group">
+        <label>Emoji icoon</label>
+        <input type="text" id="cat-icon-input" placeholder="Klik op emoji →" readonly style="cursor:pointer" onclick="toggleEmojiPicker()" />
+      </div>
+    </div>
+
+    <!-- Emoji picker -->
+    <div id="emoji-picker" style="display:none;margin-top:0.9rem">
+      <div style="font-size:0.62rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);font-weight:500;margin-bottom:0.6rem">Kies een icoon</div>
+      <div id="emoji-grid" style="display:flex;flex-wrap:wrap;gap:0.4rem;max-height:180px;overflow-y:auto;padding:0.5rem;background:var(--card);border-radius:10px;border:1px solid var(--border)"></div>
+    </div>
+
+    <button class="add-btn btn-expense" id="cat-add-btn" onclick="addCustomCategory()" style="margin-top:1rem">
+      🏷️ &nbsp;Categorie toevoegen
+    </button>
+  </div>
+
+  <!-- Existing categories -->
+  <div class="cat-manage-grid" id="cat-manage-grid"></div>
+
+</section>
+
+<!-- ── REKENINGEN ── -->
+<section class="page-section" id="page-accounts">
+  <div class="page-header">
+    <h2>Mijn <em>Rekeningen</em></h2>
+    <div class="page-date">Beheer je bankrekeningen, spaarrekeningen en kas</div>
+  </div>
+
+  <!-- Owner filter -->
+  <div class="controls" style="margin-bottom:1.2rem">
+    <div class="filter-row" id="owner-filter"></div>
+  </div>
+
+  <!-- Account balance cards grouped by owner -->
+  <div class="account-cards" id="account-cards"></div>
+
+  <!-- Transfer between accounts -->
+  <div class="form-card" style="animation: riseUp 0.6s 0.1s ease both; margin-bottom:1.5rem">
+    <div class="form-title">Overboeking <em>tussen rekeningen</em></div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Van rekening</label>
+        <select id="transfer-from"></select>
+      </div>
+      <div class="form-group">
+        <label>Naar rekening</label>
+        <select id="transfer-to"></select>
+      </div>
+      <div class="form-group">
+        <label>Bedrag (€)</label>
+        <input type="number" id="transfer-amount" placeholder="0,00" step="0.01" min="0" />
+      </div>
+      <div class="form-group">
+        <label>Datum</label>
+        <input type="date" id="transfer-date" />
+      </div>
+      <div class="form-group full">
+        <label>Omschrijving (optioneel)</label>
+        <input type="text" id="transfer-desc" placeholder="Bijv. Spaargeld overmaken…" />
+      </div>
+    </div>
+    <button class="add-btn btn-expense" onclick="doTransfer()" style="background:var(--blue)">⇄ &nbsp;Overboeking uitvoeren</button>
+  </div>
+
+  <!-- Add new account form -->
+  <div class="form-card" style="animation: riseUp 0.6s 0.15s ease both">
+    <div class="form-title">Nieuwe <em>rekening</em> toevoegen</div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Naam</label>
+        <input type="text" id="acc-name" placeholder="Bijv. ING Betaalrekening" maxlength="30" />
+      </div>
+      <div class="form-group">
+        <label>Type</label>
+        <select id="acc-type">
+          <option value="bank">🏦 Bankrekening</option>
+          <option value="savings">💎 Spaarrekening</option>
+          <option value="cash">💵 Kas / Contant</option>
+          <option value="credit">💳 Creditcard</option>
+          <option value="invest">📈 Beleggingen</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Van wie</label>
+        <select id="acc-owner">
+          <option value="rob">👤 Rob</option>
+          <option value="vriendin">💑 Vriendin</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Beginsaldo (€)</label>
+        <input type="number" id="acc-balance" placeholder="0,00" step="0.01" />
+      </div>
+      <div class="form-group">
+        <label>Kleur</label>
+        <div class="color-picker" id="color-picker"></div>
+      </div>
+    </div>
+    <button class="add-btn btn-expense" onclick="addAccount()">🏦 &nbsp;Rekening toevoegen</button>
+  </div>
+
+  <!-- Account transaction history -->
+  <div id="account-tx-section" style="display:none">
+    <div class="list-title">Transacties voor <em id="account-tx-title">—</em></div>
+    <div class="transaction-list" id="account-tx-list"></div>
+  </div>
+</section>
 ```
 
   </main>
@@ -1268,29 +1759,175 @@ if ('serviceWorker' in navigator) {
 
 <script>
 // ─── DATA ───────────────────────────────────────────────────
-const EXPENSE_CATS = {
-  eten:          { label:'Eten & drinken',  icon:'🍔' },
-  transport:     { label:'Transport',        icon:'🚗' },
-  wonen:         { label:'Wonen',            icon:'🏠' },
-  gezondheid:    { label:'Gezondheid',       icon:'💊' },
-  entertainment: { label:'Entertainment',    icon:'🎬' },
-  kleding:       { label:'Kleding',          icon:'👗' },
-  abonnement:    { label:'Abonnementen',     icon:'📱' },
-  sporten:       { label:'Sporten',          icon:'🏃' },
-  overig:        { label:'Overig',           icon:'📦' },
+const DEFAULT_EXPENSE_CATS = {
+  eten:          { label:'Eten & drinken',  icon:'🍔', default:true },
+  transport:     { label:'Transport',        icon:'🚗', default:true },
+  wonen:         { label:'Wonen',            icon:'🏠', default:true },
+  gezondheid:    { label:'Gezondheid',       icon:'💊', default:true },
+  entertainment: { label:'Entertainment',    icon:'🎬', default:true },
+  kleding:       { label:'Kleding',          icon:'👗', default:true },
+  abonnement:    { label:'Abonnementen',     icon:'📱', default:true },
+  sporten:       { label:'Sporten',          icon:'🏃', default:true },
+  overig:        { label:'Overig',           icon:'📦', default:true },
 };
 
-const INCOME_CATS = {
-  salaris:       { label:'Salaris',          icon:'💼' },
-  freelance:     { label:'Freelance',        icon:'🖥️' },
-  gift:          { label:'Cadeau/gift',      icon:'🎁' },
-  rente:         { label:'Rente/dividend',   icon:'📈' },
-  'huur-inkomen':{ label:'Huurinkomsten',    icon:'🏘️' },
-  teruggave:     { label:'Teruggave',        icon:'↩️' },
-  'overig-ink':  { label:'Overig',           icon:'💰' },
+const DEFAULT_INCOME_CATS = {
+  salaris:       { label:'Salaris',          icon:'💼', default:true },
+  freelance:     { label:'Freelance',        icon:'🖥️', default:true },
+  gift:          { label:'Cadeau/gift',      icon:'🎁', default:true },
+  rente:         { label:'Rente/dividend',   icon:'📈', default:true },
+  'huur-inkomen':{ label:'Huurinkomsten',    icon:'🏘️', default:true },
+  teruggave:     { label:'Teruggave',        icon:'↩️', default:true },
+  'overig-ink':  { label:'Overig',           icon:'💰', default:true },
 };
 
-const ALL_CATS = { ...EXPENSE_CATS, ...INCOME_CATS };
+// Load custom categories from localStorage, merge with defaults
+let customExpenseCats = JSON.parse(localStorage.getItem('rb_custom_expense_cats') || '{}');
+let customIncomeCats  = JSON.parse(localStorage.getItem('rb_custom_income_cats')  || '{}');
+
+let EXPENSE_CATS = { ...DEFAULT_EXPENSE_CATS, ...customExpenseCats };
+let INCOME_CATS  = { ...DEFAULT_INCOME_CATS,  ...customIncomeCats  };
+let ALL_CATS     = { ...EXPENSE_CATS, ...INCOME_CATS };
+
+function rebuildAllCats() {
+  EXPENSE_CATS = { ...DEFAULT_EXPENSE_CATS, ...customExpenseCats };
+  INCOME_CATS  = { ...DEFAULT_INCOME_CATS,  ...customIncomeCats  };
+  ALL_CATS     = { ...EXPENSE_CATS, ...INCOME_CATS };
+}
+
+// ─── EMOJI PICKER ────────────────────────────────────────────
+const EMOJI_LIST = [
+  '🍔','🍕','🍣','🥗','🍜','🥤','☕','🍺','🍷','🛒',
+  '🚗','🚕','🚌','🚂','✈️','🛵','🚲','⛽','🅿️','🛣️',
+  '🏠','🏡','🛋️','🔨','💡','🪴','🛁','🪟','🔑','🏗️',
+  '💊','🏥','🧘','🏋️','🦷','👓','💉','🩺','🧬','❤️',
+  '🎬','🎮','🎵','🎭','🏖️','📚','🎨','🎲','🎯','🎤',
+  '👗','👟','👜','🧥','💍','🕶️','🧣','👒','💄','🛍️',
+  '📱','💻','📺','🖥️','⌚','📷','🎧','🔋','📡','🖨️',
+  '🏃','⚽','🏊','🎾','🏂','🧗','🚴','🏇','🤸','🥊',
+  '💼','📊','🏦','💰','💳','📈','🤝','🏢','📋','✏️',
+  '🎁','🎂','🥳','💐','🎀','🎊','🪄','🎉','🥂','🫶',
+  '🐶','🐱','🐠','🐇','🌿','🌳','☀️','🌧️','⭐','🌈',
+  '🧹','🧺','🧻','🪣','🔧','🪛','🪜','📦','🗂️','📂',
+];
+
+let catType = 'expense';
+let selectedEmoji = '';
+
+function setCatType(type) {
+  catType = type;
+  document.getElementById('cat-btn-expense').className = 'type-btn' + (type==='expense' ? ' active-expense' : '');
+  document.getElementById('cat-btn-income').className  = 'type-btn' + (type==='income'  ? ' active-income'  : '');
+  document.getElementById('cat-add-btn').className = 'add-btn ' + (type==='expense' ? 'btn-expense' : 'btn-income');
+}
+
+function toggleEmojiPicker() {
+  const picker = document.getElementById('emoji-picker');
+  if (picker.style.display === 'none') {
+    picker.style.display = 'block';
+    // Build grid if empty
+    const grid = document.getElementById('emoji-grid');
+    if (!grid.children.length) {
+      grid.innerHTML = EMOJI_LIST.map(e =>
+        `<button onclick="pickEmoji('${e}')" style="
+          font-size:1.4rem;width:40px;height:40px;border:none;background:none;
+          cursor:pointer;border-radius:8px;transition:background 0.15s;display:flex;
+          align-items:center;justify-content:center;
+        " onmouseover="this.style.background='var(--card)'" onmouseout="this.style.background='none'">${e}</button>`
+      ).join('');
+    }
+  } else {
+    picker.style.display = 'none';
+  }
+}
+
+function pickEmoji(emoji) {
+  selectedEmoji = emoji;
+  document.getElementById('cat-icon-input').value = emoji;
+  document.getElementById('emoji-picker').style.display = 'none';
+}
+
+function addCustomCategory() {
+  const name  = document.getElementById('cat-name').value.trim();
+  const emoji = selectedEmoji || document.getElementById('cat-icon-input').value.trim();
+
+  if (!name) { toast('⚠️ Vul een naam in voor de categorie.'); return; }
+  if (!emoji) { toast('⚠️ Kies een emoji icoon.'); return; }
+
+  // Build a key from name
+  const key = 'custom_' + name.toLowerCase().replace(/[^a-z0-9]/g,'_') + '_' + Date.now();
+
+  if (catType === 'expense') {
+    customExpenseCats[key] = { label: name, icon: emoji, default: false };
+    localStorage.setItem('rb_custom_expense_cats', JSON.stringify(customExpenseCats));
+  } else {
+    customIncomeCats[key] = { label: name, icon: emoji, default: false };
+    localStorage.setItem('rb_custom_income_cats', JSON.stringify(customIncomeCats));
+  }
+
+  rebuildAllCats();
+  buildCategorySelect();
+  buildFilters();
+  renderCategoryManager();
+
+  document.getElementById('cat-name').value = '';
+  document.getElementById('cat-icon-input').value = '';
+  selectedEmoji = '';
+  toast(`✓ Categorie "${emoji} ${name}" toegevoegd!`);
+}
+
+function deleteCustomCategory(key, type) {
+  const usedInTx = transactions.some(t => t.category === key);
+  if (usedInTx) {
+    toast('⚠️ Kan niet verwijderen — categorie is in gebruik bij transacties.');
+    return;
+  }
+  if (type === 'expense') {
+    delete customExpenseCats[key];
+    localStorage.setItem('rb_custom_expense_cats', JSON.stringify(customExpenseCats));
+  } else {
+    delete customIncomeCats[key];
+    localStorage.setItem('rb_custom_income_cats', JSON.stringify(customIncomeCats));
+  }
+  rebuildAllCats();
+  buildCategorySelect();
+  buildFilters();
+  renderCategoryManager();
+  toast('🗑 Categorie verwijderd.');
+}
+
+function renderCategoryManager() {
+  const grid = document.getElementById('cat-manage-grid');
+  if (!grid) return;
+
+  function catList(cats, type) {
+    return Object.entries(cats).map(([k, v]) => {
+      const isDefault = v.default === true || DEFAULT_EXPENSE_CATS[k] || DEFAULT_INCOME_CATS[k];
+      const inUse = transactions.some(t => t.category === k);
+      return `
+        <div class="cat-manage-item ${isDefault ? 'is-default' : ''}">
+          <div class="cat-manage-emoji" style="background:${type==='expense'?'var(--accent-light)':'var(--green-light)'}">${v.icon}</div>
+          <div class="cat-manage-name">${v.label}</div>
+          ${isDefault ? '<span class="cat-manage-badge">Standaard</span>' : ''}
+          ${inUse && !isDefault ? '<span class="cat-manage-badge">In gebruik</span>' : ''}
+          <button class="cat-manage-del" onclick="deleteCustomCategory('${k}','${type}')"
+            ${isDefault ? 'disabled title="Standaard categorieën kunnen niet worden verwijderd"' : ''}
+            ${inUse && !isDefault ? 'disabled title="In gebruik bij transacties"' : ''}
+            title="Verwijderen">✕</button>
+        </div>`;
+    }).join('');
+  }
+
+  grid.innerHTML = `
+    <div class="cat-manage-col">
+      <h3>Uitgave<em> categorieën</em></h3>
+      <div class="cat-manage-list">${catList(EXPENSE_CATS, 'expense')}</div>
+    </div>
+    <div class="cat-manage-col">
+      <h3>Inkomsten <em class="green">categorieën</em></h3>
+      <div class="cat-manage-list">${catList(INCOME_CATS, 'income')}</div>
+    </div>`;
+}
 
 const TIPS = [
   "De <em>50/30/20 regel</em>: besteed 50% aan vaste lasten, 30% aan wensen en 20% aan sparen.",
@@ -1319,12 +1956,6 @@ buildFilters();
 render();
 
 // ─── HELPERS ────────────────────────────────────────────────
-function save() {
-  localStorage.setItem('rb_tx_v3', JSON.stringify(transactions));
-  localStorage.setItem('rb_goals_v3', JSON.stringify(goals));
-  localStorage.setItem('rb_budget_v3', budget.toString());
-}
-
 function fmt(n) {
   return '€\u00a0' + Math.abs(n).toFixed(2).replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g,'.');
 }
@@ -1352,15 +1983,6 @@ function monthTotals() {
   return { inc, exp };
 }
 
-// ─── PAGE NAV ────────────────────────────────────────────────
-function showPage(page) {
-  document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
-  document.getElementById('page-'+page).classList.add('active');
-  document.querySelector(`.nav-item[onclick="showPage('${page}')"]`).classList.add('active');
-  render();
-}
-
 // ─── FORM ────────────────────────────────────────────────────
 function setType(type) {
   currentType = type;
@@ -1376,28 +1998,6 @@ function buildCategorySelect() {
   sel.innerHTML = Object.entries(cats).map(([k,v]) =>
     `<option value="${k}">${v.icon} ${v.label}</option>`
   ).join('');
-}
-
-function addTransaction() {
-  const desc   = document.getElementById('desc').value.trim();
-  const amount = parseFloat(document.getElementById('amount').value);
-  const cat    = document.getElementById('category').value;
-  const date   = document.getElementById('date').value;
-  const note   = document.getElementById('note').value.trim();
-
-  if (!desc || isNaN(amount) || amount <= 0 || !date) {
-    toast('⚠️ Vul omschrijving, bedrag en datum in.');
-    return;
-  }
-
-  transactions.unshift({ id: Date.now(), type: currentType, desc, amount, category: cat, date, note });
-  save(); render();
-  toast(currentType === 'expense' ? '✓ Uitgave toegevoegd!' : '✓ Inkomst toegevoegd!');
-
-  document.getElementById('desc').value = '';
-  document.getElementById('amount').value = '';
-  document.getElementById('note').value = '';
-  document.getElementById('date').value = new Date().toISOString().split('T')[0];
 }
 
 // ─── BUDGET ─────────────────────────────────────────────────
@@ -1479,21 +2079,6 @@ function renderTransactions() {
   else if (sort==='amount-asc')  list.sort((a,b)=>a.amount-b.amount);
 
   renderList('all-list', list, true);
-}
-
-function txHTML(t, idx, showAll=false) {
-  const cat = ALL_CATS[t.category] || { icon:'📦', label:'Overig' };
-  const sign = t.type === 'income' ? '+' : '−';
-  return `
-    <div class="tx-item is-${t.type}" style="animation-delay:${idx*0.025}s">
-      <div class="tx-icon cat-${t.category}">${cat.icon}</div>
-      <div>
-        <div class="tx-desc">${t.desc}</div>
-        <div class="tx-meta">${t.type==='income'?'Inkomst':'Uitgave'} · ${cat.label} · ${fmtDate(t.date)}${t.note?' · '+t.note:''}</div>
-      </div>
-      <div class="tx-amount ${t.type}">${sign} ${fmt(t.amount)}</div>
-      <button class="tx-delete" onclick="deleteTransaction(${t.id})" title="Verwijderen">✕</button>
-    </div>`;
 }
 
 function renderList(id, list, paginated=false) {
@@ -1610,7 +2195,345 @@ function renderGoals() {
   }).join('');
 }
 
-// ─── SIDEBAR BALANCE ─────────────────────────────────────────
+// ─── ACCOUNTS DATA ────────────────────────────────────────────
+const ACC_TYPES = {
+  bank:    { label: 'Bankrekening',    icon: '🏦' },
+  savings: { label: 'Spaarrekening',   icon: '💎' },
+  cash:    { label: 'Kas / Contant',   icon: '💵' },
+  credit:  { label: 'Creditcard',      icon: '💳' },
+  invest:  { label: 'Beleggingen',     icon: '📈' },
+};
+
+const ACC_COLORS = ['#b85c28','#2d7a50','#2e5f8a','#8a5faf','#b08a3a','#2a8a8a','#b83028','#607a2a','#003d82','#c8002a','#e87722','#ffb3c7'];
+
+let accounts   = JSON.parse(localStorage.getItem('rb_accounts_v1') || '[]');
+let transfers  = JSON.parse(localStorage.getItem('rb_transfers_v1') || '[]');
+let selectedAccColor = ACC_COLORS[0];
+let activeAccountId  = null;
+let activeOwnerFilter = 'alles'; // 'alles' | 'rob' | 'vriendin'
+
+// Seed default accounts if empty — Rob (ING) + Vriendin (RABO) setup
+if (!accounts.length) {
+  accounts = [
+    { id: 'acc_rob_ing',    name: 'ING Betaalrekening', type: 'bank',    color: '#e87722', startBalance: 0, owner: 'rob' },
+    { id: 'acc_rob_anwb',   name: 'ANWB Creditcard',    type: 'credit',  color: '#003d82', startBalance: 0, owner: 'rob' },
+    { id: 'acc_rob_ingcc',  name: 'ING Creditcard',     type: 'credit',  color: '#e87722', startBalance: 0, owner: 'rob' },
+    { id: 'acc_rob_klarna', name: 'Klarna',              type: 'credit',  color: '#ffb3c7', startBalance: 0, owner: 'rob' },
+    { id: 'acc_vr_rabo',    name: 'RABO Betaalrekening', type: 'bank',   color: '#c8002a', startBalance: 0, owner: 'vriendin' },
+    { id: 'acc_vr_cc',      name: 'Creditcard Vriendin', type: 'credit', color: '#2d7a50', startBalance: 0, owner: 'vriendin' },
+  ];
+  localStorage.setItem('rb_accounts_v1', JSON.stringify(accounts));
+}
+
+// Migrate old CC1/CC2 accounts → ANWB + ING creditcard + Klarna
+(function migrateAccounts() {
+  let changed = false;
+  const cc1 = accounts.find(a => a.id === 'acc_rob_cc1');
+  const cc2 = accounts.find(a => a.id === 'acc_rob_cc2');
+  if (cc1) { cc1.id = 'acc_rob_anwb';  cc1.name = 'ANWB Creditcard'; cc1.color = '#003d82'; changed = true; }
+  if (cc2) { cc2.id = 'acc_rob_ingcc'; cc2.name = 'ING Creditcard';  cc2.color = '#e87722'; changed = true; }
+  if (!accounts.find(a => a.id === 'acc_rob_klarna')) {
+    const robIdx = accounts.reduce((best, a, i) => (a.owner === 'rob' ? i : best), -1);
+    accounts.splice(robIdx + 1, 0, { id: 'acc_rob_klarna', name: 'Klarna', type: 'credit', color: '#ffb3c7', startBalance: 0, owner: 'rob' });
+    changed = true;
+  }
+  if (changed) localStorage.setItem('rb_accounts_v1', JSON.stringify(accounts));
+})();
+
+function saveAccounts() {
+  localStorage.setItem('rb_accounts_v1',  JSON.stringify(accounts));
+  localStorage.setItem('rb_transfers_v1', JSON.stringify(transfers));
+}
+
+// ─── ACCOUNT BALANCE CALCULATION ─────────────────────────────
+function getAccountBalance(accId) {
+  const acc = accounts.find(a => a.id === accId);
+  if (!acc) return 0;
+  let bal = acc.startBalance || 0;
+  transactions.forEach(t => {
+    if (t.account !== accId) return;
+    bal += t.type === 'income' ? t.amount : -t.amount;
+  });
+  transfers.forEach(tr => {
+    if (tr.from === accId) bal -= tr.amount;
+    if (tr.to   === accId) bal += tr.amount;
+  });
+  return bal;
+}
+
+// ─── ADD / DELETE ACCOUNT ─────────────────────────────────────
+function addAccount() {
+  const name    = document.getElementById('acc-name').value.trim();
+  const type    = document.getElementById('acc-type').value;
+  const balance = parseFloat(document.getElementById('acc-balance').value) || 0;
+  const owner   = document.getElementById('acc-owner').value;
+
+  if (!name) { toast('⚠️ Vul een naam in voor de rekening.'); return; }
+
+  const id = 'acc_' + Date.now();
+  accounts.push({ id, name, type, color: selectedAccColor, startBalance: balance, owner });
+  saveAccounts();
+  buildAccountSelects();
+  renderAccountsPage();
+  toast(`✓ Rekening "${name}" toegevoegd!`);
+  document.getElementById('acc-name').value    = '';
+  document.getElementById('acc-balance').value = '';
+}
+
+function deleteAccount(id) {
+  const inUse = transactions.some(t => t.account === id);
+  if (inUse) { toast('⚠️ Rekening is in gebruik bij transacties — kan niet verwijderen.'); return; }
+  accounts = accounts.filter(a => a.id !== id);
+  saveAccounts();
+  buildAccountSelects();
+  renderAccountsPage();
+  toast('🗑 Rekening verwijderd.');
+}
+
+// ─── TRANSFER ─────────────────────────────────────────────────
+function doTransfer() {
+  const from   = document.getElementById('transfer-from').value;
+  const to     = document.getElementById('transfer-to').value;
+  const amount = parseFloat(document.getElementById('transfer-amount').value);
+  const date   = document.getElementById('transfer-date').value;
+  const desc   = document.getElementById('transfer-desc').value.trim() || 'Overboeking';
+
+  if (from === to)       { toast('⚠️ Van en naar rekening zijn hetzelfde.'); return; }
+  if (!amount || amount <= 0) { toast('⚠️ Vul een geldig bedrag in.'); return; }
+  if (!date)             { toast('⚠️ Vul een datum in.'); return; }
+
+  transfers.push({ id: Date.now(), from, to, amount, date, desc });
+  saveAccounts();
+  renderAccountsPage();
+  toast('⇄ Overboeking uitgevoerd!');
+  document.getElementById('transfer-amount').value = '';
+  document.getElementById('transfer-desc').value   = '';
+}
+
+// ─── BUILD ACCOUNT SELECTS ────────────────────────────────────
+function buildAccountSelects() {
+  const robAccs = accounts.filter(a => (a.owner||'rob') === 'rob');
+  const vrAccs  = accounts.filter(a => a.owner === 'vriendin');
+
+  function makeOpts(list) {
+    return list.map(a => `<option value="${a.id}">${ACC_TYPES[a.type]?.icon||'🏦'} ${a.name}</option>`).join('');
+  }
+
+  const opts = `
+    <optgroup label="👤 Rob">${makeOpts(robAccs)}</optgroup>
+    <optgroup label="💑 Vriendin">${makeOpts(vrAccs)}</optgroup>`;
+
+  const sel = document.getElementById('account-select');
+  if (sel) sel.innerHTML = opts;
+
+  const tf = document.getElementById('transfer-from');
+  const tt = document.getElementById('transfer-to');
+  if (tf) tf.innerHTML = opts;
+  if (tt) { tt.innerHTML = opts; if (accounts.length > 1) tt.selectedIndex = 1; }
+}
+
+// ─── COLOR PICKER ─────────────────────────────────────────────
+function buildColorPicker() {
+  const el = document.getElementById('color-picker');
+  if (!el) return;
+  el.innerHTML = ACC_COLORS.map(c =>
+    `<div class="color-dot ${c===selectedAccColor?'selected':''}" style="background:${c}" onclick="pickAccColor('${c}')"></div>`
+  ).join('');
+}
+
+function pickAccColor(color) {
+  selectedAccColor = color;
+  buildColorPicker();
+}
+
+// ─── RENDER ACCOUNTS PAGE ────────────────────────────────────
+function renderAccountsPage() {
+  buildColorPicker();
+  buildAccountSelects();
+
+  const cardsEl = document.getElementById('account-cards');
+  if (!cardsEl) return;
+
+  // Owner filter buttons
+  const ownerFilterEl = document.getElementById('owner-filter');
+  if (ownerFilterEl) {
+    ownerFilterEl.innerHTML = [
+      { k:'alles',     lbl:'👥 Iedereen' },
+      { k:'rob',       lbl:'👤 Rob' },
+      { k:'vriendin',  lbl:'💑 Vriendin' },
+    ].map(f => `<button class="filter-btn ${f.k===activeOwnerFilter?'active':''}" onclick="setOwnerFilter('${f.k}')">${f.lbl}</button>`).join('');
+  }
+
+  const filtered = activeOwnerFilter === 'alles' ? accounts : accounts.filter(a => (a.owner||'rob') === activeOwnerFilter);
+
+  if (!filtered.length) {
+    cardsEl.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><span class="icon">🏦</span>Geen rekeningen gevonden</div>`;
+  } else {
+    const groups = [
+      { key:'rob',      label:'👤 Rob' },
+      { key:'vriendin', label:'💑 Vriendin' },
+    ];
+    const toShow = activeOwnerFilter === 'alles' ? groups : groups.filter(g => g.key === activeOwnerFilter);
+
+    cardsEl.innerHTML = toShow.map(group => {
+      const groupAccs = filtered.filter(a => (a.owner||'rob') === group.key);
+      if (!groupAccs.length) return '';
+
+      const groupTotal = groupAccs.reduce((s, a) => s + getAccountBalance(a.id), 0);
+      const cards = groupAccs.map(acc => {
+        const bal      = getAccountBalance(acc.id);
+        const type     = ACC_TYPES[acc.type] || { label:'Rekening', icon:'🏦' };
+        const txCount  = transactions.filter(t => t.account === acc.id).length;
+        const selected = activeAccountId === acc.id;
+        return `
+          <div class="account-card ${selected?'selected':''}"
+               style="border-color:${selected?acc.color:'var(--border)'}"
+               onclick="showAccountTx('${acc.id}')">
+            <div style="position:absolute;top:0;left:0;right:0;height:3px;background:${acc.color};border-radius:16px 16px 0 0"></div>
+            <div class="account-card-top">
+              <div class="account-card-icon" style="background:${acc.color}22">${type.icon}</div>
+              <button class="account-card-del" onclick="event.stopPropagation();deleteAccount('${acc.id}')" title="Verwijderen">✕</button>
+            </div>
+            <div class="account-card-name">${acc.name}</div>
+            <div class="account-card-type">${type.label}</div>
+            <div class="account-card-balance ${bal<0?'negative':''}">${bal<0?'− ':''}${fmt(bal)}</div>
+            <div class="account-card-sub">${txCount} transactie${txCount!==1?'s':''}</div>
+          </div>`;
+      }).join('');
+
+      return `
+        <div class="owner-group">
+          <div class="owner-group-header">
+            <span class="owner-group-name">${group.label}</span>
+            <span class="owner-group-total ${groupTotal<0?'negative':''}">${groupTotal<0?'− ':''}${fmt(groupTotal)}</span>
+          </div>
+          <div class="owner-cards-row">${cards}</div>
+        </div>`;
+    }).join('');
+  }
+
+  // Transfer date default
+  const td = document.getElementById('transfer-date');
+  if (td && !td.value) td.value = new Date().toISOString().split('T')[0];
+
+  // Account transaction history
+  if (activeAccountId) {
+    const acc       = accounts.find(a => a.id === activeAccountId);
+    const titleEl   = document.getElementById('account-tx-title');
+    const sectionEl = document.getElementById('account-tx-section');
+    const listEl    = document.getElementById('account-tx-list');
+    if (acc && titleEl && sectionEl && listEl) {
+      const ownerLabel = acc.owner === 'vriendin' ? '💑' : '👤';
+      titleEl.textContent = `${ACC_TYPES[acc.type]?.icon||'🏦'} ${acc.name}`;
+      sectionEl.style.display = 'block';
+
+      const txList = transactions.filter(t => t.account === activeAccountId).map(t => ({...t, _isTx:true}));
+
+      transfers.filter(tr => tr.from===activeAccountId || tr.to===activeAccountId).forEach(tr => {
+        const isOut    = tr.from === activeAccountId;
+        const otherAcc = accounts.find(a => a.id === (isOut ? tr.to : tr.from));
+        txList.push({
+          id: tr.id, _isTransfer: true, type: isOut ? 'expense' : 'income',
+          desc: tr.desc + (otherAcc ? ` ${isOut?'→':'←'} ${otherAcc.name}` : ''),
+          amount: tr.amount, date: tr.date, category: '_transfer', note: 'Overboeking'
+        });
+      });
+
+      txList.sort((a,b) => b.date.localeCompare(a.date));
+
+      listEl.innerHTML = txList.length
+        ? txList.map((t,i) => txHTML(t,i)).join('')
+        : `<div class="empty-state"><span class="icon">📭</span>Geen transacties voor deze rekening</div>`;
+    }
+  } else {
+    const s = document.getElementById('account-tx-section');
+    if (s) s.style.display = 'none';
+  }
+}
+
+function setOwnerFilter(owner) {
+  activeOwnerFilter = owner;
+  activeAccountId   = null;
+  renderAccountsPage();
+}
+
+function showAccountTx(accId) {
+  activeAccountId = activeAccountId === accId ? null : accId;
+  renderAccountsPage();
+}
+
+// ─── UPDATED txHTML — shows account badge ─────────────────────
+function txHTML(t, idx) {
+  const cat  = t.category === '_transfer'
+    ? { icon:'⇄', label:'Overboeking' }
+    : (ALL_CATS[t.category] || { icon:'📦', label:'Overig' });
+  const sign = t.type === 'income' ? '+' : '−';
+  const acc  = accounts.find(a => a.id === t.account);
+  const badge = acc
+    ? `<span class="tx-account-badge" style="background:${acc.color}">${ACC_TYPES[acc.type]?.icon||'🏦'} ${acc.name}</span>`
+    : '';
+  const delBtn = t._isTransfer
+    ? ''
+    : `<button class="tx-delete" onclick="deleteTransaction(${t.id})" title="Verwijderen">✕</button>`;
+
+  return `
+    <div class="tx-item is-${t.type}" style="animation-delay:${idx*0.025}s">
+      <div class="tx-icon cat-${t.category}" style="${t.category==='_transfer'?'background:#e3ecf5':''}">${cat.icon}</div>
+      <div>
+        <div class="tx-desc">${t.desc}</div>
+        <div class="tx-meta">${t.type==='income'?'Inkomst':'Uitgave'} · ${cat.label} · ${fmtDate(t.date)}${t.note?' · '+t.note:''}${badge}</div>
+      </div>
+      <div class="tx-amount ${t.type}">${sign} ${fmt(t.amount)}</div>
+      ${delBtn}
+    </div>`;
+}
+
+// ─── UPDATED addTransaction — saves account ───────────────────
+function addTransaction() {
+  const desc   = document.getElementById('desc').value.trim();
+  const amount = parseFloat(document.getElementById('amount').value);
+  const cat    = document.getElementById('category').value;
+  const date   = document.getElementById('date').value;
+  const note   = document.getElementById('note').value.trim();
+  const account = document.getElementById('account-select')?.value || (accounts[0]?.id || '');
+
+  if (!desc || isNaN(amount) || amount <= 0 || !date) {
+    toast('⚠️ Vul omschrijving, bedrag en datum in.');
+    return;
+  }
+
+  transactions.unshift({ id: Date.now(), type: currentType, desc, amount, category: cat, date, note, account });
+  save(); render();
+  toast(currentType === 'expense' ? '✓ Uitgave toegevoegd!' : '✓ Inkomst toegevoegd!');
+
+  document.getElementById('desc').value    = '';
+  document.getElementById('amount').value  = '';
+  document.getElementById('note').value    = '';
+  document.getElementById('date').value    = new Date().toISOString().split('T')[0];
+}
+
+// ─── UPDATED showPage ─────────────────────────────────────────
+function showPage(page) {
+  document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-'+page).classList.add('active');
+  document.querySelector(`.nav-item[onclick="showPage('${page}')"]`).classList.add('active');
+  if (page === 'categories') renderCategoryManager();
+  else if (page === 'accounts') renderAccountsPage();
+  else render();
+}
+
+// ─── UPDATED save ─────────────────────────────────────────────
+function save() {
+  localStorage.setItem('rb_tx_v3',      JSON.stringify(transactions));
+  localStorage.setItem('rb_goals_v3',   JSON.stringify(goals));
+  localStorage.setItem('rb_budget_v3',  budget.toString());
+  saveAccounts();
+}
+
+// ─── INIT ACCOUNTS ────────────────────────────────────────────
+buildAccountSelects();
+buildColorPicker();
 function renderSidebarBalance() {
   const { inc, exp } = monthTotals();
   const bal = inc - exp;
