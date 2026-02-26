@@ -2672,7 +2672,7 @@ function renderCategoryManager() {
 
   // Build emoji quick-pick grid
   const emojiGrid = document.getElementById('emoji-quick-grid');
-  if (emojiGrid && !emojiGrid.hasChildNodes()) {
+  if (emojiGrid) {
     const EMOJIS = ['🏠','🚗','🛒','🍔','☕','🍕','👗','👟','💊','💆','🐕','🐈','🌿','🎮','🎬','🎵','📚','✈️','🏖️','⛽','🔧','🏋️','🚲','🧴','🧹','🍷','🎁','💰','📱','💡','🏦','📋','🛡️','🎓','👶','💒','🪴','🧺','🛋️','🔑'];
     emojiGrid.innerHTML = EMOJIS.map(e =>
       `<button type="button" onclick="pickEmoji('${e}')" style="font-size:1.4rem;padding:0.3rem;border:2px solid transparent;border-radius:8px;background:var(--card);cursor:pointer;line-height:1;">${e}</button>`
