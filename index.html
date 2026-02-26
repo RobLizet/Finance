@@ -2640,12 +2640,18 @@ function migrateAccountsIfNeeded() {
       { id: 'acc_rob_anwb',     name: 'ANWB Creditcard',     type: 'credit', color: '#003d82', startBalance: 0, owner: 'rob' },
       { id: 'acc_rob_ingcc',    name: 'ING Creditcard',      type: 'credit', color: '#e87722', startBalance: 0, owner: 'rob' },
       { id: 'acc_rob_klarna',   name: 'Klarna',               type: 'credit', color: '#ffb3c7', startBalance: 0, owner: 'rob' },
-      { id: 'acc_rob_peugeot',  name: 'Peugeot Rob',          type: 'car',    color: '#2e5f8a', startBalance: 0, owner: 'rob' },
+      { id: 'acc_rob_peugeot',  name: 'Peugeot Rob',          type: 'car',    color: '#7a2040', startBalance: 0, owner: 'rob' },
       { id: 'acc_vr_rabo',      name: 'RABO Betaalrekening',  type: 'bank',   color: '#c8002a', startBalance: 0, owner: 'vriendin' },
       { id: 'acc_vr_cc',        name: 'Creditcard Vriendin',  type: 'credit', color: '#2d7a50', startBalance: 0, owner: 'vriendin' },
-      { id: 'acc_vr_ford',      name: 'Ford Lizet',           type: 'car',    color: '#8a5faf', startBalance: 0, owner: 'vriendin' },
+      { id: 'acc_vr_ford',      name: 'Ford Lizet',           type: 'car',    color: '#6b8fa8', startBalance: 0, owner: 'vriendin' },
     ];
     defaults.forEach(acc => saveAccountToDB(acc));
+  } else {
+    // Update car colors in Firestore if they still have old values
+    const peugeot = accounts.find(a => a.id === 'acc_rob_peugeot');
+    const ford    = accounts.find(a => a.id === 'acc_vr_ford');
+    if (peugeot && peugeot.color !== '#7a2040') saveAccountToDB({...peugeot, color: '#7a2040'});
+    if (ford    && ford.color    !== '#6b8fa8') saveAccountToDB({...ford,    color: '#6b8fa8'});
   }
 }
 
@@ -3156,7 +3162,8 @@ function renderCryptoPage() {
               type="number" min="0" step="any"
               value="${coin.amount || ''}"
               placeholder="0"
-              oninput="updateCryptoAmount(${idx}, this.value)"
+              data-idx="${idx}"
+              onchange="updateCryptoAmount(${idx}, this.value)"
             />
           </div>
           <div style="text-align:right">${valueDisplay}</div>
@@ -3170,7 +3177,19 @@ function renderCryptoPage() {
 function updateCryptoAmount(idx, val) {
   cryptoCoins[idx].amount = parseFloat(val) || 0;
   saveCryptoDB();
-  renderCryptoPage();
+  // Only update the EUR value display, not the whole grid (prevents input losing focus)
+  const price = cryptoPriceCache[cryptoCoins[idx].id];
+  const eurPrice = price?.eur ?? null;
+  const eurValue = (eurPrice !== null && cryptoCoins[idx].amount) ? eurPrice * cryptoCoins[idx].amount : null;
+  const card = document.querySelector(`.crypto-amount-input[data-idx="${idx}"]`)?.closest('.crypto-card');
+  if (card) {
+    const valEl = card.querySelector('.crypto-eur-value');
+    const lblEl = card.querySelector('.crypto-eur-label');
+    if (valEl) valEl.textContent = eurValue !== null ? fmt(eurValue) : '—';
+    if (valEl) valEl.style.color = eurValue !== null ? 'var(--green)' : 'var(--muted)';
+    if (lblEl) lblEl.textContent = eurValue !== null ? 'jouw waarde' : 'voer aantal in';
+  }
+  updateCryptoTotal();
 }
 
 function updateCryptoTotal() {
