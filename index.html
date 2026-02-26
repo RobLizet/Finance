@@ -2650,8 +2650,8 @@ function migrateAccountsIfNeeded() {
     // Always force correct car colors
     const peugeot = accounts.find(a => a.id === 'acc_rob_peugeot');
     const ford    = accounts.find(a => a.id === 'acc_vr_ford');
-    if (peugeot) saveAccountToDB({...peugeot, color: '#7a2040'});
-    if (ford)    saveAccountToDB({...ford,    color: '#6b8fa8'});
+    if (peugeot) saveAccountToDB({...peugeot, color: '#7a2040', owner: 'rob'});
+    if (ford)    saveAccountToDB({...ford,    color: '#6b8fa8', owner: 'vriendin'});
   }
 }
 
