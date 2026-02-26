@@ -1491,6 +1491,149 @@ min-height: 100vh;
 /* Footer */
 .app-footer { padding-bottom: 2rem; font-size: 0.88rem; }
 }
+
+/* ── EXTRA PAGE ── */
+.extra-block {
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: 18px;
+padding: 1.4rem;
+margin-bottom: 1.2rem;
+box-shadow: var(–shadow);
+animation: riseUp 0.5s ease both;
+}
+
+.extra-block-title {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 1.2rem;
+font-weight: 600;
+color: var(–ink);
+margin-bottom: 1rem;
+border-bottom: 1px solid var(–border);
+padding-bottom: 0.6rem;
+}
+
+/* Maand vergelijking */
+.maand-vergelijk-grid {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 0.7rem;
+}
+
+.mv-card {
+background: var(–card);
+border-radius: 12px;
+padding: 0.9rem 0.7rem;
+text-align: center;
+border: 1px solid var(–border);
+}
+
+.mv-maand { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(–muted); font-weight: 600; margin-bottom: 0.3rem; }
+.mv-bedrag { font-family: ‘Cormorant Garamond’, serif; font-size: 1.15rem; font-weight: 600; color: var(–ink); }
+.mv-sub { font-size: 0.6rem; color: var(–muted); font-weight: 500; margin-top: 0.2rem; }
+.mv-delta { font-size: 0.65rem; font-weight: 700; margin-top: 0.3rem; padding: 0.15rem 0.4rem; border-radius: 5px; display: inline-block; }
+.mv-delta.up   { background: var(–red-light);   color: var(–red); }
+.mv-delta.down { background: var(–green-light); color: var(–green); }
+.mv-delta.flat { background: var(–card);         color: var(–muted); }
+.mv-this { border: 2px solid var(–accent); }
+
+/* Prognose */
+.prognose-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 0.8rem; }
+
+.prog-card {
+background: var(–card);
+border-radius: 12px;
+padding: 1rem;
+border: 1px solid var(–border);
+text-align: center;
+}
+
+.prog-label { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(–muted); font-weight: 600; margin-bottom: 0.4rem; }
+.prog-val { font-family: ‘Cormorant Garamond’, serif; font-size: 1.5rem; font-weight: 600; color: var(–ink); }
+.prog-sub { font-size: 0.62rem; color: var(–muted); font-weight: 500; margin-top: 0.2rem; }
+.prog-warn { color: var(–red) !important; }
+.prog-ok   { color: var(–green) !important; }
+
+/* Grootste uitgaven */
+.grootste-list { display: flex; flex-direction: column; gap: 0.5rem; }
+
+.groot-item {
+display: flex;
+align-items: center;
+gap: 0.8rem;
+padding: 0.7rem 0.9rem;
+background: var(–card);
+border-radius: 10px;
+border: 1px solid var(–border);
+}
+
+.groot-rank { font-family: ‘Cormorant Garamond’, serif; font-size: 1.2rem; font-weight: 600; color: var(–muted); width: 24px; text-align: center; flex-shrink: 0; }
+.groot-info { flex: 1; min-width: 0; }
+.groot-desc { font-size: 0.88rem; font-weight: 600; color: var(–ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.groot-meta { font-size: 0.65rem; color: var(–muted); font-weight: 500; }
+.groot-amt  { font-family: ‘Cormorant Garamond’, serif; font-size: 1.15rem; font-weight: 700; color: var(–red); flex-shrink: 0; }
+
+/* Vaste lasten */
+.vaste-lasten-list { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 0.5rem; }
+
+.vl-item {
+display: flex;
+align-items: center;
+gap: 0.8rem;
+padding: 0.75rem 0.9rem;
+background: var(–card);
+border-radius: 10px;
+border: 1px solid var(–border);
+border-left: 3px solid var(–accent);
+}
+
+.vl-item.vl-soon  { border-left-color: var(–red); background: var(–red-light); }
+.vl-item.vl-week  { border-left-color: #e8a060; }
+
+.vl-day { font-family: ‘Cormorant Garamond’, serif; font-size: 1.4rem; font-weight: 600; color: var(–accent); width: 32px; text-align: center; flex-shrink: 0; }
+.vl-item.vl-soon .vl-day { color: var(–red); }
+.vl-info { flex: 1; min-width: 0; }
+.vl-name { font-size: 0.88rem; font-weight: 700; color: var(–ink); }
+.vl-due  { font-size: 0.62rem; color: var(–muted); font-weight: 500; }
+.vl-amt  { font-family: ‘Cormorant Garamond’, serif; font-size: 1.1rem; font-weight: 700; color: var(–ink); flex-shrink: 0; }
+.vl-del  { background: none; border: none; color: var(–border); cursor: pointer; font-size: 0.75rem; padding: 0.2rem; border-radius: 4px; transition: color 0.15s; }
+.vl-del:hover { color: var(–red); }
+
+/* APK */
+.apk-list { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 0.5rem; }
+
+.apk-item {
+display: flex;
+align-items: center;
+gap: 0.9rem;
+padding: 0.9rem 1rem;
+border-radius: 12px;
+border: 1px solid var(–border);
+background: var(–card);
+border-left: 4px solid var(–green);
+}
+
+.apk-item.apk-urgent { border-left-color: var(–red);   background: var(–red-light); }
+.apk-item.apk-soon   { border-left-color: #e8a060; }
+
+.apk-icon { font-size: 1.5rem; flex-shrink: 0; }
+.apk-info { flex: 1; }
+.apk-car-name { font-size: 0.95rem; font-weight: 700; color: var(–ink); }
+.apk-date-txt { font-size: 0.68rem; color: var(–muted); font-weight: 500; }
+.apk-badge {
+font-size: 0.65rem; font-weight: 700; padding: 0.25rem 0.6rem; border-radius: 20px;
+flex-shrink: 0;
+}
+.apk-badge.ok     { background: var(–green-light); color: var(–green); }
+.apk-badge.soon   { background: #fff3e0; color: #b06000; }
+.apk-badge.urgent { background: var(–red-light);   color: var(–red); }
+.apk-del { background: none; border: none; color: var(–border); cursor: pointer; font-size: 0.75rem; padding: 0.2rem; border-radius: 4px; transition: color 0.15s; }
+.apk-del:hover { color: var(–red); }
+
+@media (max-width: 700px) {
+.maand-vergelijk-grid { grid-template-columns: repeat(2, 1fr); }
+.prognose-cards { grid-template-columns: repeat(2, 1fr); }
+}
 </style>
 
 </head>
@@ -1587,6 +1730,9 @@ min-height: 100vh;
   </button>
   <button class="nav-item" onclick="showPage('crypto')">
     <span class="nav-icon">₿</span> Crypto
+  </button>
+  <button class="nav-item" onclick="showPage('extra')">
+    <span class="nav-icon">⚡</span> Extra
   </button>
 </div>
 
@@ -1991,6 +2137,87 @@ min-height: 100vh;
 </section>
 ```
 
+  <!-- ── EXTRA ── -->
+
+  <section class="page-section" id="page-extra">
+    <div class="page-header">
+      <h2>Extra <em>Tools</em></h2>
+      <div class="page-date" id="extra-date"></div>
+    </div>
+
+```
+<!-- ── MAAND VERGELIJKING ── -->
+<div class="extra-block">
+  <div class="extra-block-title">📅 Maand <em>vergelijking</em></div>
+  <div class="maand-vergelijk-grid" id="maand-vergelijk-grid"></div>
+</div>
+
+<!-- ── PROGNOSE ── -->
+<div class="extra-block">
+  <div class="extra-block-title">🔮 Prognose <em>deze maand</em></div>
+  <div class="prognose-cards" id="prognose-cards"></div>
+</div>
+
+<!-- ── GROOTSTE UITGAVE ── -->
+<div class="extra-block">
+  <div class="extra-block-title">🏆 Grootste uitgaven <em>deze maand</em></div>
+  <div class="grootste-list" id="grootste-list"></div>
+</div>
+
+<!-- ── VASTE LASTEN ── -->
+<div class="extra-block">
+  <div class="extra-block-title">📋 Vaste <em>lasten</em></div>
+  <div class="vaste-lasten-list" id="vaste-lasten-list"></div>
+  <div class="form-card" style="margin-top:1rem">
+    <div class="form-title">Vaste last <em>toevoegen</em></div>
+    <div class="form-grid">
+      <div class="form-group full">
+        <label>Naam</label>
+        <input type="text" id="vl-name" placeholder="Bijv. Netflix, Huur, Verzekering..." />
+      </div>
+      <div class="form-group">
+        <label>Bedrag (€)</label>
+        <input type="number" id="vl-amount" placeholder="0" min="0" step="0.01" />
+      </div>
+      <div class="form-group">
+        <label>Dag van de maand</label>
+        <input type="number" id="vl-day" placeholder="1-31" min="1" max="31" />
+      </div>
+      <div class="form-group">
+        <label>Categorie</label>
+        <select id="vl-category"></select>
+      </div>
+    </div>
+    <button class="add-btn btn-expense" onclick="addVasteLast()">📋 &nbsp;Toevoegen</button>
+  </div>
+</div>
+
+<!-- ── APK HERINNERINGEN ── -->
+<div class="extra-block">
+  <div class="extra-block-title">🔧 APK <em>herinneringen</em></div>
+  <div class="apk-list" id="apk-list"></div>
+  <div class="form-card" style="margin-top:1rem">
+    <div class="form-title">APK <em>toevoegen</em></div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Auto</label>
+        <select id="apk-car">
+          <option value="03-FS-HR">🚗 03-FS-HR</option>
+          <option value="91-PF-BL">🚙 91-PF-BL</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>APK vervaldatum</label>
+        <input type="date" id="apk-date" />
+      </div>
+    </div>
+    <button class="add-btn btn-expense" onclick="addApk()">🔧 &nbsp;Toevoegen</button>
+  </div>
+</div>
+```
+
+  </section>
+
   </main>
 </div><!-- end .layout -->
 </div><!-- end #app-wrapper -->
@@ -2058,8 +2285,8 @@ const DEFAULT_EXPENSE_CATS = {
   kleding:       { label:'Kleding',            icon:'👗', default:true },
   abonnement:    { label:'Abonnementen',       icon:'📱', default:true },
   sporten:       { label:'Sporten',            icon:'🏃', default:true },
-  peugeot_rob:   { label:'🚙 Peugeot (Rob)',  icon:'🚙', default:true },
-  ford_lizet:    { label:'🚘 Ford (Lizet)',    icon:'🚘', default:true },
+  peugeot_rob:   { label:'🚗 03-FS-HR',  icon:'🚗', default:true },
+  ford_lizet:    { label:'🚙 91-PF-BL',  icon:'🚙', default:true },
   overig:        { label:'Overig',             icon:'📦', default:true },
 };
 
@@ -2364,6 +2591,8 @@ function subscribeToFirestore() {
     cryptoCoins = data.coins || defaultCryptoCoins();
     if (document.getElementById('page-crypto').classList.contains('active')) renderCryptoPage();
   }));
+
+  subscribeExtra();
 }
 
 // ─── INIT ────────────────────────────────────────────────────
@@ -2640,18 +2869,18 @@ function migrateAccountsIfNeeded() {
       { id: 'acc_rob_anwb',     name: 'ANWB Creditcard',     type: 'credit', color: '#003d82', startBalance: 0, owner: 'rob' },
       { id: 'acc_rob_ingcc',    name: 'ING Creditcard',      type: 'credit', color: '#e87722', startBalance: 0, owner: 'rob' },
       { id: 'acc_rob_klarna',   name: 'Klarna',               type: 'credit', color: '#ffb3c7', startBalance: 0, owner: 'rob' },
-      { id: 'acc_rob_peugeot',  name: 'Peugeot Rob',          type: 'car',    color: '#7a2040', startBalance: 0, owner: 'rob' },
+      { id: 'acc_rob_peugeot',  name: '03-FS-HR',  type: 'car',    color: '#7a2040', startBalance: 0, owner: 'rob' },
       { id: 'acc_vr_rabo',      name: 'RABO Betaalrekening',  type: 'bank',   color: '#c8002a', startBalance: 0, owner: 'vriendin' },
       { id: 'acc_vr_cc',        name: 'Creditcard Vriendin',  type: 'credit', color: '#2d7a50', startBalance: 0, owner: 'vriendin' },
-      { id: 'acc_vr_ford',      name: 'Ford Lizet',           type: 'car',    color: '#6b8fa8', startBalance: 0, owner: 'vriendin' },
+      { id: 'acc_vr_ford',      name: '91-PF-BL',  type: 'car',    color: '#6b8fa8', startBalance: 0, owner: 'vriendin' },
     ];
     defaults.forEach(acc => saveAccountToDB(acc));
   } else {
     // Always force correct car colors
     const peugeot = accounts.find(a => a.id === 'acc_rob_peugeot');
     const ford    = accounts.find(a => a.id === 'acc_vr_ford');
-    if (peugeot) saveAccountToDB({...peugeot, color: '#7a2040', owner: 'rob'});
-    if (ford)    saveAccountToDB({...ford,    color: '#6b8fa8', owner: 'vriendin'});
+    if (peugeot) saveAccountToDB({...peugeot, color: '#7a2040', owner: 'rob', name: '03-FS-HR'});
+    if (ford)    saveAccountToDB({...ford,    color: '#6b8fa8', owner: 'vriendin', name: '91-PF-BL'});
   }
 }
 
@@ -2930,6 +3159,7 @@ function showPage(page) {
   if (page === 'categories') renderCategoryManager();
   else if (page === 'accounts') renderAccountsPage();
   else if (page === 'crypto') { renderCryptoPage(); loadCryptoPrices(); }
+  else if (page === 'extra')  { renderExtraPage(); }
   else render();
 }
 
@@ -3250,7 +3480,278 @@ function deleteCryptoCoin(idx) {
   toast(`🗑 ${name} verwijderd.`);
 }
 
-// ── EXPOSE TO GLOBAL SCOPE (needed for inline onclick handlers with type="module") ──
+// ═══════════════════════════════════════════════════════════════
+// ─── EXTRA FEATURES ───────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════
+
+let vasteLasten = [];
+let apkItems    = [];
+
+// ─── FIRESTORE EXTRA ──────────────────────────────────────────
+async function saveVasteLast(vl) {
+  await setDoc(doc(sharedCol('vaste_lasten'), String(vl.id)), vl);
+}
+async function deleteVasteLastDB(id) {
+  await deleteDoc(doc(sharedCol('vaste_lasten'), String(id)));
+}
+async function saveApkDB(apk) {
+  await setDoc(doc(sharedCol('apk'), apk.car), apk);
+}
+async function deleteApkDB(car) {
+  await deleteDoc(doc(sharedCol('apk'), car));
+}
+
+// Subscribe extra collections
+function subscribeExtra() {
+  unsubscribers.push(onSnapshot(sharedCol('vaste_lasten'), snap => {
+    vasteLasten = snap.docs.map(d => d.data());
+    vasteLasten.sort((a,b) => a.day - b.day);
+    if (document.getElementById('page-extra').classList.contains('active')) renderExtraPage();
+  }));
+  unsubscribers.push(onSnapshot(sharedCol('apk'), snap => {
+    apkItems = snap.docs.map(d => d.data());
+    if (document.getElementById('page-extra').classList.contains('active')) renderExtraPage();
+  }));
+}
+
+// ─── MAIN EXTRA RENDER ────────────────────────────────────────
+function renderExtraPage() {
+  document.getElementById('extra-date').textContent =
+    new Date().toLocaleDateString('nl-NL',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+
+  renderMaandVergelijking();
+  renderPrognose();
+  renderGrootsteUitgaven();
+  renderVasteLasten();
+  renderApk();
+  buildVlCategorySelect();
+}
+
+// ─── 1. MAAND VERGELIJKING ────────────────────────────────────
+function renderMaandVergelijking() {
+  const el = document.getElementById('maand-vergelijk-grid');
+  const now = new Date();
+  const months = [];
+  for (let i = 2; i >= 0; i--) {
+    const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+    months.push({ m: d.getMonth(), y: d.getFullYear(), lbl: d.toLocaleDateString('nl-NL',{month:'long'}) });
+  }
+
+  const data = months.map(mo => {
+    const inc = transactions.filter(t => t.type==='income'  && sameMonth(t.date, mo.m, mo.y)).reduce((s,t)=>s+t.amount,0);
+    const exp = transactions.filter(t => t.type==='expense' && sameMonth(t.date, mo.m, mo.y)).reduce((s,t)=>s+t.amount,0);
+    return { ...mo, inc, exp, net: inc - exp };
+  });
+
+  el.innerHTML = data.map((mo, i) => {
+    const isThis = i === 2;
+    const prev   = i > 0 ? data[i-1] : null;
+    let delta = '';
+    if (prev && prev.exp > 0) {
+      const pct = ((mo.exp - prev.exp) / prev.exp * 100);
+      const cls = pct > 2 ? 'up' : pct < -2 ? 'down' : 'flat';
+      const sign = pct > 0 ? '+' : '';
+      delta = `<div class="mv-delta ${cls}">${sign}${pct.toFixed(0)}%</div>`;
+    }
+    return `
+      <div class="mv-card ${isThis ? 'mv-this' : ''}">
+        <div class="mv-maand">${mo.lbl}</div>
+        <div class="mv-bedrag" style="color:var(--red)">${fmt(mo.exp)}</div>
+        <div class="mv-sub">uitgaven</div>
+        <div class="mv-bedrag" style="color:var(--green);font-size:0.95rem;margin-top:0.3rem">${fmt(mo.inc)}</div>
+        <div class="mv-sub">inkomsten</div>
+        ${delta}
+      </div>`;
+  }).join('');
+}
+
+function sameMonth(dateStr, m, y) {
+  const d = new Date(dateStr + 'T12:00:00');
+  return d.getMonth() === m && d.getFullYear() === y;
+}
+
+// ─── 2. PROGNOSE ──────────────────────────────────────────────
+function renderPrognose() {
+  const el  = document.getElementById('prognose-cards');
+  const now = new Date();
+  const dayOfMonth  = now.getDate();
+  const daysInMonth = new Date(now.getFullYear(), now.getMonth()+1, 0).getDate();
+  const daysLeft    = daysInMonth - dayOfMonth;
+
+  const { inc, exp } = monthTotals();
+  const dagGem   = dayOfMonth > 0 ? exp / dayOfMonth : 0;
+  const prognose = dagGem * daysInMonth;
+  const resterend = inc - exp;
+  const dagBudget = daysLeft > 0 ? resterend / daysLeft : 0;
+
+  const progCls = prognose > (budget || inc) ? 'prog-warn' : 'prog-ok';
+
+  el.innerHTML = `
+    <div class="prog-card">
+      <div class="prog-label">Gem. per dag</div>
+      <div class="prog-val">${fmt(dagGem)}</div>
+      <div class="prog-sub">gebaseerd op ${dayOfMonth} dagen</div>
+    </div>
+    <div class="prog-card">
+      <div class="prog-label">Prognose einde maand</div>
+      <div class="prog-val ${progCls}">${fmt(prognose)}</div>
+      <div class="prog-sub">${daysLeft} dagen resterend</div>
+    </div>
+    <div class="prog-card">
+      <div class="prog-label">Budget per dag over</div>
+      <div class="prog-val ${dagBudget < 0 ? 'prog-warn' : 'prog-ok'}">${dagBudget > 0 ? fmt(dagBudget) : '—'}</div>
+      <div class="prog-sub">tot einde maand</div>
+    </div>
+    <div class="prog-card">
+      <div class="prog-label">Huidig saldo</div>
+      <div class="prog-val ${resterend < 0 ? 'prog-warn' : 'prog-ok'}">${(resterend<0?'− ':'')}${fmt(resterend)}</div>
+      <div class="prog-sub">inkomen − uitgaven</div>
+    </div>`;
+}
+
+// ─── 3. GROOTSTE UITGAVEN ─────────────────────────────────────
+function renderGrootsteUitgaven() {
+  const el  = document.getElementById('grootste-list');
+  const now = new Date();
+  const thisMonth = transactions
+    .filter(t => t.type==='expense' && sameMonth(t.date, now.getMonth(), now.getFullYear()))
+    .sort((a,b) => b.amount - a.amount)
+    .slice(0, 5);
+
+  if (!thisMonth.length) {
+    el.innerHTML = `<div style="color:var(--muted);font-size:0.78rem;padding:0.5rem">Nog geen uitgaven deze maand.</div>`;
+    return;
+  }
+
+  const medals = ['🥇','🥈','🥉','4️⃣','5️⃣'];
+  el.innerHTML = thisMonth.map((t, i) => {
+    const cat = EXPENSE_CATS[t.category] || { icon:'📦', label:'Overig' };
+    return `
+      <div class="groot-item">
+        <div class="groot-rank">${medals[i]}</div>
+        <div class="groot-info">
+          <div class="groot-desc">${t.desc}</div>
+          <div class="groot-meta">${cat.icon} ${cat.label} · ${fmtDate(t.date)}${t.addedBy ? ' · '+t.addedBy : ''}</div>
+        </div>
+        <div class="groot-amt">− ${fmt(t.amount)}</div>
+      </div>`;
+  }).join('');
+}
+
+// ─── 4. VASTE LASTEN ──────────────────────────────────────────
+function buildVlCategorySelect() {
+  const sel = document.getElementById('vl-category');
+  if (!sel) return;
+  sel.innerHTML = Object.entries(EXPENSE_CATS).map(([k,v]) =>
+    `<option value="${k}">${v.icon} ${v.label}</option>`
+  ).join('');
+}
+
+function addVasteLast() {
+  const name   = document.getElementById('vl-name').value.trim();
+  const amount = parseFloat(document.getElementById('vl-amount').value);
+  const day    = parseInt(document.getElementById('vl-day').value);
+  const cat    = document.getElementById('vl-category').value;
+
+  if (!name)             { toast('⚠️ Vul een naam in.'); return; }
+  if (!amount || amount <= 0) { toast('⚠️ Vul een bedrag in.'); return; }
+  if (!day || day < 1 || day > 31) { toast('⚠️ Vul een geldige dag in (1-31).'); return; }
+
+  const vl = { id: Date.now(), name, amount, day, category: cat };
+  saveVasteLast(vl);
+  toast(`📋 "${name}" toegevoegd!`);
+  document.getElementById('vl-name').value   = '';
+  document.getElementById('vl-amount').value = '';
+  document.getElementById('vl-day').value    = '';
+}
+
+function deleteVasteLast(id) {
+  deleteVasteLastDB(id);
+  toast('🗑 Vaste last verwijderd.');
+}
+
+function renderVasteLasten() {
+  const el  = document.getElementById('vaste-lasten-list');
+  if (!vasteLasten.length) {
+    el.innerHTML = `<div style="color:var(--muted);font-size:0.78rem;padding:0.5rem">Nog geen vaste lasten ingevoerd.</div>`;
+    return;
+  }
+
+  const today = new Date().getDate();
+  const total = vasteLasten.reduce((s,v) => s+v.amount, 0);
+
+  el.innerHTML = vasteLasten.map(vl => {
+    const daysUntil = vl.day >= today ? vl.day - today : (31 - today + vl.day);
+    const cls = daysUntil <= 3 ? 'vl-soon' : daysUntil <= 7 ? 'vl-week' : '';
+    const dueTxt = daysUntil === 0 ? '⚠️ Vandaag!' : daysUntil === 1 ? 'Morgen!' : `over ${daysUntil} dagen`;
+    const cat = EXPENSE_CATS[vl.category] || { icon:'📦' };
+    return `
+      <div class="vl-item ${cls}">
+        <div class="vl-day">${vl.day}</div>
+        <div class="vl-info">
+          <div class="vl-name">${cat.icon} ${vl.name}</div>
+          <div class="vl-due">${dueTxt}</div>
+        </div>
+        <div class="vl-amt">${fmt(vl.amount)}</div>
+        <button class="vl-del" onclick="deleteVasteLast(${vl.id})">✕</button>
+      </div>`;
+  }).join('') + `
+    <div style="text-align:right;font-size:0.72rem;color:var(--muted);font-weight:600;margin-top:0.5rem;padding-right:2rem">
+      Totaal per maand: <strong style="color:var(--ink)">${fmt(total)}</strong>
+    </div>`;
+}
+
+// ─── 5. APK HERINNERINGEN ─────────────────────────────────────
+function addApk() {
+  const car  = document.getElementById('apk-car').value;
+  const date = document.getElementById('apk-date').value;
+  if (!date) { toast('⚠️ Vul een vervaldatum in.'); return; }
+
+  const apk = { car, date };
+  saveApkDB(apk);
+  toast(`🔧 APK voor ${car} opgeslagen!`);
+  document.getElementById('apk-date').value = '';
+}
+
+function deleteApk(car) {
+  deleteApkDB(car);
+  toast('🗑 APK verwijderd.');
+}
+
+function renderApk() {
+  const el = document.getElementById('apk-list');
+  if (!apkItems.length) {
+    el.innerHTML = `<div style="color:var(--muted);font-size:0.78rem;padding:0.5rem">Nog geen APK-datums ingevoerd.</div>`;
+    return;
+  }
+
+  const today = new Date(); today.setHours(0,0,0,0);
+  el.innerHTML = apkItems.map(apk => {
+    const exp   = new Date(apk.date + 'T00:00:00');
+    const diff  = Math.round((exp - today) / (1000*60*60*24));
+    const icon  = apk.car === '03-FS-HR' ? '🚗' : '🚙';
+    let cls = '', badgeCls = 'ok', badgeTxt = '';
+    if (diff < 0) {
+      cls = 'apk-urgent'; badgeCls = 'urgent';
+      badgeTxt = `${Math.abs(diff)} dagen verlopen!`;
+    } else if (diff <= 30) {
+      cls = 'apk-soon'; badgeCls = 'soon';
+      badgeTxt = `over ${diff} dagen`;
+    } else {
+      badgeTxt = `over ${diff} dagen`;
+    }
+    return `
+      <div class="apk-item ${cls}">
+        <div class="apk-icon">${icon}</div>
+        <div class="apk-info">
+          <div class="apk-car-name">${apk.car}</div>
+          <div class="apk-date-txt">APK verlooopt: ${new Date(apk.date+'T12:00:00').toLocaleDateString('nl-NL',{day:'numeric',month:'long',year:'numeric'})}</div>
+        </div>
+        <span class="apk-badge ${badgeCls}">${badgeTxt}</span>
+        <button class="apk-del" onclick="deleteApk('${apk.car}')">✕</button>
+      </div>`;
+  }).join('');
+}
 Object.assign(window, {
   loginWithGoogle, logoutUser,
   showPage, setType, addTransaction, deleteTransaction,
@@ -3261,6 +3762,7 @@ Object.assign(window, {
   renderCategoryManager, setCatType,
   updateBudget,
   addCryptoCoin, deleteCryptoCoin, updateCryptoAmount, loadCryptoPrices,
+  addVasteLast, deleteVasteLast, addApk, deleteApk,
   installApp,
 });
 
