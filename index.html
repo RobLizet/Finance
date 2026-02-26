@@ -2465,7 +2465,7 @@ let activeFilterType = 'alles';
 
 // ─── FIREBASE ────────────────────────────────────────────────
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged }
+import { getAuth, GoogleAuthProvider, signInWithRedirect, getRedirectResult, signOut, onAuthStateChanged }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import { getFirestore, doc, collection, setDoc, deleteDoc, onSnapshot, getDoc }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
@@ -2500,7 +2500,7 @@ function showAppScreen() {
 async function loginWithGoogle() {
   try {
     const provider = new GoogleAuthProvider();
-    await signInWithPopup(auth, provider);
+    await signInWithRedirect(auth, provider);
   } catch(e) {
     alert('Inloggen mislukt: ' + e.message);
   }
@@ -2515,10 +2515,12 @@ async function logoutUser() {
   customExpenseCats = {}; customIncomeCats = {};
 }
 
+// Handle redirect result (after Google login redirect)
+getRedirectResult(auth).catch(() => {});
+
 onAuthStateChanged(auth, async (user) => {
   if (user) {
-    currentUser = user;
-    const name = user.displayName?.split(' ')[0] || 'Rob';
+    currentUser = user;    const name = user.displayName?.split(' ')[0] || 'Rob';
     document.getElementById('greeting-name').textContent = name;
     document.getElementById('sb-user-name').textContent  = name;
     document.getElementById('sb-user-email').textContent = user.email;
