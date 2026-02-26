@@ -4138,63 +4138,122 @@ async function handleScanFile(event) {
   preview.style.display = 'block';
 
   const status = document.getElementById('scan-status');
-  status.textContent = '🔍 Bon analyseren met AI...';
+  status.textContent = '🔍 Tekst lezen van bon...';
   status.className = 'scan-status scanning';
   document.getElementById('scan-result').style.display = 'none';
 
   try {
-    const base64   = await fileToBase64(file);
-    const mediaType = file.type || 'image/jpeg';
+    // Load Tesseract.js if not loaded yet
+    if (!window.Tesseract) {
+      status.textContent = '⏳ Scanner laden...';
+      await new Promise((resolve, reject) => {
+        const s = document.createElement('script');
+        s.src = 'https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/5.1.0/tesseract.min.js';
+        s.onload = resolve;
+        s.onerror = reject;
+        document.head.appendChild(s);
+      });
+    }
 
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-allow-cors': 'true',
-      },
-      body: JSON.stringify({
-        model: 'claude-haiku-4-5-20251001',
-        max_tokens: 300,
-        messages: [{
-          role: 'user',
-          content: [
-            { type: 'image', source: { type: 'base64', media_type: mediaType, data: base64 } },
-            { type: 'text', text: `Analyseer deze kassabon en geef ALLEEN een JSON object terug zonder extra tekst:
-{"beschrijving":"naam van de winkel","bedrag":12.34,"datum":"2025-02-26","categorie":"eten"}
-- beschrijving: naam winkel of product (bijv. "Albert Heijn", "Esso", "Action")
-- bedrag: totaalbedrag als getal met punt als decimaalteken
-- datum: YYYY-MM-DD formaat, of null als niet zichtbaar
-- categorie: kies de beste uit: eten, transport, wonen, gezondheid, entertainment, kleding, abonnement, sporten, overig
-Geef ALLEEN het JSON object.` }
-          ]
-        }]
-      })
+    status.textContent = '🔍 Bon scannen... 0%';
+
+    const result = await Tesseract.recognize(file, 'nld+eng+deu', {
+      logger: m => {
+        if (m.status === 'recognizing text') {
+          status.textContent = `🔍 Bon scannen... ${Math.round(m.progress * 100)}%`;
+        }
+      }
     });
 
-    const data  = await response.json();
-    const text  = data.content?.[0]?.text || '';
-    const clean = text.replace(/```json|```/g, '').trim();
-    const result = JSON.parse(clean);
-    scanResultData = result;
+    const text = result.data.text;
+    console.log('OCR resultaat:', text);
 
-    document.getElementById('scan-res-desc').textContent   = result.beschrijving || '—';
-    document.getElementById('scan-res-amount').textContent = result.bedrag ? `€ ${result.bedrag.toFixed(2).replace('.',',')}` : '—';
-    document.getElementById('scan-res-date').textContent   = result.datum
-      ? new Date(result.datum+'T12:00:00').toLocaleDateString('nl-NL',{day:'numeric',month:'long',year:'numeric'})
+    const parsed = parseReceiptText(text);
+    scanResultData = parsed;
+
+    document.getElementById('scan-res-desc').textContent   = parsed.beschrijving || '—';
+    document.getElementById('scan-res-amount').textContent = parsed.bedrag != null ? `€ ${parsed.bedrag.toFixed(2).replace('.',',')}` : '—';
+    document.getElementById('scan-res-date').textContent   = parsed.datum
+      ? new Date(parsed.datum+'T12:00:00').toLocaleDateString('nl-NL',{day:'numeric',month:'long',year:'numeric'})
       : '—';
-    const catInfo = EXPENSE_CATS[result.categorie];
-    document.getElementById('scan-res-cat').textContent = catInfo ? `${catInfo.icon} ${catInfo.label}` : '—';
+    const catInfo = EXPENSE_CATS[parsed.categorie];
+    document.getElementById('scan-res-cat').textContent = catInfo ? `${catInfo.icon} ${catInfo.label}` : '📦 Overig';
 
     document.getElementById('scan-result').style.display = 'block';
-    status.textContent = '✓ Bon herkend!';
+    status.textContent = '✓ Bon gelezen!';
     status.className = 'scan-status success';
 
   } catch(e) {
-    status.textContent = `⚠️ Fout: ${e.message || 'Kon bon niet lezen'}. Probeer opnieuw.`;
+    status.textContent = `⚠️ Kon bon niet lezen: ${e.message}`;
     status.className = 'scan-status error';
-    console.error('Scan error:', e);
+    console.error('Scan fout:', e);
   }
+}
+
+function parseReceiptText(text) {
+  const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
+
+  // ── Winkel naam: eerste niet-lege regel
+  let beschrijving = '';
+  for (const line of lines) {
+    if (line.length > 2 && !/^\d/.test(line) && !/^[*=-]{3,}/.test(line)) {
+      beschrijving = line.replace(/[^a-zA-Z0-9\s&.'()-]/g, '').trim();
+      if (beschrijving.length > 2) break;
+    }
+  }
+
+  // ── Totaalbedrag: zoek "totaal", "total", "gesamtbetrag", "te betalen", "sum"
+  let bedrag = null;
+  const totalPatterns = [
+    /(?:totaal|total|te betalen|gesamtbetrag|summe|gesamt|grand total|subtotal)[^\d]*([\d]+[.,][\d]{2})/i,
+    /(?:eur|€)\s*([\d]+[.,][\d]{2})/i,
+  ];
+  for (const pat of totalPatterns) {
+    const m = text.match(pat);
+    if (m) { bedrag = parseFloat(m[1].replace(',','.')); break; }
+  }
+  // Fallback: grootste bedrag in de tekst
+  if (bedrag == null) {
+    const allAmounts = [...text.matchAll(/([\d]{1,5}[.,][\d]{2})/g)]
+      .map(m => parseFloat(m[1].replace(',','.')))
+      .filter(n => n > 0 && n < 100000);
+    if (allAmounts.length) bedrag = Math.max(...allAmounts);
+  }
+
+  // ── Datum: DD-MM-YYYY, DD/MM/YYYY, YYYY-MM-DD, DD.MM.YYYY
+  let datum = null;
+  const datePatterns = [
+    /(\d{4})[.\-\/](\d{2})[.\-\/](\d{2})/,   // YYYY-MM-DD
+    /(\d{2})[.\-\/](\d{2})[.\-\/](\d{4})/,   // DD-MM-YYYY
+    /(\d{2})\.(\d{2})\.(\d{2,4})/,            // DD.MM.YY
+  ];
+  for (const pat of datePatterns) {
+    const m = text.match(pat);
+    if (m) {
+      try {
+        let y, mo, d;
+        if (m[1].length === 4) { y=m[1]; mo=m[2]; d=m[3]; }
+        else { d=m[1]; mo=m[2]; y=m[3].length===2?'20'+m[3]:m[3]; }
+        const dt = new Date(`${y}-${mo}-${d}`);
+        if (!isNaN(dt)) datum = `${y}-${mo}-${d}`;
+      } catch(e) {}
+      if (datum) break;
+    }
+  }
+
+  // ── Categorie op basis van winkel/tekst
+  const t = text.toLowerCase();
+  let categorie = 'overig';
+  if (/albert.heijn|jumbo|lidl|aldi|plus|dirk|spar|ah |boodschap|supermarkt|bakker|slager|markt/.test(t)) categorie = 'eten';
+  else if (/shell|esso|bp |total|tinq|tamoil|benzine|diesel|tankst|brandstof/.test(t)) categorie = 'transport';
+  else if (/apotheek|drogist|etos|kruidvat|dokter|tandarts|huisarts|zorgverzekeraar|da |health/.test(t)) categorie = 'gezondheid';
+  else if (/zara|h&m|c&a|primark|only|vero moda|wehkamp|hm|kleding|mode|fashion/.test(t)) categorie = 'kleding';
+  else if (/bioscoop|cinema|spotify|netflix|disney|pathé|pathe|game|steam/.test(t)) categorie = 'entertainment';
+  else if (/action|ikea|gamma|praxis|hornbach|blokker|kwantum|wonen|huis|interieur/.test(t)) categorie = 'wonen';
+  else if (/tabak|sigaret|sigar|tobacco/.test(t)) categorie = 'overig';
+  else if (/gym|fitness|sport|decathlon|intersport/.test(t)) categorie = 'sporten';
+
+  return { beschrijving, bedrag, datum, categorie };
 }
 
 function fileToBase64(file) {
