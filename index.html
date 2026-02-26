@@ -2465,7 +2465,7 @@ let activeFilterType = 'alles';
 
 // ─── FIREBASE ────────────────────────────────────────────────
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getAuth, GoogleAuthProvider, signInWithRedirect, getRedirectResult, signOut, onAuthStateChanged }
+import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult, signOut, onAuthStateChanged }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import { getFirestore, doc, collection, setDoc, deleteDoc, onSnapshot, getDoc }
   from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
@@ -2498,11 +2498,23 @@ function showAppScreen() {
 }
 
 async function loginWithGoogle() {
+  const provider = new GoogleAuthProvider();
+  // Safari/WebKit blokkeert popups — gebruik redirect op mobiel
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  const isIOS    = /iPad|iPhone|iPod/.test(navigator.userAgent);
   try {
-    const provider = new GoogleAuthProvider();
-    await signInWithRedirect(auth, provider);
+    if (isSafari || isIOS) {
+      await signInWithRedirect(auth, provider);
+    } else {
+      await signInWithPopup(auth, provider);
+    }
   } catch(e) {
-    alert('Inloggen mislukt: ' + e.message);
+    // Als popup toch geblokkeerd wordt, probeer redirect
+    if (e.code === 'auth/popup-blocked' || e.code === 'auth/cancelled-popup-request') {
+      await signInWithRedirect(auth, provider);
+    } else {
+      alert('Inloggen mislukt: ' + e.message);
+    }
   }
 }
 
