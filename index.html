@@ -1998,14 +1998,7 @@ flex-shrink: 0;
     <!-- Quick emoji grid -->
     <div style="margin-top:0.8rem">
       <div style="font-size:0.62rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);font-weight:500;margin-bottom:0.5rem">Snel kiezen — tik op een emoji</div>
-      <div style="display:flex;flex-wrap:wrap;gap:0.35rem;">
-        ${['🏠','🚗','🛒','🍔','☕','🍕','👗','👟','💊','💆','🐕','🐈','🌿','🎮','🎬','🎵','📚','✈️','🏖️','⛽','🔧','🏋️','🚲','🧴','🧹','🍷','🎁','💰','📱','💡','🏦','📋','🛡️','🎓','👶','💒','🪴','🧺','🛋️','🔑'].map(e =>
-          `<button type="button" onclick="pickEmoji('${e}')" style="
-            font-size:1.4rem;padding:0.3rem;border:2px solid transparent;border-radius:8px;
-            background:var(--card);cursor:pointer;transition:all 0.1s;line-height:1;
-          " onmousedown="event.preventDefault()">${e}</button>`
-        ).join('')}
-      </div>
+      <div id="emoji-quick-grid" style="display:flex;flex-wrap:wrap;gap:0.35rem;"></div>
     </div>
 
     <button class="add-btn btn-expense" id="cat-add-btn" onclick="addCustomCategory()" style="margin-top:1rem">
@@ -2433,6 +2426,15 @@ function deleteCustomCategory(key, type) {
 function renderCategoryManager() {
   const grid = document.getElementById('cat-manage-grid');
   if (!grid) return;
+
+  // Build emoji quick-pick grid
+  const emojiGrid = document.getElementById('emoji-quick-grid');
+  if (emojiGrid && !emojiGrid.hasChildNodes()) {
+    const EMOJIS = ['🏠','🚗','🛒','🍔','☕','🍕','👗','👟','💊','💆','🐕','🐈','🌿','🎮','🎬','🎵','📚','✈️','🏖️','⛽','🔧','🏋️','🚲','🧴','🧹','🍷','🎁','💰','📱','💡','🏦','📋','🛡️','🎓','👶','💒','🪴','🧺','🛋️','🔑'];
+    emojiGrid.innerHTML = EMOJIS.map(e =>
+      `<button type="button" onclick="pickEmoji('${e}')" style="font-size:1.4rem;padding:0.3rem;border:2px solid transparent;border-radius:8px;background:var(--card);cursor:pointer;line-height:1;">${e}</button>`
+    ).join('');
+  }
 
   function catList(cats, type) {
     return Object.entries(cats).map(([k, v]) => {
