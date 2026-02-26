@@ -2452,12 +2452,24 @@ border: 1px solid var(–border); margin-top: 0.8rem; display: none;
     <span style="color:var(--muted);font-size:0.78rem">Datum</span>
     <span class="scan-result-val" id="scan-res-date">—</span>
   </div>
-  <button onclick="useScanResult()" style="
-    width:100%; margin-top:0.8rem; padding:0.8rem; border:none; border-radius:10px;
-    background:var(--accent); color:#fff; font-family:'Space Grotesk',sans-serif;
-    font-size:0.88rem; font-weight:700; cursor:pointer;">
-    ✓ Gebruik deze gegevens
-  </button>
+  <div class="scan-result-row">
+    <span style="color:var(--muted);font-size:0.78rem">Categorie</span>
+    <span class="scan-result-val" id="scan-res-cat">—</span>
+  </div>
+  <div style="display:flex; gap:0.6rem; margin-top:0.8rem;">
+    <button onclick="clearScanResult()" style="
+      flex:1; padding:0.8rem; border:2px solid var(--border); border-radius:10px;
+      background:var(--card); color:var(--muted); font-family:'Space Grotesk',sans-serif;
+      font-size:0.88rem; font-weight:600; cursor:pointer;">
+      🗑 Opnieuw
+    </button>
+    <button onclick="useScanResult()" style="
+      flex:2; padding:0.8rem; border:none; border-radius:10px;
+      background:var(--accent); color:#fff; font-family:'Space Grotesk',sans-serif;
+      font-size:0.88rem; font-weight:700; cursor:pointer;">
+      ✓ Gebruik deze gegevens
+    </button>
+  </div>
 </div>
 ```
 
@@ -4145,10 +4157,11 @@ async function handleScanFile(event) {
           content: [
             { type: 'image', source: { type: 'base64', media_type: mediaType, data: base64 } },
             { type: 'text', text: `Analyseer deze kassabon en geef ALLEEN een JSON object terug zonder extra tekst:
-{"beschrijving":"naam van de winkel","bedrag":12.34,"datum":"2025-02-26"}
+{"beschrijving":"naam van de winkel","bedrag":12.34,"datum":"2025-02-26","categorie":"eten"}
 - beschrijving: naam winkel of product (bijv. "Albert Heijn", "Esso", "Action")
 - bedrag: totaalbedrag als getal met punt als decimaalteken
 - datum: YYYY-MM-DD formaat, of null als niet zichtbaar
+- categorie: kies de beste uit deze lijst: eten, transport, wonen, gezondheid, entertainment, kleding, abonnement, sporten, peugeot_rob, ford_lizet, overig
 Geef ALLEEN het JSON object.` }
           ]
         }]
@@ -4166,6 +4179,8 @@ Geef ALLEEN het JSON object.` }
     document.getElementById('scan-res-date').textContent   = result.datum
       ? new Date(result.datum+'T12:00:00').toLocaleDateString('nl-NL',{day:'numeric',month:'long',year:'numeric'})
       : '—';
+    const catInfo = EXPENSE_CATS[result.categorie];
+    document.getElementById('scan-res-cat').textContent = catInfo ? `${catInfo.icon} ${catInfo.label}` : '—';
 
     document.getElementById('scan-result').style.display = 'block';
     status.textContent = '✓ Bon herkend!';
@@ -4186,11 +4201,28 @@ function fileToBase64(file) {
   });
 }
 
+function clearScanResult() {
+  scanResultData = null;
+  document.getElementById('scan-preview').style.display = 'none';
+  document.getElementById('scan-result').style.display  = 'none';
+  document.getElementById('scan-status').textContent    = 'Maak een foto of kies een afbeelding van je bon';
+  document.getElementById('scan-status').className      = 'scan-status';
+  document.getElementById('scan-file').value   = '';
+  document.getElementById('scan-camera').value = '';
+}
+
 function useScanResult() {
   if (!scanResultData) return;
   if (scanResultData.beschrijving) document.getElementById('qm-desc').value   = scanResultData.beschrijving;
   if (scanResultData.bedrag)       document.getElementById('qm-amount').value = scanResultData.bedrag;
   if (scanResultData.datum)        document.getElementById('qm-date').value   = scanResultData.datum;
+  if (scanResultData.categorie) {
+    const sel = document.getElementById('qm-category');
+    if (sel) {
+      const opt = [...sel.options].find(o => o.value === scanResultData.categorie);
+      if (opt) sel.value = scanResultData.categorie;
+    }
+  }
   document.getElementById('scan-modal-backdrop').classList.remove('open');
   toast('✓ Bon ingelezen — controleer en sla op!');
 }
@@ -4207,7 +4239,7 @@ Object.assign(window, {
   addCryptoCoin, deleteCryptoCoin, updateCryptoAmount, loadCryptoPrices,
   addVasteLast, deleteVasteLast, addApk, deleteApk,
   toggleQuickAdd, closeQuickAdd, qmSetType, quickAddTransaction,
-  openScanModal, closeScanModal, handleScanFile, useScanResult,
+  openScanModal, closeScanModal, handleScanFile, useScanResult, clearScanResult,
   installApp,
 });
 
