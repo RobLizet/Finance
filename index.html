@@ -24,21 +24,21 @@
 –surface: #fdfaf6;
 –card: #f0ebe3;
 –border: #e2d9cc;
-–ink: #2a2118;
-–ink2: #4a3f33;
-–muted: #9e9184;
+–ink: #14100a;
+–ink2: #2e2416;
+–muted: #6b5f52;
 –accent: #b85c28;
 –accent-light: #f5e8de;
-–green: #2d7a50;
+–green: #1e6038;
 –green-light: #dff0e8;
-–blue: #2e5f8a;
+–blue: #1e4a72;
 –blue-light: #deeaf5;
-–red: #b83028;
+–red: #9e2018;
 –red-light: #fce8e7;
-–gold: #b08a3a;
+–gold: #8a6820;
 –gold-light: #f5edda;
-–shadow: 0 2px 20px rgba(42,33,24,0.08);
-–shadow-lg: 0 8px 40px rgba(42,33,24,0.14);
+–shadow: 0 2px 20px rgba(20,16,10,0.09);
+–shadow-lg: 0 8px 40px rgba(20,16,10,0.16);
 }
 
 body {
@@ -47,6 +47,8 @@ background: var(–bg);
 color: var(–ink);
 min-height: 100vh;
 overflow-x: hidden;
+font-weight: 500;
+-webkit-font-smoothing: antialiased;
 }
 
 .top-stripe {
@@ -137,9 +139,9 @@ gap: 0.7rem;
 padding: 0.65rem 0.8rem;
 border-radius: 10px;
 cursor: pointer;
-font-size: 0.82rem;
-font-weight: 500;
-color: #9a9088;
+font-size: 0.86rem;
+font-weight: 600;
+color: #7a6e62;
 transition: all 0.18s;
 border: none;
 background: none;
@@ -171,8 +173,8 @@ margin-bottom: 0.4rem;
 
 .sidebar-balance .bal-amount {
 font-family: ‘Cormorant Garamond’, serif;
-font-size: 1.8rem;
-font-weight: 300;
+font-size: 2rem;
+font-weight: 600;
 line-height: 1;
 color: #f7f3ee;
 }
@@ -288,18 +290,18 @@ border-radius: 14px 14px 0 0;
 .summary-card.sc-avg::after     { background: #9a6faf; }
 
 .sc-label {
-font-size: 0.62rem;
+font-size: 0.68rem;
 text-transform: uppercase;
 letter-spacing: 0.12em;
 color: var(–muted);
-font-weight: 500;
+font-weight: 600;
 margin-bottom: 0.5rem;
 }
 
 .sc-num {
 font-family: ‘Cormorant Garamond’, serif;
-font-size: 1.7rem;
-font-weight: 300;
+font-size: 2rem;
+font-weight: 600;
 line-height: 1;
 }
 
@@ -310,9 +312,10 @@ line-height: 1;
 .sc-num.negative { color: var(–red) !important; }
 
 .sc-sub {
-font-size: 0.62rem;
-color: var(–muted);
+font-size: 0.7rem;
+color: var(–ink2);
 margin-top: 0.35rem;
+font-weight: 500;
 }
 
 /* Budget */
@@ -547,11 +550,11 @@ gap: 0.9rem;
 .form-group.full { grid-column: 1 / -1; }
 
 label {
-font-size: 0.63rem;
+font-size: 0.68rem;
 text-transform: uppercase;
 letter-spacing: 0.11em;
-color: var(–muted);
-font-weight: 500;
+color: var(–ink2);
+font-weight: 700;
 }
 
 input[type=text],
@@ -693,25 +696,27 @@ flex-shrink: 0;
 }
 
 .tx-desc {
-font-size: 0.88rem;
-font-weight: 500;
+font-size: 0.98rem;
+font-weight: 600;
 white-space: nowrap;
 overflow: hidden;
 text-overflow: ellipsis;
+color: var(–ink);
 }
 
 .tx-meta {
-font-size: 0.63rem;
+font-size: 0.72rem;
 color: var(–muted);
 margin-top: 0.18rem;
 text-transform: uppercase;
-letter-spacing: 0.05em;
+letter-spacing: 0.04em;
+font-weight: 500;
 }
 
 .tx-amount {
 font-family: ‘Cormorant Garamond’, serif;
-font-size: 1.25rem;
-font-weight: 600;
+font-size: 1.35rem;
+font-weight: 700;
 white-space: nowrap;
 }
 
@@ -1145,26 +1150,27 @@ line-height: 1;
 .account-card-del:hover { color: var(–red); background: var(–red-light); }
 
 .account-card-name {
-font-size: 0.88rem;
-font-weight: 600;
+font-size: 0.95rem;
+font-weight: 700;
 color: var(–ink);
 margin-bottom: 0.2rem;
 }
 
 .account-card-type {
-font-size: 0.63rem;
+font-size: 0.65rem;
 text-transform: uppercase;
 letter-spacing: 0.1em;
 color: var(–muted);
-font-weight: 500;
+font-weight: 600;
 }
 
 .account-card-balance {
 font-family: ‘Cormorant Garamond’, serif;
-font-size: 1.8rem;
-font-weight: 300;
+font-size: 2rem;
+font-weight: 600;
 line-height: 1;
 margin-top: 0.7rem;
+color: var(–ink);
 }
 
 .account-card-balance.negative { color: var(–red); }
