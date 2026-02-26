@@ -2647,11 +2647,11 @@ function migrateAccountsIfNeeded() {
     ];
     defaults.forEach(acc => saveAccountToDB(acc));
   } else {
-    // Update car colors in Firestore if they still have old values
+    // Always force correct car colors
     const peugeot = accounts.find(a => a.id === 'acc_rob_peugeot');
     const ford    = accounts.find(a => a.id === 'acc_vr_ford');
-    if (peugeot && peugeot.color !== '#7a2040') saveAccountToDB({...peugeot, color: '#7a2040'});
-    if (ford    && ford.color    !== '#6b8fa8') saveAccountToDB({...ford,    color: '#6b8fa8'});
+    if (peugeot) saveAccountToDB({...peugeot, color: '#7a2040'});
+    if (ford)    saveAccountToDB({...ford,    color: '#6b8fa8'});
   }
 }
 
