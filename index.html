@@ -4191,41 +4191,57 @@ async function handleScanFile(event) {
 }
 
 function parseReceiptText(text) {
-  const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
+  const lines = text.split('\n').map(l => l.trim()).filter(l => l.length > 1);
+  console.log('Alle regels:', lines);
 
-  // ── Winkel naam: eerste niet-lege regel
+  // ── Winkelnaam: zoek langste zinvolle regel in eerste 8 regels
   let beschrijving = '';
-  for (const line of lines) {
-    if (line.length > 2 && !/^\d/.test(line) && !/^[*=-]{3,}/.test(line)) {
-      beschrijving = line.replace(/[^a-zA-Z0-9\s&.'()-]/g, '').trim();
-      if (beschrijving.length > 2) break;
+  const skipPatterns = /^[\d\s.,*=\-_|\/\\]+$|btw|tel|fax|kvk|www|http|@|postbus|straat|weg|laan|plein|^\d{4}/i;
+  for (const line of lines.slice(0, 10)) {
+    const clean = line.replace(/[^a-zA-Z0-9\s&.'()\-]/g, '').trim();
+    if (clean.length >= 3 && !skipPatterns.test(clean) && clean.length > beschrijving.length) {
+      beschrijving = clean;
     }
   }
 
-  // ── Totaalbedrag: zoek "totaal", "total", "gesamtbetrag", "te betalen", "sum"
+  // ── Totaalbedrag: zoek specifiek naar totaal-woorden, pak grootste match
   let bedrag = null;
-  const totalPatterns = [
-    /(?:totaal|total|te betalen|gesamtbetrag|summe|gesamt|grand total|subtotal)[^\d]*([\d]+[.,][\d]{2})/i,
-    /(?:eur|€)\s*([\d]+[.,][\d]{2})/i,
-  ];
-  for (const pat of totalPatterns) {
-    const m = text.match(pat);
-    if (m) { bedrag = parseFloat(m[1].replace(',','.')); break; }
-  }
-  // Fallback: grootste bedrag in de tekst
-  if (bedrag == null) {
-    const allAmounts = [...text.matchAll(/([\d]{1,5}[.,][\d]{2})/g)]
-      .map(m => parseFloat(m[1].replace(',','.')))
-      .filter(n => n > 0 && n < 100000);
-    if (allAmounts.length) bedrag = Math.max(...allAmounts);
+
+  // Eerst proberen met totaal-sleutelwoorden
+  const totalKeywords = /totaal|total|te betalen|gesamtbetrag|summe|gesamt|grand.?total|sum:|bedrag|amount|EUR\b/i;
+  for (const line of lines) {
+    if (totalKeywords.test(line)) {
+      // Pak het grootste getal op deze regel
+      const nums = [...line.matchAll(/(\d{1,6}[.,]\d{2})/g)]
+        .map(m => parseFloat(m[1].replace(',','.')))
+        .filter(n => n > 0);
+      if (nums.length) {
+        const candidate = Math.max(...nums);
+        if (bedrag === null || candidate > bedrag) bedrag = candidate;
+      }
+    }
   }
 
-  // ── Datum: DD-MM-YYYY, DD/MM/YYYY, YYYY-MM-DD, DD.MM.YYYY
+  // Fallback: pak het grootste bedrag > €5 uit de hele tekst
+  if (bedrag === null || bedrag < 5) {
+    const allAmounts = [...text.matchAll(/(\d{1,5}[.,]\d{2})/g)]
+      .map(m => parseFloat(m[1].replace(',','.')))
+      .filter(n => n >= 5 && n < 50000);
+    if (allAmounts.length) {
+      // Neem het meest voorkomende grote bedrag (totaal staat vaak 2x)
+      const counts = {};
+      allAmounts.forEach(n => counts[n] = (counts[n]||0)+1);
+      const sorted = Object.entries(counts).sort((a,b) => b[1]-a[1] || b[0]-a[0]);
+      bedrag = parseFloat(sorted[0][0]);
+    }
+  }
+
+  // ── Datum
   let datum = null;
   const datePatterns = [
-    /(\d{4})[.\-\/](\d{2})[.\-\/](\d{2})/,   // YYYY-MM-DD
-    /(\d{2})[.\-\/](\d{2})[.\-\/](\d{4})/,   // DD-MM-YYYY
-    /(\d{2})\.(\d{2})\.(\d{2,4})/,            // DD.MM.YY
+    /(\d{4})[.\-\/](\d{2})[.\-\/](\d{2})/,
+    /(\d{2})[.\-\/](\d{2})[.\-\/](\d{4})/,
+    /(\d{2})\.(\d{2})\.(\d{2})\b/,
   ];
   for (const pat of datePatterns) {
     const m = text.match(pat);
@@ -4234,24 +4250,26 @@ function parseReceiptText(text) {
         let y, mo, d;
         if (m[1].length === 4) { y=m[1]; mo=m[2]; d=m[3]; }
         else { d=m[1]; mo=m[2]; y=m[3].length===2?'20'+m[3]:m[3]; }
-        const dt = new Date(`${y}-${mo}-${d}`);
-        if (!isNaN(dt)) datum = `${y}-${mo}-${d}`;
+        const dt = new Date(`${y}-${mo}-${d}T12:00:00`);
+        if (!isNaN(dt) && parseInt(y) >= 2000 && parseInt(y) <= 2030) {
+          datum = `${y}-${mo.padStart(2,'0')}-${d.padStart(2,'0')}`;
+        }
       } catch(e) {}
       if (datum) break;
     }
   }
 
-  // ── Categorie op basis van winkel/tekst
-  const t = text.toLowerCase();
+  // ── Categorie
+  const t = (beschrijving + ' ' + text).toLowerCase();
   let categorie = 'overig';
-  if (/albert.heijn|jumbo|lidl|aldi|plus|dirk|spar|ah |boodschap|supermarkt|bakker|slager|markt/.test(t)) categorie = 'eten';
-  else if (/shell|esso|bp |total|tinq|tamoil|benzine|diesel|tankst|brandstof/.test(t)) categorie = 'transport';
-  else if (/apotheek|drogist|etos|kruidvat|dokter|tandarts|huisarts|zorgverzekeraar|da |health/.test(t)) categorie = 'gezondheid';
-  else if (/zara|h&m|c&a|primark|only|vero moda|wehkamp|hm|kleding|mode|fashion/.test(t)) categorie = 'kleding';
-  else if (/bioscoop|cinema|spotify|netflix|disney|pathé|pathe|game|steam/.test(t)) categorie = 'entertainment';
-  else if (/action|ikea|gamma|praxis|hornbach|blokker|kwantum|wonen|huis|interieur/.test(t)) categorie = 'wonen';
-  else if (/tabak|sigaret|sigar|tobacco/.test(t)) categorie = 'overig';
+  if (/albert.heijn|jumbo|lidl|aldi|\bplus\b|dirk|spar|\bah\b|supermarkt|bakker|slager|dagmark|nettorama|dekamarkt/.test(t)) categorie = 'eten';
+  else if (/shell|esso|\bbp\b|total\b|tinq|tamoil|benzine|diesel|tankst|brandstof|tango|q8/.test(t)) categorie = 'transport';
+  else if (/apotheek|drogist|etos|kruidvat|dokter|tandarts|huisarts|\bda\b|health|medic|pharma/.test(t)) categorie = 'gezondheid';
+  else if (/zara|h&m|c&a|primark|only|vero moda|wehkamp|kleding|mode|fashion|hema/.test(t)) categorie = 'kleding';
+  else if (/bioscoop|cinema|spotify|netflix|disney|pathé|pathe|\bgame\b|steam/.test(t)) categorie = 'entertainment';
+  else if (/action|ikea|gamma|praxis|hornbach|blokker|kwantum|wonen|interieur/.test(t)) categorie = 'wonen';
   else if (/gym|fitness|sport|decathlon|intersport/.test(t)) categorie = 'sporten';
+  else if (/restaurant|cafe|café|pizza|burger|mcdonalds|kfc|subway|dominos|thuisbezorgd|sushi/.test(t)) categorie = 'eten';
 
   return { beschrijving, bedrag, datum, categorie };
 }
