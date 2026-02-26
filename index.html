@@ -1634,6 +1634,128 @@ flex-shrink: 0;
 .maand-vergelijk-grid { grid-template-columns: repeat(2, 1fr); }
 .prognose-cards { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* ── FLOATING ADD BUTTON ── */
+.fab {
+position: fixed;
+bottom: 5rem;
+right: 1.2rem;
+width: 58px; height: 58px;
+background: var(–accent);
+color: #fff;
+border: none; border-radius: 50%;
+font-size: 1.8rem; line-height: 1;
+cursor: pointer;
+box-shadow: 0 4px 20px rgba(185,92,40,0.45);
+z-index: 900;
+display: flex; align-items: center; justify-content: center;
+transition: transform 0.2s, box-shadow 0.2s;
+}
+.fab:active { transform: scale(0.93); }
+.fab.open   { transform: rotate(45deg); background: #6b3a20; }
+
+@media (min-width: 701px) { .fab { bottom: 2rem; right: 2rem; } }
+
+/* ── QUICK ADD MODAL ── */
+.quick-modal-backdrop {
+position: fixed; inset: 0; z-index: 901;
+background: rgba(20,16,10,0.55);
+backdrop-filter: blur(3px);
+display: none; align-items: flex-end; justify-content: center;
+}
+.quick-modal-backdrop.open { display: flex; }
+
+.quick-modal {
+background: var(–surface);
+border-radius: 24px 24px 0 0;
+padding: 1.5rem 1.5rem 2.5rem;
+width: 100%; max-width: 520px;
+box-shadow: 0 -8px 40px rgba(0,0,0,0.18);
+animation: slideUp 0.25s ease;
+}
+
+@keyframes slideUp {
+from { transform: translateY(100%); opacity: 0; }
+to   { transform: translateY(0);    opacity: 1; }
+}
+
+.qm-header {
+display: flex; align-items: center; justify-content: space-between;
+margin-bottom: 1.2rem;
+}
+.qm-title { font-family: ‘Cormorant Garamond’,serif; font-size: 1.3rem; font-weight: 600; color: var(–ink); }
+.qm-close { background: none; border: none; font-size: 1.3rem; color: var(–muted); cursor: pointer; padding: 0.2rem; }
+
+.qm-type-row { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+.qm-type-btn {
+flex: 1; padding: 0.55rem; border: 2px solid var(–border); border-radius: 10px;
+font-family: ‘Space Grotesk’,sans-serif; font-size: 0.82rem; font-weight: 600;
+background: var(–card); color: var(–muted); cursor: pointer; transition: all 0.15s;
+}
+.qm-type-btn.active-expense { border-color: var(–red);   color: var(–red);   background: var(–red-light); }
+.qm-type-btn.active-income  { border-color: var(–green); color: var(–green); background: var(–green-light); }
+
+.qm-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; margin-bottom: 0.7rem; }
+.qm-row.full { grid-template-columns: 1fr; }
+
+.qm-field label { font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(–muted); font-weight: 600; display: block; margin-bottom: 0.3rem; }
+.qm-field input, .qm-field select {
+width: 100%; padding: 0.7rem 0.8rem;
+border: 1.5px solid var(–border); border-radius: 10px;
+font-family: ‘Space Grotesk’,sans-serif; font-size: 0.88rem; color: var(–ink);
+background: var(–card); outline: none;
+}
+
+.qm-actions { display: flex; gap: 0.7rem; margin-top: 1rem; }
+.qm-submit { flex: 1; padding: 0.85rem; border: none; border-radius: 12px; font-family: ‘Space Grotesk’,sans-serif; font-size: 0.9rem; font-weight: 700; cursor: pointer; }
+.qm-submit.expense { background: var(–red);   color: #fff; }
+.qm-submit.income  { background: var(–green); color: #fff; }
+
+.qm-scan-btn {
+padding: 0.85rem 1rem; border: 2px solid var(–border); border-radius: 12px;
+background: var(–card); color: var(–ink); font-size: 1.1rem; cursor: pointer;
+font-family: ‘Space Grotesk’,sans-serif; font-weight: 600;
+display: flex; align-items: center; gap: 0.4rem; white-space: nowrap;
+transition: border-color 0.15s;
+}
+.qm-scan-btn:hover { border-color: var(–accent); }
+
+/* ── RECEIPT SCANNER MODAL ── */
+.scan-modal-backdrop {
+position: fixed; inset: 0; z-index: 1000;
+background: rgba(20,16,10,0.7);
+backdrop-filter: blur(4px);
+display: none; align-items: center; justify-content: center; padding: 1rem;
+}
+.scan-modal-backdrop.open { display: flex; }
+
+.scan-modal {
+background: var(–surface);
+border-radius: 20px;
+padding: 1.5rem;
+width: 100%; max-width: 420px;
+box-shadow: 0 8px 40px rgba(0,0,0,0.25);
+}
+
+.scan-preview {
+width: 100%; max-height: 220px; object-fit: contain;
+border-radius: 12px; border: 1px solid var(–border);
+margin: 0.8rem 0; display: none;
+}
+
+.scan-result {
+background: var(–card); border-radius: 12px; padding: 1rem;
+border: 1px solid var(–border); margin-top: 0.8rem; display: none;
+}
+
+.scan-result-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem; font-size: 0.85rem; }
+.scan-result-label { color: var(–muted); font-weight: 500; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; }
+.scan-result-val { font-weight: 700; color: var(–ink); }
+
+.scan-status { font-size: 0.78rem; color: var(–muted); font-weight: 500; text-align: center; padding: 0.5rem; }
+.scan-status.scanning { color: var(–accent); }
+.scan-status.error    { color: var(–red); }
+.scan-status.success  { color: var(–green); }
 </style>
 
 </head>
@@ -2232,6 +2354,115 @@ flex-shrink: 0;
 </div><!-- end #app-wrapper -->
 
 <div class="toast" id="toast"></div>
+
+<!-- ── FLOATING ADD BUTTON ── -->
+
+<button class="fab" id="fab" onclick="toggleQuickAdd()" title="Snel toevoegen">+</button>
+
+<!-- ── QUICK ADD MODAL ── -->
+
+<div class="quick-modal-backdrop" id="quick-modal-backdrop" onclick="closeQuickAdd(event)">
+  <div class="quick-modal">
+    <div class="qm-header">
+      <div class="qm-title">Snel <em>toevoegen</em></div>
+      <button class="qm-close" onclick="closeQuickAdd()">✕</button>
+    </div>
+
+```
+<div class="qm-type-row">
+  <button class="qm-type-btn active-expense" id="qm-btn-expense" onclick="qmSetType('expense')">− Uitgave</button>
+  <button class="qm-type-btn" id="qm-btn-income" onclick="qmSetType('income')">+ Inkomst</button>
+</div>
+
+<div class="qm-row full">
+  <div class="qm-field">
+    <label>Omschrijving</label>
+    <input type="text" id="qm-desc" placeholder="Bijv. Albert Heijn" />
+  </div>
+</div>
+<div class="qm-row">
+  <div class="qm-field">
+    <label>Bedrag (€)</label>
+    <input type="number" id="qm-amount" placeholder="0,00" min="0" step="0.01" inputmode="decimal" />
+  </div>
+  <div class="qm-field">
+    <label>Datum</label>
+    <input type="date" id="qm-date" />
+  </div>
+</div>
+<div class="qm-row">
+  <div class="qm-field">
+    <label>Categorie</label>
+    <select id="qm-category"></select>
+  </div>
+  <div class="qm-field">
+    <label>Rekening</label>
+    <select id="qm-account"></select>
+  </div>
+</div>
+
+<div class="qm-actions">
+  <button class="qm-scan-btn" onclick="openScanModal()">📷 Bon scannen</button>
+  <button class="qm-submit expense" id="qm-submit-btn" onclick="quickAddTransaction()">Toevoegen</button>
+</div>
+```
+
+  </div>
+</div>
+
+<!-- ── RECEIPT SCANNER MODAL ── -->
+
+<div class="scan-modal-backdrop" id="scan-modal-backdrop" onclick="closeScanModal(event)">
+  <div class="scan-modal">
+    <div class="qm-header">
+      <div class="qm-title">📷 Bon <em>scannen</em></div>
+      <button class="qm-close" onclick="closeScanModal()">✕</button>
+    </div>
+
+```
+<div style="display:flex; gap:0.7rem; margin-bottom:0.5rem;">
+  <label style="flex:1; display:flex; align-items:center; justify-content:center; gap:0.5rem;
+    padding:0.85rem; border:2px dashed var(--border); border-radius:12px; cursor:pointer;
+    font-size:0.85rem; font-weight:600; color:var(--muted); background:var(--card);">
+    📁 Kies foto
+    <input type="file" id="scan-file" accept="image/*" onchange="handleScanFile(event)" style="display:none" />
+  </label>
+  <label style="flex:1; display:flex; align-items:center; justify-content:center; gap:0.5rem;
+    padding:0.85rem; border:2px dashed var(--accent); border-radius:12px; cursor:pointer;
+    font-size:0.85rem; font-weight:600; color:var(--accent); background:var(--card);">
+    📷 Camera
+    <input type="file" id="scan-camera" accept="image/*" capture="environment" onchange="handleScanFile(event)" style="display:none" />
+  </label>
+</div>
+
+<img id="scan-preview" class="scan-preview" alt="Bon preview" />
+<div class="scan-status" id="scan-status">Maak een foto of kies een afbeelding van je bon</div>
+
+<div class="scan-result" id="scan-result">
+  <div class="scan-result-label">Gevonden op bon</div>
+  <div class="scan-result-row">
+    <span style="color:var(--muted);font-size:0.78rem">Omschrijving</span>
+    <span class="scan-result-val" id="scan-res-desc">—</span>
+  </div>
+  <div class="scan-result-row">
+    <span style="color:var(--muted);font-size:0.78rem">Bedrag</span>
+    <span class="scan-result-val" id="scan-res-amount">—</span>
+  </div>
+  <div class="scan-result-row">
+    <span style="color:var(--muted);font-size:0.78rem">Datum</span>
+    <span class="scan-result-val" id="scan-res-date">—</span>
+  </div>
+  <button onclick="useScanResult()" style="
+    width:100%; margin-top:0.8rem; padding:0.8rem; border:none; border-radius:10px;
+    background:var(--accent); color:#fff; font-family:'Space Grotesk',sans-serif;
+    font-size:0.88rem; font-weight:700; cursor:pointer;">
+    ✓ Gebruik deze gegevens
+  </button>
+</div>
+```
+
+  </div>
+</div>
 
 <script>
 // ── PWA INSTALL ──────────────────────────────────────────────
@@ -3780,6 +4011,190 @@ function renderApk() {
       </div>`;
   }).join('');
 }
+
+// ═══════════════════════════════════════════════════════════════
+// ─── SNEL TOEVOEGEN ───────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════
+
+let qmType = 'expense';
+let scanResultData = null;
+
+function toggleQuickAdd() {
+  const backdrop = document.getElementById('quick-modal-backdrop');
+  const fab      = document.getElementById('fab');
+  const isOpen   = backdrop.classList.contains('open');
+  if (isOpen) {
+    backdrop.classList.remove('open');
+    fab.classList.remove('open');
+  } else {
+    openQuickAdd();
+  }
+}
+
+function openQuickAdd() {
+  const backdrop = document.getElementById('quick-modal-backdrop');
+  const fab      = document.getElementById('fab');
+  backdrop.classList.add('open');
+  fab.classList.add('open');
+  document.getElementById('qm-date').value = new Date().toISOString().split('T')[0];
+  buildQmSelects();
+  setTimeout(() => document.getElementById('qm-desc').focus(), 300);
+}
+
+function closeQuickAdd(e) {
+  if (e && e.target !== document.getElementById('quick-modal-backdrop')) return;
+  document.getElementById('quick-modal-backdrop').classList.remove('open');
+  document.getElementById('fab').classList.remove('open');
+}
+
+function qmSetType(type) {
+  qmType = type;
+  document.getElementById('qm-btn-expense').className = 'qm-type-btn' + (type==='expense' ? ' active-expense' : '');
+  document.getElementById('qm-btn-income').className  = 'qm-type-btn' + (type==='income'  ? ' active-income'  : '');
+  document.getElementById('qm-submit-btn').className  = 'qm-submit ' + type;
+  buildQmCategorySelect();
+}
+
+function buildQmSelects() {
+  buildQmCategorySelect();
+  const sel    = document.getElementById('qm-account');
+  const robAccs = accounts.filter(a => (a.owner||'rob') === 'rob');
+  const vrAccs  = accounts.filter(a => a.owner === 'vriendin');
+  sel.innerHTML = `
+    <optgroup label="👤 Rob">${robAccs.map(a => `<option value="${a.id}">${ACC_TYPES[a.type]?.icon||'🏦'} ${a.name}</option>`).join('')}</optgroup>
+    <optgroup label="💑 Vriendin">${vrAccs.map(a => `<option value="${a.id}">${ACC_TYPES[a.type]?.icon||'🏦'} ${a.name}</option>`).join('')}</optgroup>`;
+}
+
+function buildQmCategorySelect() {
+  const sel  = document.getElementById('qm-category');
+  const cats = qmType === 'expense' ? EXPENSE_CATS : INCOME_CATS;
+  sel.innerHTML = Object.entries(cats).map(([k,v]) =>
+    `<option value="${k}">${v.icon} ${v.label}</option>`
+  ).join('');
+}
+
+function quickAddTransaction() {
+  const desc    = document.getElementById('qm-desc').value.trim();
+  const amount  = parseFloat(document.getElementById('qm-amount').value);
+  const date    = document.getElementById('qm-date').value;
+  const cat     = document.getElementById('qm-category').value;
+  const account = document.getElementById('qm-account').value;
+  const addedBy = currentUser?.displayName?.split(' ')[0] || 'onbekend';
+
+  if (!desc || isNaN(amount) || amount <= 0 || !date) {
+    toast('⚠️ Vul omschrijving, bedrag en datum in.');
+    return;
+  }
+
+  const tx = { id: Date.now(), type: qmType, desc, amount, category: cat, date, note: '', account, addedBy };
+  saveTx(tx);
+  toast(qmType === 'expense' ? '✓ Uitgave toegevoegd!' : '✓ Inkomst toegevoegd!');
+
+  document.getElementById('qm-desc').value   = '';
+  document.getElementById('qm-amount').value = '';
+  document.getElementById('qm-date').value   = new Date().toISOString().split('T')[0];
+  document.getElementById('quick-modal-backdrop').classList.remove('open');
+  document.getElementById('fab').classList.remove('open');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ─── KASSABON SCANNER ─────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════════
+
+function openScanModal() {
+  document.getElementById('scan-modal-backdrop').classList.add('open');
+  document.getElementById('scan-preview').style.display = 'none';
+  document.getElementById('scan-result').style.display  = 'none';
+  document.getElementById('scan-status').textContent    = 'Maak een foto of kies een afbeelding van je bon';
+  document.getElementById('scan-status').className      = 'scan-status';
+  document.getElementById('scan-file').value   = '';
+  document.getElementById('scan-camera').value = '';
+  scanResultData = null;
+}
+
+function closeScanModal(e) {
+  if (e && e.target !== document.getElementById('scan-modal-backdrop')) return;
+  document.getElementById('scan-modal-backdrop').classList.remove('open');
+}
+
+async function handleScanFile(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const preview = document.getElementById('scan-preview');
+  preview.src = URL.createObjectURL(file);
+  preview.style.display = 'block';
+
+  const status = document.getElementById('scan-status');
+  status.textContent = '🔍 Bon analyseren met AI...';
+  status.className = 'scan-status scanning';
+  document.getElementById('scan-result').style.display = 'none';
+
+  try {
+    const base64   = await fileToBase64(file);
+    const mediaType = file.type || 'image/jpeg';
+
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 300,
+        messages: [{
+          role: 'user',
+          content: [
+            { type: 'image', source: { type: 'base64', media_type: mediaType, data: base64 } },
+            { type: 'text', text: `Analyseer deze kassabon en geef ALLEEN een JSON object terug zonder extra tekst:
+{"beschrijving":"naam van de winkel","bedrag":12.34,"datum":"2025-02-26"}
+- beschrijving: naam winkel of product (bijv. "Albert Heijn", "Esso", "Action")
+- bedrag: totaalbedrag als getal met punt als decimaalteken
+- datum: YYYY-MM-DD formaat, of null als niet zichtbaar
+Geef ALLEEN het JSON object.` }
+          ]
+        }]
+      })
+    });
+
+    const data  = await response.json();
+    const text  = data.content?.[0]?.text || '';
+    const clean = text.replace(/```json|```/g, '').trim();
+    const result = JSON.parse(clean);
+    scanResultData = result;
+
+    document.getElementById('scan-res-desc').textContent   = result.beschrijving || '—';
+    document.getElementById('scan-res-amount').textContent = result.bedrag ? `€ ${result.bedrag.toFixed(2).replace('.',',')}` : '—';
+    document.getElementById('scan-res-date').textContent   = result.datum
+      ? new Date(result.datum+'T12:00:00').toLocaleDateString('nl-NL',{day:'numeric',month:'long',year:'numeric'})
+      : '—';
+
+    document.getElementById('scan-result').style.display = 'block';
+    status.textContent = '✓ Bon herkend!';
+    status.className = 'scan-status success';
+
+  } catch(e) {
+    status.textContent = '⚠️ Kon bon niet lezen. Probeer een duidelijkere foto.';
+    status.className = 'scan-status error';
+  }
+}
+
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload  = () => resolve(reader.result.split(',')[1]);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+function useScanResult() {
+  if (!scanResultData) return;
+  if (scanResultData.beschrijving) document.getElementById('qm-desc').value   = scanResultData.beschrijving;
+  if (scanResultData.bedrag)       document.getElementById('qm-amount').value = scanResultData.bedrag;
+  if (scanResultData.datum)        document.getElementById('qm-date').value   = scanResultData.datum;
+  document.getElementById('scan-modal-backdrop').classList.remove('open');
+  toast('✓ Bon ingelezen — controleer en sla op!');
+}
+
 Object.assign(window, {
   loginWithEmail, logoutUser,
   showPage, setType, addTransaction, deleteTransaction,
@@ -3791,6 +4206,8 @@ Object.assign(window, {
   updateBudget,
   addCryptoCoin, deleteCryptoCoin, updateCryptoAmount, loadCryptoPrices,
   addVasteLast, deleteVasteLast, addApk, deleteApk,
+  toggleQuickAdd, closeQuickAdd, qmSetType, quickAddTransaction,
+  openScanModal, closeScanModal, handleScanFile, useScanResult,
   installApp,
 });
 
