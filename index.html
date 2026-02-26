@@ -4148,9 +4148,13 @@ async function handleScanFile(event) {
 
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-allow-cors': 'true',
+      },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
+        model: 'claude-haiku-4-5-20251001',
         max_tokens: 300,
         messages: [{
           role: 'user',
@@ -4161,7 +4165,7 @@ async function handleScanFile(event) {
 - beschrijving: naam winkel of product (bijv. "Albert Heijn", "Esso", "Action")
 - bedrag: totaalbedrag als getal met punt als decimaalteken
 - datum: YYYY-MM-DD formaat, of null als niet zichtbaar
-- categorie: kies de beste uit deze lijst: eten, transport, wonen, gezondheid, entertainment, kleding, abonnement, sporten, peugeot_rob, ford_lizet, overig
+- categorie: kies de beste uit: eten, transport, wonen, gezondheid, entertainment, kleding, abonnement, sporten, overig
 Geef ALLEEN het JSON object.` }
           ]
         }]
@@ -4187,8 +4191,9 @@ Geef ALLEEN het JSON object.` }
     status.className = 'scan-status success';
 
   } catch(e) {
-    status.textContent = '⚠️ Kon bon niet lezen. Probeer een duidelijkere foto.';
+    status.textContent = `⚠️ Fout: ${e.message || 'Kon bon niet lezen'}. Probeer opnieuw.`;
     status.className = 'scan-status error';
+    console.error('Scan error:', e);
   }
 }
 
