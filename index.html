@@ -4231,12 +4231,7 @@ function parseReceiptText(text) {
     const allAmounts = [...text.matchAll(/(\d{1,5}[.,]\d{2})/g)]
       .map(m => parseFloat(m[1].replace(',','.')))
       .filter(n => n >= 5 && n < 50000);
-    if (allAmounts.length) {
-      const counts = {};
-      allAmounts.forEach(n => counts[n] = (counts[n]||0)+1);
-      const sorted = Object.entries(counts).sort((a,b) => b[1]-a[1] || b[0]-a[0]);
-      bedrag = parseFloat(sorted[0][0]);
-    }
+    if (allAmounts.length) bedrag = Math.max(...allAmounts);
   }
 
   // ── Datum
