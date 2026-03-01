@@ -1492,7 +1492,46 @@ min-height: 100vh;
 .app-footer { padding-bottom: 2rem; font-size: 0.88rem; }
 }
 
-/* ── EXTRA PAGE ── */
+/* ── SALDO BAR ── */
+.saldo-bar {
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
+gap: 0.7rem;
+margin-bottom: 1.2rem;
+}
+
+.saldo-bar-card {
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: 14px;
+padding: 0.9rem 0.8rem;
+text-align: center;
+box-shadow: var(–shadow);
+transition: transform 0.15s;
+}
+.saldo-bar-card:hover { transform: translateY(-2px); }
+
+.saldo-bar-totaal {
+border: 2px solid var(–accent);
+background: var(–accent-light);
+}
+
+.saldo-bar-label {
+font-size: 0.6rem;
+text-transform: uppercase;
+letter-spacing: 0.1em;
+color: var(–muted);
+font-weight: 600;
+margin-bottom: 0.35rem;
+}
+
+.saldo-bar-amount {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 1.15rem;
+font-weight: 700;
+color: var(–ink);
+}
+.saldo-bar-amount.negative { color: var(–red); }
 .extra-block {
 background: var(–surface);
 border: 1px solid var(–border);
@@ -2139,6 +2178,9 @@ border: 1px solid var(–border); margin-top: 0.8rem; display: none;
     <h2>Mijn <em>Rekeningen</em></h2>
     <div class="page-date">Beheer je bankrekeningen, spaarrekeningen en kas</div>
   </div>
+
+  <!-- Saldo overzicht bar -->
+  <div class="saldo-bar" id="accounts-saldo-bar"></div>
 
   <!-- Owner filter -->
   <div class="controls" style="margin-bottom:1.2rem">
@@ -3274,6 +3316,28 @@ function renderAccountsPage() {
 
   const cardsEl = document.getElementById('account-cards');
   if (!cardsEl) return;
+
+  // ── Saldo overzicht bovenaan ──
+  const robTotal = accounts.filter(a => (a.owner||'rob') === 'rob').reduce((s,a) => s + getAccountBalance(a.id), 0);
+  const vrTotal  = accounts.filter(a => a.owner === 'vriendin').reduce((s,a) => s + getAccountBalance(a.id), 0);
+  const totaal   = robTotal + vrTotal;
+
+  const saldoEl = document.getElementById('accounts-saldo-bar');
+  if (saldoEl) {
+    saldoEl.innerHTML = `
+      <div class="saldo-bar-card" onclick="setOwnerFilter('rob')" style="cursor:pointer">
+        <div class="saldo-bar-label">👤 Rob</div>
+        <div class="saldo-bar-amount ${robTotal<0?'negative':''}">${robTotal<0?'−&nbsp;':''}${fmt(Math.abs(robTotal))}</div>
+      </div>
+      <div class="saldo-bar-card" onclick="setOwnerFilter('vriendin')" style="cursor:pointer">
+        <div class="saldo-bar-label">💑 Lizet</div>
+        <div class="saldo-bar-amount ${vrTotal<0?'negative':''}">${vrTotal<0?'−&nbsp;':''}${fmt(Math.abs(vrTotal))}</div>
+      </div>
+      <div class="saldo-bar-card saldo-bar-totaal" onclick="setOwnerFilter('alles')" style="cursor:pointer">
+        <div class="saldo-bar-label">👥 Totaal</div>
+        <div class="saldo-bar-amount ${totaal<0?'negative':''}">${totaal<0?'−&nbsp;':''}${fmt(Math.abs(totaal))}</div>
+      </div>`;
+  }
 
   // Owner filter buttons
   const ownerFilterEl = document.getElementById('owner-filter');
