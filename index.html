@@ -4309,70 +4309,82 @@ async function handleScanFile(event) {
 
 function parseReceiptText(text) {
   const lines = text.split('\n').map(l => l.trim()).filter(l => l.length > 1);
-  console.log('Alle regels:', lines);
+  console.log('OCR regels:', lines);
 
-  // ── Winkelnaam: zoek beste regel in eerste 10 regels
-  const skipPatterns = /^[\d\s.,*=\-_|\/\\€]+$|tel\b|tel:|telefoon|fax|kvk|www\.|http|postbus|\d{4}\s?[a-z]{2}\b|anzahl|artikel|einzelpreis|gesamtpreis|aantal|prijs|omschrijving|description|dorpsstr|straat|weg\b|laan\b|\d{2,}[-\s]\d{4,}/i;
+  // ── WINKELNAAM: zoek specifiek bekende winkels in de volledige tekst
+  const knownStores = [
+    [/plus\s*(snetsers|supermarkt)?/i, 'PLUS'],
+    [/albert.heijn|ah\s+to\s+go/i,     'Albert Heijn'],
+    [/jumbo/i,                          'Jumbo'],
+    [/lidl/i,                           'Lidl'],
+    [/aldi/i,                           'Aldi'],
+    [/dirk/i,                           'Dirk'],
+    [/spar/i,                           'Spar'],
+    [/nettorama/i,                      'Nettorama'],
+    [/dekamarkt/i,                      'Dekamarkt'],
+    [/tabak.*?store|tabak24/i,          'Tabak24 Store'],
+    [/action/i,                         'Action'],
+    [/ikea/i,                           'IKEA'],
+    [/hema/i,                           'HEMA'],
+    [/etos/i,                           'Etos'],
+    [/kruidvat/i,                       'Kruidvat'],
+    [/shell/i,                          'Shell'],
+    [/esso/i,                           'Esso'],
+    [/gamma/i,                          'Gamma'],
+    [/praxis/i,                         'Praxis'],
+    [/mcdonald/i,                       'McDonald\'s'],
+    [/subway/i,                         'Subway'],
+  ];
+
   let beschrijving = '';
-  let combined = '';
-  for (const line of lines.slice(0, 10)) {
-    const clean = line.replace(/[^a-zA-Z0-9\s&.'()\-]/g, '').trim();
-    // Sla over: telefoonnummers (040-xxx, 06-xxx etc.)
-    if (/^(0\d{1,3}[\s\-]\d{6,}|\d{10})/.test(line.trim())) continue;
-    if (clean.length >= 2 && !skipPatterns.test(clean) && !/^\d+$/.test(clean)) {
-      if (clean.length <= 15) {
-        combined += (combined ? ' ' : '') + clean;
-      } else if (!beschrijving) {
+  for (const [pat, name] of knownStores) {
+    if (pat.test(text)) { beschrijving = name; break; }
+  }
+
+  // Fallback: eerste regel die eruitziet als een winkelnaam
+  if (!beschrijving) {
+    const skip = /tel[\s.:0-9]|fax|kvk|www\.|http|postbus|\d{4}\s?[a-z]{2}\b|straat|dorps|^\d|omschrijving|p\.st|bedrag|korting|totaal/i;
+    for (const line of lines.slice(0, 12)) {
+      const clean = line.replace(/[^a-zA-Z0-9\s&.'()\-]/g, '').trim();
+      if (clean.length >= 3 && !skip.test(line) && !/^\d/.test(clean) && /[a-zA-Z]{3,}/.test(clean)) {
         beschrijving = clean;
+        break;
       }
     }
   }
-  if (!beschrijving && combined) beschrijving = combined;
-  if (!beschrijving) beschrijving = lines[0]?.replace(/[^a-zA-Z0-9\s]/g,'').trim() || '';
-  // Herstel bekende winkels met afgeknipte eerste letter
-  beschrijving = beschrijving
-    .replace(/^abak(\d)/i, 'Tabak$1')
-    .replace(/^lbert.heijn/i, 'Albert Heijn')
-    .replace(/^umbo/i, 'Jumbo')
-    .replace(/^ction/i, 'Action');
-  if (/^[a-z]/.test(beschrijving)) {
-    beschrijving = beschrijving.charAt(0).toUpperCase() + beschrijving.slice(1);
-  }
 
-  // ── Totaalbedrag — zoek eerst op sleutelwoorden
+  // ── TOTAALBEDRAG: zoek "Totaal" of "Total" gevolgd door een bedrag
   let bedrag = null;
-  const totalKeywords = /totaal|total|te betalen|gesamtbetrag|summe|gesamt|grand.?total|sum:|bedrag|amount/i;
-  for (const line of lines) {
-    if (totalKeywords.test(line)) {
-      const nums = [...line.matchAll(/(\d{1,6}[.,]\d{2})/g)]
-        .map(m => parseFloat(m[1].replace(',','.')))
-        .filter(n => n > 0);
-      if (nums.length) {
-        const candidate = Math.max(...nums);
-        if (bedrag === null || candidate > bedrag) bedrag = candidate;
-      }
-    }
-  }
-  // Zoek ook op naburige regels: sleutelwoord op regel N, bedrag op regel N+1
-  if (bedrag === null) {
+
+  // Methode 1: "Totaal" + bedrag op dezelfde regel
+  const totaalRegel = text.match(/totaa?l\s*[€]?\s*(\d{1,5}[.,]\d{2})/i);
+  if (totaalRegel) bedrag = parseFloat(totaalRegel[1].replace(',','.'));
+
+  // Methode 2: "Totaal" op één regel, bedrag op de volgende
+  if (!bedrag) {
     for (let i = 0; i < lines.length - 1; i++) {
-      if (totalKeywords.test(lines[i])) {
-        const nums = [...lines[i+1].matchAll(/(\d{1,6}[.,]\d{2})/g)]
-          .map(m => parseFloat(m[1].replace(',','.')))
-          .filter(n => n > 0);
-        if (nums.length) { bedrag = Math.max(...nums); break; }
+      if (/^totaa?l/i.test(lines[i])) {
+        const m = (lines[i] + ' ' + lines[i+1]).match(/(\d{1,5}[.,]\d{2})/);
+        if (m) { bedrag = parseFloat(m[1].replace(',','.')); break; }
       }
     }
-  }
-  // Fallback: grootste bedrag > €5
-  if (bedrag === null || bedrag < 5) {
-    const allAmounts = [...text.matchAll(/(\d{1,5}[.,]\d{2})/g)]
-      .map(m => parseFloat(m[1].replace(',','.')))
-      .filter(n => n >= 5 && n < 50000);
-    if (allAmounts.length) bedrag = Math.max(...allAmounts);
   }
 
-  // ── Datum
+  // Methode 3: andere totaal-woorden
+  if (!bedrag) {
+    const m = text.match(/(?:te betalen|gesamtbetrag|summe|gesamt|grand total|sum:)[^\d]*(\d{1,5}[.,]\d{2})/i);
+    if (m) bedrag = parseFloat(m[1].replace(',','.'));
+  }
+
+  // Methode 4: grootste bedrag als alles faalt
+  if (!bedrag) {
+    const all = [...text.matchAll(/(\d{1,4}[.,]\d{2})/g)]
+      .map(m => parseFloat(m[1].replace(',','.')))
+      .filter(n => n >= 1 && n < 50000);
+    if (all.length) bedrag = Math.max(...all);
+  }
+
+  // ── DATUM
   let datum = null;
   const datePatterns = [
     /(\d{4})[.\-\/](\d{2})[.\-\/](\d{2})/,
@@ -4387,7 +4399,7 @@ function parseReceiptText(text) {
         if (m[1].length === 4) { y=m[1]; mo=m[2]; d=m[3]; }
         else { d=m[1]; mo=m[2]; y=m[3].length===2?'20'+m[3]:m[3]; }
         const dt = new Date(`${y}-${mo}-${d}T12:00:00`);
-        if (!isNaN(dt) && parseInt(y) >= 2000 && parseInt(y) <= 2030) {
+        if (!isNaN(dt) && parseInt(y) >= 2020 && parseInt(y) <= 2030) {
           datum = `${y}-${mo.padStart(2,'0')}-${d.padStart(2,'0')}`;
         }
       } catch(e) {}
@@ -4395,24 +4407,23 @@ function parseReceiptText(text) {
     }
   }
 
-  // ── Categorie — volgorde belangrijk: specifiek eerst
+  // ── CATEGORIE
   const t = (beschrijving + ' ' + text).toLowerCase();
   let categorie = 'overig';
-
-  if (/tabak|sigaret|tobacco|camel|marlboro|winston|cigarett|rolling|vloeipapier/.test(t))  categorie = 'overig';
-  else if (/albert.heijn|jumbo|lidl|aldi|\bplus\b|dirk|spar|\bah\b|supermarkt|dagmark|nettorama|dekamarkt|boodschap/.test(t)) categorie = 'boodschappen';
+  if (/tabak|sigaret|tobacco|camel|marlboro|winston|cigarett/.test(t)) categorie = 'overig';
+  else if (/\bplus\b|albert.heijn|\bah\b|jumbo|lidl|aldi|dirk|spar|nettorama|dekamarkt|supermarkt|dagmarkt/.test(t)) categorie = 'boodschappen';
   else if (/restaurant|cafe|café|pizza|burger|mcdonalds|kfc|subway|dominos|sushi|thuisbezorgd/.test(t)) categorie = 'eten';
-  else if (/apotheek|drogist|etos|kruidvat|dokter|tandarts|huisarts|\bda\b|health|medic|pharma/.test(t)) categorie = 'gezondheid';
-  else if (/zara|h&m|c&a|primark|only|vero moda|wehkamp|kleding|mode|fashion|hema/.test(t)) categorie = 'kleding';
-  else if (/bioscoop|cinema|spotify|netflix|disney|pathé|pathe|\bgame\b|steam/.test(t)) categorie = 'entertainment';
+  else if (/apotheek|drogist|etos|kruidvat|dokter|tandarts|huisarts|health|medic|pharma/.test(t)) categorie = 'gezondheid';
+  else if (/zara|h&m|c&a|primark|only|wehkamp|kleding|mode|fashion|hema/.test(t)) categorie = 'kleding';
+  else if (/bioscoop|cinema|spotify|netflix|disney|pathé|pathe|steam/.test(t)) categorie = 'entertainment';
   else if (/action|ikea|gamma|praxis|hornbach|blokker|kwantum|wonen|interieur/.test(t)) categorie = 'wonen';
   else if (/gym|fitness|sport|decathlon|intersport/.test(t)) categorie = 'sporten';
   else if (/verzeker|allianz|aegon|centraal.beheer|nationale.nederlanden|interpolis/.test(t)) categorie = 'verzekeringen';
-  else if (/lening|hypotheek|krediet|abn|rabobank|ing bank|loan/.test(t)) categorie = 'leningen';
-  else if (/\bshell\b|\besso\b|\bbp\b|\btotal\b|tinq|tamoil|benzine|diesel|tankstation|brandstof|tango\b|q8/.test(t)) categorie = 'transport';
+  else if (/\bshell\b|\besso\b|\bbp\b|tinq|benzine|diesel|tankstation/.test(t)) categorie = 'transport';
 
   return { beschrijving, bedrag, datum, categorie };
 }
+
 
 function fileToBase64(file) {
   return new Promise((resolve, reject) => {
