@@ -1492,10 +1492,35 @@ min-height: 100vh;
 .app-footer { padding-bottom: 2rem; font-size: 0.88rem; }
 }
 
+/* ── SALDO TOTAAL BANNER ── */
+.saldo-totaal-banner {
+background: var(–ink);
+border-radius: 18px;
+padding: 1.2rem 1.5rem;
+text-align: center;
+margin-bottom: 0.8rem;
+box-shadow: var(–shadow);
+}
+.saldo-totaal-label {
+font-size: 0.68rem;
+text-transform: uppercase;
+letter-spacing: 0.12em;
+color: rgba(255,255,255,0.55);
+font-weight: 600;
+margin-bottom: 0.3rem;
+}
+.saldo-totaal-amount {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 2.2rem;
+font-weight: 700;
+color: #f0ebe3;
+}
+.saldo-totaal-amount.negative { color: #ff8888; }
+
 /* ── SALDO BAR ── */
 .saldo-bar {
 display: grid;
-grid-template-columns: 1fr 1fr 1fr;
+grid-template-columns: 1fr 1fr;
 gap: 0.7rem;
 margin-bottom: 1.2rem;
 }
@@ -2179,10 +2204,11 @@ border: 1px solid var(–border); margin-top: 0.8rem; display: none;
     <div class="page-date">Beheer je bankrekeningen, spaarrekeningen en kas</div>
   </div>
 
-  <!-- Saldo overzicht bar -->
-  <div class="saldo-bar" id="accounts-saldo-bar"></div>
+  <!-- Totaal saldo banner bovenin -->
+  <div class="saldo-totaal-banner" id="accounts-totaal-banner"></div>
 
-  <!-- Owner filter -->
+  <!-- Rob + Lizet saldo bar -->
+  <div class="saldo-bar" id="accounts-saldo-bar"></div>
   <div class="controls" style="margin-bottom:1.2rem">
     <div class="filter-row" id="owner-filter"></div>
   </div>
@@ -3322,6 +3348,15 @@ function renderAccountsPage() {
   const vrTotal  = accounts.filter(a => a.owner === 'vriendin').reduce((s,a) => s + getAccountBalance(a.id), 0);
   const totaal   = robTotal + vrTotal;
 
+  // ── Totaal banner bovenin ──
+  const bannerEl = document.getElementById('accounts-totaal-banner');
+  if (bannerEl) {
+    bannerEl.innerHTML = `
+      <div class="saldo-totaal-label">👥 Totaal saldo Rob & Lizet</div>
+      <div class="saldo-totaal-amount ${totaal<0?'negative':''}">${totaal<0?'− ':''}${fmt(Math.abs(totaal))}</div>`;
+  }
+
+  // ── Rob + Lizet saldo bar ──
   const saldoEl = document.getElementById('accounts-saldo-bar');
   if (saldoEl) {
     saldoEl.innerHTML = `
@@ -3332,10 +3367,6 @@ function renderAccountsPage() {
       <div class="saldo-bar-card" onclick="setOwnerFilter('vriendin')" style="cursor:pointer">
         <div class="saldo-bar-label">💑 Lizet</div>
         <div class="saldo-bar-amount ${vrTotal<0?'negative':''}">${vrTotal<0?'−&nbsp;':''}${fmt(Math.abs(vrTotal))}</div>
-      </div>
-      <div class="saldo-bar-card saldo-bar-totaal" onclick="setOwnerFilter('alles')" style="cursor:pointer">
-        <div class="saldo-bar-label">👥 Totaal</div>
-        <div class="saldo-bar-amount ${totaal<0?'negative':''}">${totaal<0?'−&nbsp;':''}${fmt(Math.abs(totaal))}</div>
       </div>`;
   }
 
